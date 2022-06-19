@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Все транзакции</h1>
+
+<table>
+<tr th:each="p: ${t}">
+    <td th:text="${p.id}" />
+    <td th:text="${p.sourceAccount.id}" />
+    <td th:text="${p.person.receiptAccount.id}" />
+</tr>
+</table>
+</body>
+</html>
