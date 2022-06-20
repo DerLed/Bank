@@ -1,9 +1,12 @@
 package ru.lebedev.bank.domain.entity;
 
+import ru.lebedev.bank.domain.entity.account.BaseAccount;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transaction")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_gen")
@@ -11,13 +14,18 @@ public class Transaction {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "source_account_id")
-    private BaseAccount sourceAccount;
+    @Column(name = "amount")
+    private BigDecimal amount;
+
+    @Column(name = "date")
+    private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "receipt_account_id")
+    @JoinColumn(name = "source_acc_id")
+    private BaseAccount souseAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "receipt_acc_id")
     private BaseAccount receiptAccount;
-
 
 }

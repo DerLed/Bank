@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain.entity.account;
 
 import java.math.BigDecimal;
 
