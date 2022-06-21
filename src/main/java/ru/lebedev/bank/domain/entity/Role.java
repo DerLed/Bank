@@ -1,28 +1,27 @@
 package ru.lebedev.bank.domain.entity;
 
-import lombok.*;
-import org.hibernate.Hibernate;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@Entity
-@Table(name = "roles")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(nullable = false, unique = true)
-    //@NotEmpty
-    private String name;
+public enum Role {
+    USER(Set.of(Permission.READ)),
+    ADMIN(Set.of(Permission.READ, Permission.WRITE));
 
-    @ManyToMany(mappedBy = "roles")
-    @ToString.Exclude
-    private List<User> users;
+    private final Set<Permission> permissions;
 
+    Role(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    public Set<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public Set<SimpleGrantedAuthority> getAuthorities() {
+        return getPermissions().stream()
+                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+                .collect(Collectors.toSet());
+    }
 }

@@ -17,7 +17,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/client")
-
 public class ClientController {
 
     private final ClientService clientService;
@@ -44,7 +43,7 @@ public class ClientController {
     @PostMapping()
     public String create(@ModelAttribute("client") Client client){
         clientService.save(client);
-        return "redirect:client";
+        return "redirect:/";
     }
 
 }
