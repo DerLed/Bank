@@ -4,27 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.lebedev.bank.domain.entity.Client;
 import ru.lebedev.bank.domain.entity.PersonStatus;
-import ru.lebedev.bank.repository.ClientRepo;
+import ru.lebedev.bank.repository.UserRepo;
 
 import java.util.List;
 
 @Service
 public class ClientService {
 
-    private final ClientRepo clientRepo;
+    private final UserRepo userRepo;
 
     @Autowired
-    public ClientService(ClientRepo clientRepo) {
-        this.clientRepo = clientRepo;
+    public ClientService(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
 
     public List<Client> all(){
-        return clientRepo.findAll();
+        return userRepo.findAll();
     }
 
     public Client save(Client client){
-        client.getPerson().setLogin(client.getPhone());
-        client.getPerson().setStatus(PersonStatus.ACTIVE);
-        return clientRepo.save(client);
+        client.getUser().setLogin(client.getPhone());
+        client.getUser().setStatus(PersonStatus.ACTIVE);
+        return userRepo.save(client);
     }
 }

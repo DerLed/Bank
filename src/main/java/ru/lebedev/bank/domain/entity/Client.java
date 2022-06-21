@@ -29,7 +29,7 @@ public class Client{
     @OneToOne(
     fetch = FetchType.LAZY,
     cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Person person;
+    private User user;
 
     @Override
     public boolean equals(Object o) {

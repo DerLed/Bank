@@ -1,7 +1,8 @@
 package ru.lebedev.bank.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.lebedev.bank.domain.entity.Client;
-import ru.lebedev.bank.repository.ClientRepo;
 import ru.lebedev.bank.service.ClientService;
 
 
@@ -28,7 +28,8 @@ public class ClientController {
     }
 
     @GetMapping()
-    public String client(Model model){
+    public String client(Authentication authentication, Model model){
+        System.out.println((UserDetails) authentication.getPrincipal());
         List<Client> lp  = clientService.all();
         model.addAttribute("lp", lp);
         return "client";
