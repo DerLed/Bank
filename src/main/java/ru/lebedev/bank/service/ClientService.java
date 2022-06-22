@@ -6,30 +6,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.lebedev.bank.domain.entity.Client;
 import ru.lebedev.bank.domain.Status;
-import ru.lebedev.bank.repository.ClientRepo;
+import ru.lebedev.bank.repository.ClientRepository;
 
 import java.util.List;
 
 @Service
 public class ClientService {
 
-    private final ClientRepo clientRepo;
+    private final ClientRepository clientRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
-    public ClientService(ClientRepo clientRepo, PasswordEncoder passwordEncoder) {
-        this.clientRepo = clientRepo;
+    public ClientService(ClientRepository clientRepository, PasswordEncoder passwordEncoder) {
+        this.clientRepository = clientRepository;
 
     }
 
     public List<Client> all(){
-        return clientRepo.findAll();
+        return clientRepository.findAll();
     }
 
     public Client save(Client client){
         client.getUser().setPassword(passwordEncoder.encode(client.getUser().getPassword()));
         client.getUser().setLogin(client.getPhone());
         client.getUser().setStatus(Status.ACTIVE);
-        return clientRepo.save(client);
+        return clientRepository.save(client);
     }
 }
