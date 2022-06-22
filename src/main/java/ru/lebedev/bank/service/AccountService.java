@@ -17,6 +17,6 @@ public class AccountService {
     }
 
     public List<Account> findByPhoneNumber(String phoneNumber) {
-        return accountRepository.findByClientPhone(phoneNumber);
+        return accountRepository.findByClientPhoneNumber(phoneNumber);
     }
 }

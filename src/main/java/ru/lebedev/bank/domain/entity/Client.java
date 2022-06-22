@@ -23,8 +23,8 @@ public class Client{
     @Column(name = "email")
     private String email;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @OneToOne(
     fetch = FetchType.LAZY,
