@@ -1,11 +1,10 @@
 package ru.lebedev.bank.domain.entity;
 
 import lombok.*;
-import org.hibernate.Hibernate;
+import ru.lebedev.bank.domain.Role;
+import ru.lebedev.bank.domain.Status;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "usr")

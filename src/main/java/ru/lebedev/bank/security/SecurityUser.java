@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.lebedev.bank.domain.entity.Status;
+import ru.lebedev.bank.domain.Status;
 import ru.lebedev.bank.domain.entity.User;
 
 import java.util.Collection;

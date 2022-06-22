@@ -1,12 +1,19 @@
 package ru.lebedev.bank.domain.entity;
 
-import ru.lebedev.bank.domain.entity.account.BaseAccount;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import ru.lebedev.bank.domain.TransactionStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "transaction")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_gen")
@@ -20,12 +27,15 @@ public class Transaction {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @ManyToOne
-    @JoinColumn(name = "source_acc_id")
-    private BaseAccount souseAccount;
+    @Column(name = "status")
+    private TransactionStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "receipt_acc_id")
-    private BaseAccount receiptAccount;
+    @JoinColumn(name = "source_account_id")
+    private Account souseAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "target_account_id")
+    private Account targetAccount;
 
 }

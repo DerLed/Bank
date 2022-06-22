@@ -1,6 +1,7 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import ru.lebedev.bank.domain.Permission;
 
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain;
 
 public enum Status {
     ACTIVE, BANNED, DELETED
