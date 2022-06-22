@@ -28,7 +28,7 @@ public class ClientService {
 
     public Client save(Client client){
         client.getUser().setPassword(passwordEncoder.encode(client.getUser().getPassword()));
-        client.getUser().setLogin(client.getPhone());
+        client.getUser().setLogin(client.getPhoneNumber());
         client.getUser().setStatus(Status.ACTIVE);
         return clientRepository.save(client);
     }

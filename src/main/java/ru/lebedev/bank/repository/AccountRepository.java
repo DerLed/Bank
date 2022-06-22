@@ -6,6 +6,7 @@ import ru.lebedev.bank.domain.entity.Account;
 import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
+    //void closeById(Long id);
     List<Account> findByClientId(Long ClientId);
     List<Account> findByClientPhoneNumber(String phoneNumber);
 }

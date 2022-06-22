@@ -21,10 +21,10 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping("/account")
-    public String account(Authentication authentication, Model model){
-        UserDetails user = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("name", user.getUsername());
-        return "account";
-    }
+//    @GetMapping("/account")
+//    public String account(Authentication authentication, Model model){
+//        UserDetails user = (UserDetails) authentication.getPrincipal();
+//        model.addAttribute("name", user.getUsername());
+//        return "account";
+//    }
 }

@@ -30,5 +30,7 @@ public class Card {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
     private CardPlan cardPlan;
 }
