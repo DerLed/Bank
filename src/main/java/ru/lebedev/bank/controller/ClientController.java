@@ -27,8 +27,8 @@ public class ClientController {
     }
 
     @GetMapping()
-    public String client(Authentication authentication, Model model){
-        System.out.println((UserDetails) authentication.getPrincipal());
+    public String client(Model model){
+
         List<Client> lp  = clientService.all();
         model.addAttribute("lp", lp);
         return "client";
