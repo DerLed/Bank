@@ -1,8 +1,11 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain.card;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.lebedev.bank.domain.account.Account;
+import ru.lebedev.bank.domain.cardPlan.CardPlan;
+import ru.lebedev.bank.domain.client.Client;
 
 import javax.persistence.*;
 

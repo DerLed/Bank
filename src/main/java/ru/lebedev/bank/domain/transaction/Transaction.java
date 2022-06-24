@@ -1,9 +1,10 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain.transaction;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.lebedev.bank.domain.TransactionStatus;
+import ru.lebedev.bank.domain.account.Account;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

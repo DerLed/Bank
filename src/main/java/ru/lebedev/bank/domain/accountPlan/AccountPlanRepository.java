@@ -1,7 +1,7 @@
-package ru.lebedev.bank.repository;
+package ru.lebedev.bank.domain.accountPlan;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.lebedev.bank.domain.entity.CardPlan;
+import ru.lebedev.bank.domain.cardPlan.CardPlan;
 
 public interface AccountPlanRepository extends JpaRepository<CardPlan, Long> {
 

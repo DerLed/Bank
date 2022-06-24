@@ -1,9 +1,11 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain.account;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import ru.lebedev.bank.domain.accountPlan.AccountPlan;
+import ru.lebedev.bank.domain.client.Client;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

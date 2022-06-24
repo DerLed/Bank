@@ -1,12 +1,12 @@
-package ru.lebedev.bank.service;
+package ru.lebedev.bank.domain.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.lebedev.bank.domain.entity.Client;
+import ru.lebedev.bank.domain.client.Client;
 import ru.lebedev.bank.domain.Status;
-import ru.lebedev.bank.repository.ClientRepository;
+import ru.lebedev.bank.domain.client.ClientRepository;
 
 import java.util.List;
 

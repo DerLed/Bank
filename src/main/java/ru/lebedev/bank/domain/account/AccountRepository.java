@@ -1,7 +1,7 @@
-package ru.lebedev.bank.repository;
+package ru.lebedev.bank.domain.account;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.lebedev.bank.domain.entity.Account;
+import ru.lebedev.bank.domain.account.Account;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package ru.lebedev.bank.service;
+package ru.lebedev.bank.domain.account;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.lebedev.bank.domain.entity.Account;
-import ru.lebedev.bank.repository.AccountRepository;
+import ru.lebedev.bank.domain.account.Account;
+import ru.lebedev.bank.domain.account.AccountRepository;
 
 import java.util.List;
 

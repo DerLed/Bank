@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.lebedev.bank.domain.entity.Account;
-import ru.lebedev.bank.service.AccountService;
+import ru.lebedev.bank.domain.account.Account;
+import ru.lebedev.bank.domain.account.AccountService;
 
 import java.util.List;
 

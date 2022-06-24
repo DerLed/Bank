@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain.user;
 
 import lombok.*;
 import ru.lebedev.bank.domain.Role;

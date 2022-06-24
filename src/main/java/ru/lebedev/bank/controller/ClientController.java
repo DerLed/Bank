@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.lebedev.bank.domain.entity.Client;
-import ru.lebedev.bank.service.ClientService;
+import ru.lebedev.bank.domain.client.Client;
+import ru.lebedev.bank.domain.client.ClientService;
 
 
 import java.util.List;

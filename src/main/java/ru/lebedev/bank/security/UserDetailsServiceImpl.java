@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.lebedev.bank.domain.entity.User;
-import ru.lebedev.bank.repository.UserRepository;
+import ru.lebedev.bank.domain.user.User;
+import ru.lebedev.bank.domain.user.UserRepository;
 
 @Service("userDetailsServiceImpl")
 public class UserDetailsServiceImpl implements UserDetailsService {

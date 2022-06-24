@@ -1,7 +1,8 @@
-package ru.lebedev.bank.domain.entity;
+package ru.lebedev.bank.domain.client;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import ru.lebedev.bank.domain.user.User;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class Client{
     @OneToOne(
     fetch = FetchType.LAZY,
     cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "user_id", unique = true)
     private User user;
 
     @Override
