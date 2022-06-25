@@ -1,7 +1,6 @@
 package ru.lebedev.bank.domain.client;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,20 +26,22 @@ public class ClientServiceImpl implements ClientService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public Optional<ClientDTO> findById(Long id) {
-        return Optional.empty();
+        return clientRepository.findById(id)
+                .map(clientMapper::toDTO);
     }
 
     @Override
     public Optional<ClientDTO> findByPhoneNumber(String phoneNumber) {
-        return Optional.empty();
+        return clientRepository.findByPhoneNumber(phoneNumber)
+                .map(clientMapper::toDTO);
     }
 
     @Override
     public Optional<ClientDTO> findByEmail(String email) {
-        return Optional.empty();
+        return clientRepository.findByEmail(email)
+                .map(clientMapper::toDTO);
     }
 
     public ClientDTO save(ClientDTO clientDTO){
