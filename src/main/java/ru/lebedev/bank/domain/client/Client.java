@@ -8,10 +8,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Getter
+
 @Setter
 @ToString
-
+@Getter
 @RequiredArgsConstructor
 @Table(name = "client")
 public class Client{

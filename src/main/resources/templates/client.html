@@ -10,8 +10,10 @@
 <table>
 <tr th:each="p: ${lp}">
     <td th:text="${p.id}"></td>
-    <td th:text="${p.user.name}"></td>
-    <td th:text="${p.user.surname}"></td>
+    <td th:text="${p.userDTO.name}"></td>
+    <td th:text="${p.userDTO.surname}"></td>
+    <td th:text="${p.userDTO.password}"></td>
+    <td th:text="${p.userDTO.login}"></td>
 </tr>
 </table>
 

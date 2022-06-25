@@ -8,8 +8,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "usr")
-@Getter
+
 @Setter
+@Getter
 @ToString
 @RequiredArgsConstructor
 public class User {

@@ -1,35 +1,13 @@
 package ru.lebedev.bank.domain.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import ru.lebedev.bank.domain.client.Client;
-import ru.lebedev.bank.domain.Status;
-import ru.lebedev.bank.domain.client.ClientRepository;
-
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class ClientService {
-
-    private final ClientRepository clientRepository;
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    @Autowired
-    public ClientService(ClientRepository clientRepository, PasswordEncoder passwordEncoder) {
-        this.clientRepository = clientRepository;
-
-    }
-
-    public List<Client> all(){
-        return clientRepository.findAll();
-    }
-
-    public Client save(Client client){
-        client.getUser().setPassword(passwordEncoder.encode(client.getUser().getPassword()));
-        client.getUser().setLogin(client.getPhoneNumber());
-        client.getUser().setStatus(Status.ACTIVE);
-        return clientRepository.save(client);
-    }
+public interface ClientService {
+    List<ClientDTO> findAll();
+    Optional<ClientDTO> findById(Long id);
+    Optional<ClientDTO> findByPhoneNumber(String phoneNumber);
+    Optional<ClientDTO> findByEmail(String email);
+    ClientDTO save(ClientDTO clientDTO);
+    void deleteById(Long id);
 }

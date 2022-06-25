@@ -7,22 +7,24 @@
 <body>
 <h1>Регистрация</h1>
 
-<form th:action="@{/client}" th:object="${client}" th:method="POST">
+<form action="#" th:action="@{/client/signup}" th:object="${client}" th:method="POST">
     <div>
+
+
         <label for="name">Имя</label>
-        <input type="text" th:field="*{user.name}" id="name">
+        <input type="text" th:field="*{userDTO.name}" id="name">
         <br>
         <label for="surname">Фамилия</label>
-        <input type="text" th:field="*{user.surname}" id="surname">
+        <input type="text" th:field="*{userDTO.surname}" id="surname">
         <br>
         <label for="email">Email</label>
         <input type="text" th:field="*{email}" id="email">
         <br>
         <label for="phone">Телефон</label>
-        <input type="text" th:field="*{phone}" id="phone">
+        <input type="text" th:field="*{phoneNumber}" id="phone">
         <br>
         <label for="login">Пароль</label>
-        <input type="text" th:field="*{user.password}" id="login">
+        <input type="text" th:field="*{userDTO.password}" id="login">
         <br>
         <input type="submit" value="Добавить">
     </div>
