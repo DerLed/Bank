@@ -1,36 +1,12 @@
 package ru.lebedev.bank.domain.account;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import ru.lebedev.bank.domain.account.Account;
-import ru.lebedev.bank.domain.account.AccountRepository;
-
 import java.util.List;
+import java.util.Optional;
 
-@Service
-@RequiredArgsConstructor
-public class AccountService {
-    private final AccountRepository accountRepository;
-
-    public List<Account> findAll() {
-        return accountRepository.findAll();
-    }
-
-    //public void close(Long id) {
-    //    accountRepository.closeById(id);
-    //}
-
-    public List<Account> findByClientId(Long clientId) {
-        return accountRepository.findByClientId(clientId);
-    }
-
-    public List<Account> findByPhoneNumber(String phoneNumber) {
-        return accountRepository.findByClientPhoneNumber(phoneNumber);
-    }
-
-    public Account save(Account account) {
-        return accountRepository.save(account);
-    }
-
-
+public interface AccountService {
+    List<AccountDTO> findAll();
+    AccountDTO save(AccountDTO accountDTO);
+    List<AccountDTO> findByClientId (Long clientId);
+    List<AccountDTO> findByPhoneNumber (String phoneNumber);
+    void deleteById(Long id);
 }
