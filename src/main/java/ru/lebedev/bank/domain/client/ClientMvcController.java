@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.lebedev.bank.security.IAuthenticationFacade;
+import ru.lebedev.bank.security.SecurityUser;
 
 
 import java.util.List;
@@ -37,35 +38,21 @@ public class ClientMvcController {
     @GetMapping("/accounts")
     public String clientAccounts(Model model){
         Authentication authentication = authenticationFacade.getAuthentication();
-
+        SecurityUser user = (SecurityUser) authentication.getPrincipal();
         List<ClientDTO> lp  = clientService.findAll();
         model.addAttribute("lp", lp);
         return "client";
     }
 
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("title", "Форма входа");
-        return "client/login";
-    }
 
-    @PostMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("title", "Форма входа");
-        return "client/login";
-    }
 
-    @GetMapping("/signup")
-    public String signup(Model model){
-        model.addAttribute("client", new ClientDTO());
-        return "client/signup";
-    }
+//    @PostMapping("/login")
+//    public String login(Model model) {
+//        model.addAttribute("title", "Форма входа");
+//        return "client/login";
+//    }
 
-    @PostMapping("/signup")
-    public String create(@ModelAttribute("client") ClientDTO clientDTO){
-        clientService.save(clientDTO);
-        return "redirect:";
-    }
+
 
 }

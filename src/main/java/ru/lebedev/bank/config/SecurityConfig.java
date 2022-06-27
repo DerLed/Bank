@@ -44,14 +44,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                     .csrf().disable()
                     .authorizeRequests()
-                .antMatchers("/client/signup").permitAll()
-                .antMatchers("/client/**").authenticated()
+
+                //.antMatchers("/client/login").permitAll()
+                .antMatchers("/client*").authenticated()
+                .antMatchers("/signup").permitAll()
                 .antMatchers("/").permitAll()
 //                    .anyRequest()
 //                    .authenticated()
                 .and()
-                    .formLogin()
-                    .loginPage("/client/login").permitAll()
+                    .formLogin().permitAll()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/perform-login")
+                    .usernameParameter("user")
+                    .passwordParameter("pass")
                     .defaultSuccessUrl("/");
 
 
