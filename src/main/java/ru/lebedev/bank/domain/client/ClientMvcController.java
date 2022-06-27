@@ -2,7 +2,9 @@ package ru.lebedev.bank.domain.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,18 +32,23 @@ public class ClientMvcController {
 
     @GetMapping()
     public String client(Model model){
-        List<ClientDTO> lp  = clientService.findAll();
-        model.addAttribute("lp", lp);
+        Authentication authentication = authenticationFacade.getAuthentication();
+        UserDetails realUser= (UserDetails)authentication.getPrincipal();
+        ClientDTO client = clientService.findByUserLogin(realUser.getUsername()).orElseThrow();
+        model.addAttribute("client", client);
+
         return "client";
     }
 
     @GetMapping("/accounts")
     public String clientAccounts(Model model){
         Authentication authentication = authenticationFacade.getAuthentication();
-        SecurityUser user = (SecurityUser) authentication.getPrincipal();
-        List<ClientDTO> lp  = clientService.findAll();
-        model.addAttribute("lp", lp);
-        return "client";
+        UserDetails realUser= (UserDetails)authentication.getPrincipal();
+        ClientDTO client = clientService.findByUserLogin(realUser.getUsername()).orElseThrow();
+
+//        List<ClientDTO> lp  = clientService.findAll();
+//        model.addAttribute("lp", lp);
+        return "client/accounts";
     }
 
 

@@ -59,4 +59,9 @@ public class ClientServiceImpl implements ClientService {
     public void deleteById(Long id) {
 
     }
+
+    @Override
+    public Optional<ClientDTO> findByUserLogin(String login) {
+        return clientRepository.findByUserLogin(login).map(clientMapper::toDTO);
+    }
 }

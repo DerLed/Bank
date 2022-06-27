@@ -10,4 +10,5 @@ public interface ClientService {
     Optional<ClientDTO> findByEmail(String email);
     ClientDTO save(ClientDTO clientDTO);
     void deleteById(Long id);
+    Optional<ClientDTO> findByUserLogin(String login);
 }
