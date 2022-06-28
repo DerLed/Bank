@@ -7,6 +7,7 @@ import ru.lebedev.bank.domain.Status;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usr")
@@ -37,7 +38,8 @@ public class User {
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @NotNull
+    @NotNull(message = "Password must be between 4 to 15 characters")
+    @Size(min = 4, max = 15)
     @Column(name = "password", nullable = false)
     private String password;
 

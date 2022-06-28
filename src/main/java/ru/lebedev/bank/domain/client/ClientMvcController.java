@@ -15,6 +15,7 @@ import ru.lebedev.bank.security.IAuthenticationFacade;
 import ru.lebedev.bank.security.SecurityUser;
 
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -31,10 +32,9 @@ public class ClientMvcController {
     }
 
     @GetMapping()
-    public String client(Model model){
-        Authentication authentication = authenticationFacade.getAuthentication();
-        UserDetails realUser= (UserDetails)authentication.getPrincipal();
-        ClientDTO client = clientService.findByUserLogin(realUser.getUsername()).orElseThrow();
+    public String client(Model model, Principal principal){
+
+        ClientDTO client = clientService.findByUserLogin(principal.getName()).orElseThrow();
         model.addAttribute("client", client);
 
         return "client";
@@ -45,9 +45,6 @@ public class ClientMvcController {
         Authentication authentication = authenticationFacade.getAuthentication();
         UserDetails realUser= (UserDetails)authentication.getPrincipal();
         ClientDTO client = clientService.findByUserLogin(realUser.getUsername()).orElseThrow();
-
-//        List<ClientDTO> lp  = clientService.findAll();
-//        model.addAttribute("lp", lp);
         return "client/accounts";
     }
 
