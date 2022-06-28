@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import ru.lebedev.bank.domain.Role;
 import ru.lebedev.bank.domain.Status;
 
+import javax.validation.ConstraintViolation;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,6 +47,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     public ClientDTO save(ClientDTO clientDTO){
+
         Client client = clientMapper.toEntity(clientDTO);
         String encodedPassword = passwordEncoder.encode(client.getUser().getPassword());
         client.getUser().setPassword(encodedPassword);

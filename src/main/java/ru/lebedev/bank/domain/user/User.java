@@ -39,7 +39,7 @@ public class User {
     private String login;
 
     @NotNull(message = "Password must be between 4 to 15 characters")
-    @Size(min = 4, max = 15)
+    @Size(min = 4)
     @Column(name = "password", nullable = false)
     private String password;
 

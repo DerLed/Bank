@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.thymeleaf.org ">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,13 +7,18 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738
+@thymesVar id="post" type="your.package.Post"
+@thymesVar id="title" type="String"
+@thymesVar id="content" type="String"
+*/
 <h1>Регистрация</h1>
 
 <form action="#" th:action="@{/signup}" th:object="${client}" th:method="POST">
     <div>
         <label for="name">Имя</label>
         <input type="text" th:field="*{userDTO.name}" id="name">
-        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+        <p th:if="${#fields.hasErrors('userDTO.name')}" th:errors="*{userDTO.name}">Name Error</p>
         <br>
         <label for="surname">Фамилия</label>
         <input type="text" th:field="*{userDTO.surname}" id="surname">
