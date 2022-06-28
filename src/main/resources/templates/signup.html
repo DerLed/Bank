@@ -8,45 +8,46 @@
 <body>
 <h1>Регистрация</h1>
 
-<!--<form action="#" th:action="@{/signup}" th:object="${client}" th:method="POST">-->
-<!--    <div>-->
-<!--        <label for="name">Имя</label>-->
-<!--        <input type="text" th:field="*{userDTO.name}" id="name">-->
-<!--        <br>-->
-<!--        <label for="surname">Фамилия</label>-->
-<!--        <input type="text" th:field="*{userDTO.surname}" id="surname">-->
-<!--        <br>-->
-<!--        <label for="email">Email</label>-->
-<!--        <input type="text" th:field="*{email}" id="email">-->
-<!--        <br>-->
-<!--        <label for="phone">Телефон</label>-->
-<!--        <input type="text" th:field="*{phoneNumber}" id="phone">-->
-<!--        <br>-->
-<!--        <label for="login">Пароль</label>-->
-<!--        <input type="text" th:field="*{userDTO.password}" id="login">-->
-<!--        <br>-->
-<!--        <input type="submit" value="Добавить">-->
-<!--    </div>-->
+<form action="#" th:action="@{/signup}" th:object="${client}" th:method="POST">
+    <div>
+        <label for="name">Имя</label>
+        <input type="text" th:field="*{userDTO.name}" id="name">
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+        <br>
+        <label for="surname">Фамилия</label>
+        <input type="text" th:field="*{userDTO.surname}" id="surname">
+        <br>
+        <label for="email">Email</label>
+        <input type="text" th:field="*{email}" id="email">
+        <br>
+        <label for="phone">Телефон</label>
+        <input type="text" th:field="*{phoneNumber}" id="phone">
+        <br>
+        <label for="login">Пароль</label>
+        <input type="text" th:field="*{userDTO.password}" id="login">
+        <br>
+        <input type="submit" value="Добавить">
+    </div>
 
-<!--</form>-->
-
-<form action="#" th:action="@{/signup}" th:object="${client}" method="post">
-    <table>
-        <tr>
-            <td>Name:</td>
-            <td><input type="text" th:field="*{name}" /></td>
-            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
-        </tr>
-        <tr>
-            <td>Age:</td>
-            <td><input type="text" th:field="*{age}" /></td>
-            <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
-        </tr>
-        <tr>
-            <td><button type="submit">Submit</button></td>
-        </tr>
-    </table>
 </form>
+
+<!--<form action="#" th:action="@{/signup}" th:object="${client}" method="post">-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>Name:</td>-->
+<!--            <td><input type="text" th:field="*{name}" /></td>-->
+<!--            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Age:</td>-->
+<!--            <td><input type="text" th:field="*{age}" /></td>-->
+<!--            <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><button type="submit">Submit</button></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</form>-->
 
 </body>
 </html>
