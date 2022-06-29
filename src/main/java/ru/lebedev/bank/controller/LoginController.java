@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.lebedev.bank.domain.client.ClientCreateReq;
 import ru.lebedev.bank.domain.client.ClientDTO;
 import ru.lebedev.bank.domain.client.ClientService;
 
@@ -33,8 +34,12 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public String create(@ModelAttribute("client") @Valid ClientDTO clientDTO, BindingResult bindingResult){
-        clientService.save(clientDTO);
+    public String create(@ModelAttribute("client") @Valid ClientCreateReq clientCreate, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "signup";
+        }
+
+       // clientService.save(clientCreate);
         return "redirect:";
     }
 }

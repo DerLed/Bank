@@ -22,15 +22,19 @@
         <br>
         <label for="surname">Фамилия</label>
         <input type="text" th:field="*{userDTO.surname}" id="surname">
+        <p th:if="${#fields.hasErrors('userDTO.surname')}" th:errors="*{userDTO.surname}">Surname Error</p>
         <br>
         <label for="email">Email</label>
         <input type="text" th:field="*{email}" id="email">
+        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
         <br>
         <label for="phone">Телефон</label>
         <input type="text" th:field="*{phoneNumber}" id="phone">
+        <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Email Error</p>
         <br>
         <label for="login">Пароль</label>
         <input type="text" th:field="*{userDTO.password}" id="login">
+        <p th:if="${#fields.hasErrors('userDTO.password')}" th:errors="*{userDTO.password}">Email Error</p>
         <br>
         <input type="submit" value="Добавить">
     </div>

@@ -23,35 +23,24 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "Name incorrect")
-    @NotBlank
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @NotBlank
     @Column(name = "surname")
     private String surname;
 
-    @NotNull
-    @NotBlank
     @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @NotNull(message = "Password must be between 4 to 15 characters")
-    @Size(min = 4)
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotNull
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
-    @NotNull
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
     private Role role;
-
 
 }
