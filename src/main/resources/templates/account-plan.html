@@ -8,17 +8,27 @@
 </head>
 <body>
 
-<h1>Добавление </h1>
+<h1>Банковские предложения</h1>
 
+<a href="account_plan/add">Добавить</a>
+<table>
 <tr
-        th:each="ap : ${accountPlan}">
-<!--        th:style="${iStat.odd}? 'font-weight: bold;'"-->
-<!--        th:alt-title="${iStat.even}? 'even' : 'odd'">-->
+        th:each="ap, iStat : ${accountPlan}"
+        th:style="${iStat.odd}? 'font-weight: bold; background-color: darkgray'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+
     <td th:text="${ap.id}" />
     <td th:text="${ap.type}" />
-    <td th:text="${ap.percent}" />
+    <td th:text="${ap.percent}"></td>
+    <td>
+        <form action="#" th:action="@{/account_plan/remove/{apId}(apId=${ap.id})}" th:method="delete" >
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit" id="submitButton">Удалить</button>
+        </form>
+    </td>
+<!--    <td><a th:href="@{/account_plan/remove/{apId}(apId=${ap.id})}">Delete</a></td>-->
 
 </tr>
-
+</table>
 </body>
 </html>

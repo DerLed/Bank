@@ -14,7 +14,7 @@
     <div>
         <label for="type">Тип</label>
         <input type="text" th:field="*{type}" id="type">
-        <p th:if="${#fields.hasErrors('type')}" th:errors="*{userDTO.name}">Name Error</p>
+        <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Name Error</p>
         <br>
         <label for="percent">Проценты</label>
         <input type="text" th:field="*{percent}" id="percent">
