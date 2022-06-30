@@ -37,6 +37,6 @@ public class AccountPlanServiceImpl implements AccountPlanService{
 
     @Override
     public void deleteById(Long id) {
-
+        accountPlanRepository.deleteById(id);
     }
 }

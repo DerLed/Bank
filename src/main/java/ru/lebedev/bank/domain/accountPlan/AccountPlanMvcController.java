@@ -11,6 +11,7 @@ import ru.lebedev.bank.domain.client.ClientDTO;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/account_plan")
@@ -21,31 +22,48 @@ public class AccountPlanMvcController {
 
     @GetMapping()
     public String accountPlan(Model model){
-
         List<AccountPlanDTO> accountPlans = accountPlanService.findAll();
-        model.addAttribute("accountPlan", accountPlans);
-
-        return "account-plan";
+        model.addAttribute("accountPlans", accountPlans);
+        return "account-plan/account-plan";
     }
 
     @GetMapping("/add")
     public String add(Model model){
         model.addAttribute("accountPlan", new AccountPlanDTO());
-        return "account-plan-add";
+        return "account-plan/account-plan-add";
     }
 
     @PostMapping("/add")
     public String create(@ModelAttribute("accountPlan") @Valid AccountPlanDTO accountPlanDTO, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return "account-plan-add";
+            return "account-plan/account-plan-add";
         }
         accountPlanService.save(accountPlanDTO);
         return "redirect:/account_plan";
     }
 
-    @PostMapping("/remove/{id}")
-    public String accountPlanDelete(@PathVariable("id") AccountPlanDTO accountPlanDTO) {
-        accountPlanService.deleteById(accountPlanDTO.getId());
+    @GetMapping("/edit/{id}")
+    public String editAccountPlan(@PathVariable("id") Long id, Model model) {
+        AccountPlanDTO accountPlanDTO = accountPlanService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid accountPlan Id:" + id));
+        model.addAttribute("accountPlan", accountPlanDTO);
+        return "account-plan/account-plan-edit";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateAccountPlan(@PathVariable("id") Long id, @Valid AccountPlanDTO accountPlanDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            accountPlanDTO.setId(id);
+            return "account-plan/account-plan-edit";
+        }
+
+        accountPlanService.save(accountPlanDTO);
+        return "redirect:/account_plan";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String removeAccountPlan(@PathVariable("id") Long id, Model model) {
+        accountPlanService.deleteById(id);
         return "redirect:/account_plan";
     }
 }
