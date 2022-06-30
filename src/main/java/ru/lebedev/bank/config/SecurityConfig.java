@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
 
                 //.antMatchers("/client/login").permitAll()
+                .antMatchers("/client/new").permitAll()
                 .antMatchers("/client/*").authenticated()
                 .antMatchers("/client").authenticated()
                 .antMatchers("/signup").permitAll()
@@ -54,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .authenticated()
                 .and()
                     .formLogin().permitAll()
-                    .loginPage("/login")
+                    .loginPage("/client/login")
                     .loginProcessingUrl("/perform-login")
                     .usernameParameter("user")
                     .passwordParameter("pass")

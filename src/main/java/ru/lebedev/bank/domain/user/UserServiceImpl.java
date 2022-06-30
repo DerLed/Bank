@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService{
     public Optional<UserDTO> findByLogin(String login) {
         return Optional.empty();
     }
+
+    @Override
+    public boolean checkIfUserExist(String login) {
+        return userRepository.findByLogin(login).isEmpty();
+    }
 }

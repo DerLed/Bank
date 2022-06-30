@@ -7,14 +7,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.lebedev.bank.exception.UserAlreadyExistException;
 import ru.lebedev.bank.security.IAuthenticationFacade;
 import ru.lebedev.bank.security.SecurityUser;
 
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -31,25 +34,52 @@ public class ClientMvcController {
         this.authenticationFacade = authenticationFacade;
     }
 
-    @GetMapping()
-    public String client(Model model, Principal principal){
+//    @GetMapping()
+//    public String client(Model model, Principal principal){
+//
+//        ClientDTO client = clientService.findByUserLogin(principal.getName()).orElseThrow();
+//        model.addAttribute("client", client);
+//
+//        return "client";
+//    }
+//
+//    @GetMapping("/accounts")
+//    public String clientAccounts(Model model){
+//        Authentication authentication = authenticationFacade.getAuthentication();
+//        UserDetails realUser= (UserDetails)authentication.getPrincipal();
+//        ClientDTO client = clientService.findByUserLogin(realUser.getUsername()).orElseThrow();
+//        return "client/accounts";
+//    }
 
-        ClientDTO client = clientService.findByUserLogin(principal.getName()).orElseThrow();
-        model.addAttribute("client", client);
-
-        return "client";
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("title", "Форма входа");
+        return "client/login";
     }
 
-    @GetMapping("/accounts")
-    public String clientAccounts(Model model){
-        Authentication authentication = authenticationFacade.getAuthentication();
-        UserDetails realUser= (UserDetails)authentication.getPrincipal();
-        ClientDTO client = clientService.findByUserLogin(realUser.getUsername()).orElseThrow();
-        return "client/accounts";
+    @GetMapping("/new")
+    public String signup(Model model){
+        model.addAttribute("client", new ClientCreateReq());
+        return "client/new";
     }
 
+    @PostMapping("/new")
+    public String create(@ModelAttribute("client") @Valid ClientCreateReq clientCreate, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            return "client/new";
+        }
+
+        try {
+            clientService.newClient(clientCreate);
+        }catch (UserAlreadyExistException e){
+            bindingResult.rejectValue("phoneNumber", "client.phoneNumber","Данный номер уже зарегестрирован в системе.");
+            model.addAttribute("client", clientCreate);
+            return "client/new";
+        }
 
 
+        return "redirect:/";
+    }
 
 //    @PostMapping("/login")
 //    public String login(Model model) {

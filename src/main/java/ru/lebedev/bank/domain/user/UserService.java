@@ -11,4 +11,5 @@ public interface UserService {
     UserDTO save(UserDTO userDTO);
     void deleteById(Long id);
     Optional<UserDTO> findByLogin(String login);
+    boolean checkIfUserExist(String login);
 }
