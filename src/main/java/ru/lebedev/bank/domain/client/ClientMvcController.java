@@ -34,22 +34,6 @@ public class ClientMvcController {
         this.authenticationFacade = authenticationFacade;
     }
 
-//    @GetMapping()
-//    public String client(Model model, Principal principal){
-//
-//        ClientDTO client = clientService.findByUserLogin(principal.getName()).orElseThrow();
-//        model.addAttribute("client", client);
-//
-//        return "client";
-//    }
-//
-//    @GetMapping("/accounts")
-//    public String clientAccounts(Model model){
-//        Authentication authentication = authenticationFacade.getAuthentication();
-//        UserDetails realUser= (UserDetails)authentication.getPrincipal();
-//        ClientDTO client = clientService.findByUserLogin(realUser.getUsername()).orElseThrow();
-//        return "client/accounts";
-//    }
 
     @GetMapping("/login")
     public String login(Model model) {

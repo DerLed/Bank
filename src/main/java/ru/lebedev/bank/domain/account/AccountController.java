@@ -16,8 +16,8 @@ import java.util.Optional;
 public class AccountController {
     private final AccountService accountService;
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<AccountDTO>> findByUserId (@PathVariable Long clientId) {
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<List<AccountDTO>> findByClientId (@PathVariable Long clientId) {
         List<AccountDTO> accounts = accountService.findByClientId(clientId);
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }

@@ -7,6 +7,7 @@ public interface AccountService {
     List<AccountDTO> findAll();
     AccountDTO save(AccountDTO accountDTO);
     List<AccountDTO> findByClientId (Long clientId);
+    List<AccountDTO> findByClientLogin (String login);
     List<AccountDTO> findByPhoneNumber (String phoneNumber);
     void deleteById(Long id);
 }
