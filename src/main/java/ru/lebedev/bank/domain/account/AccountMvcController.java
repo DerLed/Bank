@@ -31,6 +31,7 @@ public class AccountMvcController {
         return "accounts/accounts";
     }
 
+
     @GetMapping("/new")
     public String newAccount(Model model, Principal principal){
         ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
