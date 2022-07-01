@@ -36,9 +36,11 @@ public class AccountMvcController {
         ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
         AccountDTO accountDTO = AccountDTO.builder()
                 .client(clientDTO)
+                .isDefault(false)
+                .isClosed(false)
                 .build();
         model.addAttribute("account", accountDTO);
-        model.addAttribute(accountPlanService.findAll());
+        model.addAttribute("accountPlans", accountPlanService.findAll());
         return "accounts/account-new";
     }
 
@@ -49,6 +51,6 @@ public class AccountMvcController {
             return "accounts/account-new";
         }
         accountService.save(accountDTO);
-        return "redirect:/clients";
+        return "redirect:/client";
     }
 }

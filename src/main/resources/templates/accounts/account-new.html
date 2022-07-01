@@ -17,15 +17,16 @@
         <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name Error</p>
         <br>
 
-<!--        <label for="percent">Проценты</label>-->
-<!--        <input type="text" th:field="*{percent}" id="percent">-->
-<!--        <p th:if="${#fields.hasErrors('percent')}" th:errors="*{percent}">Surname Error</p>-->
-
+        <div th:each="aP : ${accountPlans}">
+            <input type="radio" th:field="*{accountPlan}" th:value="${aP.id}" />
+            <label th:for="${#ids.prev('accountPlan')}" th:text="${aP.type}"></label>
+        </div>
 
         <input type="submit" value="Добавить">
     </div>
-
 </form>
+
+
 
 </body>
 </html>
