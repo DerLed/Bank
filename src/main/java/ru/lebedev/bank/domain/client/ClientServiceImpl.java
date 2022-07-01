@@ -67,7 +67,7 @@ public class ClientServiceImpl implements ClientService {
 
 
         if(userService.checkIfUserExist(clientCreateReq.getPhoneNumber())){
-            throw new UserAlreadyExistException("User already exists for this email");
+            throw new UserAlreadyExistException("User already exists for this phone");
         }
 
         String encodedPassword = passwordEncoder.encode(clientCreateReq.getPassword());
