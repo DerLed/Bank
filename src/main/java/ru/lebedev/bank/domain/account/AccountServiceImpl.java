@@ -3,7 +3,12 @@ package ru.lebedev.bank.domain.account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.lebedev.bank.domain.TransactionStatus;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
+import ru.lebedev.bank.domain.transaction.Transaction;
+import ru.lebedev.bank.domain.transaction.TransactionDTO;
+import ru.lebedev.bank.domain.transaction.TransactionMapper;
+import ru.lebedev.bank.domain.transaction.TransactionService;
 import ru.lebedev.bank.exception.AccountTransferException;
 
 import java.math.BigDecimal;
@@ -18,9 +23,13 @@ public class AccountServiceImpl implements AccountService {
     private static final String ACCOUNT_BY_ID_NOT_FOUND_MESSAGE = "Account with id %s is not found";
     private static final String TRANSFER_AMOUNT_HIGHER_THEN_ACCOUNT_AMOUNT =
             "Transfer amount higher than source account amount";
+    private static final String ACCOUNT_BY_PHONE_NUMBER_NOT_FOUND_MESSAGE =
+            "Account with phone number: %s is not found";
 
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
+    private final TransactionService transactionService;
+    private final TransactionMapper transactionMapper;
 
     public List<AccountDTO> findAll() {
         return accountRepository.findAll().stream()
@@ -80,9 +89,10 @@ public class AccountServiceImpl implements AccountService {
     @Transactional
     public void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount) {
         List<Account> accounts = accountRepository.findByClientPhoneNumberAndIsClosedFalse(phoneNumber);
-
+        if (accounts.isEmpty()) {
+            throw new AccountTransferException(String.format(ACCOUNT_BY_PHONE_NUMBER_NOT_FOUND_MESSAGE, phoneNumber));
+        }
         Account targetAccount = accounts.get(0);
-
         transferAmount(amount, accountId, targetAccount);
     }
 
@@ -93,9 +103,9 @@ public class AccountServiceImpl implements AccountService {
 
     private void transferAmount(BigDecimal amount, Long accountId, Account accountTarget) {
         Account accountSource = getAccount(accountId);
-
+        Transaction transaction = getTransaction(amount, accountSource, accountTarget);
         if (accountSource.getAmount().compareTo(amount) < 0) {
-           // transaction.setState(TransactionState.CANCELLED);
+           transaction.setStatus(TransactionStatus.CANCELLED);
             throw new AccountTransferException(TRANSFER_AMOUNT_HIGHER_THEN_ACCOUNT_AMOUNT);
         } else {
             //transaction.setState(TransactionState.DONE);
@@ -110,5 +120,15 @@ public class AccountServiceImpl implements AccountService {
                 -> new AccountTransferException(String.format(ACCOUNT_BY_ID_NOT_FOUND_MESSAGE, accountId)));
     }
 
+    private Transaction getTransaction(BigDecimal amount, Account accountSource, Account accountTarget) {
+        TransactionDTO transactionDTO = transactionService.create(TransactionDTO.builder()
+                .sourceAccount(accountMapper.toDTO(accountSource))
+                .targetAccount(accountMapper.toDTO(accountTarget))
+                .amount(amount)
+                .status(TransactionStatus.NEW)
+                .build());
+
+        return transactionMapper.toEntity(transactionDTO);
+    }
 
 }
