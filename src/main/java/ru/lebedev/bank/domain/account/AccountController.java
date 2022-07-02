@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.lebedev.bank.domain.transaction.TransactionDTO;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -34,11 +35,11 @@ public class AccountController {
 //        return new ResponseEntity<>(account, HttpStatus.OK);
 //    }
 //
-//    @GetMapping("/history/{accountId}")
-//    public ResponseEntity<List<TransactionDTO>> getHistory (@PathVariable Long accountId) {
-//        List<TransactionDTO> transactions = accountService.getHistory(accountId);
-//        return new ResponseEntity<>(transactions, HttpStatus.OK);
-//    }
+    @GetMapping("/history/{accountId}")
+    public ResponseEntity<List<TransactionDTO>> getHistory (@PathVariable Long accountId) {
+        List<TransactionDTO> transactions = accountService.getHistory(accountId);
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity<List<AccountDTO>> findAll () {
@@ -52,11 +53,11 @@ public class AccountController {
         return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
     }
 
-//    @DeleteMapping("/close/{accountId}")
-//    public ResponseEntity<Void> close (@PathVariable Long accountId) {
-//        accountService.close(accountId);
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//    }
+    @DeleteMapping("/close/{accountId}")
+    public ResponseEntity<Void> close (@PathVariable Long accountId) {
+        accountService.close(accountId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 //
 //    @PutMapping("/cardNumber/{accountId}")
 //    public ResponseEntity<Void> transferMoneyByCardNumber (@PathVariable Long accountId,
@@ -66,11 +67,11 @@ public class AccountController {
 //        return ResponseEntity.status(HttpStatus.OK).build();
 //    }
 //
-//    @PutMapping("/phoneNumber/{accountId}")
-//    public ResponseEntity<Void> transferMoneyByUserPhoneNumber (@PathVariable Long accountId,
-//                                                                @RequestBody String phoneNumber,
-//                                                                @RequestParam BigDecimal amount) {
-//        accountService.transferMoneyByUserPhoneNumber(accountId, phoneNumber, amount);
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//    }
+    @PutMapping("/phoneNumber/{accountId}")
+    public ResponseEntity<Void> transferMoneyByUserPhoneNumber (@PathVariable Long accountId,
+                                                                @RequestBody String phoneNumber,
+                                                                @RequestParam BigDecimal amount) {
+        accountService.transferMoneyByUserPhoneNumber(accountId, phoneNumber, amount);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import ru.lebedev.bank.domain.accountPlan.AccountPlan;
 import ru.lebedev.bank.domain.client.Client;
 
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account")
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,6 +30,7 @@ public class Account {
     BigDecimal amount;
 
     @Column(name = "date_opened")
+    @CreatedDate
     LocalDateTime dateOpened;
 
     @Column(name = "is_closed")

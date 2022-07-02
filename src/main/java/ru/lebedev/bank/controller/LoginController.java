@@ -15,32 +15,32 @@ import ru.lebedev.bank.domain.client.ClientService;
 
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping("/")
+
+
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final ClientService clientService;
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("title", "Форма входа");
-        return "login";
-    }
-
-    @GetMapping("/signup")
-    public String signup(Model model){
-        model.addAttribute("client", new ClientDTO());
-        return "signup";
-    }
-
-    @PostMapping("/signup")
-    public String create(@ModelAttribute("client") @Valid ClientCreateReq clientCreate, BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            return "signup";
-        }
-
-       // clientService.save(clientCreate);
-        return "redirect:";
-    }
+//    private final ClientService clientService;
+//    @GetMapping("/login")
+//    public String login(Model model) {
+//        model.addAttribute("title", "Форма входа");
+//        return "login";
+//    }
+//
+//    @GetMapping("/signup")
+//    public String signup(Model model){
+//        model.addAttribute("client", new ClientDTO());
+//        return "signup";
+//    }
+//
+//    @PostMapping("/signup")
+//    public String create(@ModelAttribute("client") @Valid ClientCreateReq clientCreate, BindingResult bindingResult){
+//        if (bindingResult.hasErrors()) {
+//            return "signup";
+//        }
+//
+//       // clientService.save(clientCreate);
+//        return "redirect:";
+//    }
 }
 

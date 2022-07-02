@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class AccountPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_plan_gen")
-    @SequenceGenerator(name = "account_plan_gen", sequenceName = "account_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "account_plan_gen", sequenceName = "account_plan_id_seq", allocationSize = 1)
     @Column(name = "id")
     Long id;
 

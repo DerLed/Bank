@@ -1,6 +1,7 @@
 package ru.lebedev.bank.domain.transaction;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_gen")
@@ -33,6 +35,7 @@ public class Transaction {
     private LocalDateTime date;
 
     @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private TransactionStatus status;
 
     @ManyToOne

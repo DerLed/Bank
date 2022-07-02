@@ -12,9 +12,11 @@ import ru.lebedev.bank.domain.transaction.TransactionService;
 import ru.lebedev.bank.exception.AccountTransferException;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -80,13 +82,22 @@ public class AccountServiceImpl implements AccountService {
                 .map(accountMapper::toDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public List<TransactionDTO> getHistory(Long id) {
+        List<TransactionDTO> transactionsBySourceId = transactionService.findAllBySourceAccountId(id);
+        List<TransactionDTO> transactionsByTargetId = transactionService.findAllByTargetAccountId(id);
+        return Stream.concat(transactionsBySourceId.stream(), transactionsByTargetId.stream())
+                .sorted(Comparator.comparing(TransactionDTO::getDate))
+                .collect(Collectors.toList());
+    }
+
     public List<AccountDTO> findByPhoneNumber(String phoneNumber) {
         return accountRepository.findByClientPhoneNumberAndIsClosedFalse(phoneNumber).stream()
                 .map(accountMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(noRollbackFor = AccountTransferException.class)
     public void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount) {
         List<Account> accounts = accountRepository.findByClientPhoneNumberAndIsClosedFalse(phoneNumber);
         if (accounts.isEmpty()) {
@@ -97,20 +108,32 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void deleteById(Long id) {
-
+    @Transactional
+    public void close(Long id) {
+        accountRepository.closeById(id);
     }
+
 
     private void transferAmount(BigDecimal amount, Long accountId, Account accountTarget) {
         Account accountSource = getAccount(accountId);
-        Transaction transaction = getTransaction(amount, accountSource, accountTarget);
+
+
+        //Transaction transaction = getTransaction(amount, accountSource, accountTarget);
+        Transaction transaction = Transaction.builder()
+                .amount(amount)
+                .sourceAccount(accountSource)
+                .targetAccount(accountTarget)
+                .build();
+
         if (accountSource.getAmount().compareTo(amount) < 0) {
            transaction.setStatus(TransactionStatus.CANCELLED);
+            transactionService.save(transactionMapper.toDTO(transaction));
             throw new AccountTransferException(TRANSFER_AMOUNT_HIGHER_THEN_ACCOUNT_AMOUNT);
         } else {
-            //transaction.setState(TransactionState.DONE);
+            transaction.setStatus(TransactionStatus.DONE);
             accountSource.setAmount(accountSource.getAmount().subtract(amount));
             accountTarget.setAmount(accountTarget.getAmount().add(amount));
+            transactionService.save(transactionMapper.toDTO(transaction));
         }
     }
 
@@ -119,6 +142,7 @@ public class AccountServiceImpl implements AccountService {
         return account.orElseThrow(()
                 -> new AccountTransferException(String.format(ACCOUNT_BY_ID_NOT_FOUND_MESSAGE, accountId)));
     }
+
 
     private Transaction getTransaction(BigDecimal amount, Account accountSource, Account accountTarget) {
         TransactionDTO transactionDTO = transactionService.create(TransactionDTO.builder()

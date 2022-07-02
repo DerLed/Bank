@@ -3,17 +3,13 @@ package ru.lebedev.bank.domain.transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
-@RequiredArgsConstructor
-public class TransactionService {
+import java.util.List;
 
-    private final TransactionRepository transactionRepository;
-    private final TransactionMapper transactionMapper;
+public interface TransactionService {
 
-    public TransactionDTO create(TransactionDTO transactionRequestDTO) {
-        Transaction transaction = transactionMapper.toEntity(transactionRequestDTO);
+    TransactionDTO create(TransactionDTO transactionRequestDTO);
+    TransactionDTO save(TransactionDTO transactionRequestDTO);
+    List<TransactionDTO> findAllByTargetAccountId(Long id);
 
-        transactionRepository.save(transaction);
-        return transactionMapper.toDTO(transaction);
-    }
+    List<TransactionDTO> findAllBySourceAccountId(Long id);
 }

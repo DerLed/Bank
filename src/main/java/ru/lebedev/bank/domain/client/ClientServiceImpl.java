@@ -53,11 +53,12 @@ public class ClientServiceImpl implements ClientService {
     public ClientDTO save(ClientDTO clientDTO){
 
         Client client = clientMapper.toEntity(clientDTO);
-        String encodedPassword = passwordEncoder.encode(client.getUser().getPassword());
-        client.getUser().setPassword(encodedPassword);
-        client.getUser().setLogin(client.getPhoneNumber());
-        client.getUser().setRole(Role.USER);
-        client.getUser().setStatus(Status.ACTIVE);
+
+        if(client.getUser().getPassword() != null) {
+            String encodedPassword = passwordEncoder.encode(client.getUser().getPassword());
+            client.getUser().setPassword(encodedPassword);
+        }
+
         clientRepository.saveAndFlush(client);
         return clientMapper.toDTO(client);
     }
