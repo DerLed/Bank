@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import ru.lebedev.bank.domain.account.AccountDTO;
 import ru.lebedev.bank.domain.cardPlan.CardPlanDTO;
+import ru.lebedev.bank.domain.client.ClientDTO;
 import ru.lebedev.bank.domain.user.UserDTO;
 
 @Data
@@ -11,12 +12,12 @@ import ru.lebedev.bank.domain.user.UserDTO;
 public class CardDTO {
 
     private Long id;
-    private AccountDTO accountDTO;
-    private String pin;
-    private UserDTO userDTO;
-    private CardPlanDTO cardPlanDTO;
-    private Boolean isClosed;
     private String cardNumber;
+    private String pin;
     private Boolean isBlocked;
+
+    private AccountDTO accountDTO;
+    private ClientDTO clientDTO;
+    private CardPlanDTO cardPlanDTO;
 
 }

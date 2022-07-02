@@ -10,6 +10,7 @@ import ru.lebedev.bank.domain.client.ClientDTO;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class AccountPlanMvcController {
     @GetMapping("/add")
     public String add(Model model){
         model.addAttribute("accountPlan", new AccountPlanDTO());
+        model.addAttribute("type", Arrays.asList(TypeAccount.values()));
         return "account-plan/account-plan-add";
     }
 

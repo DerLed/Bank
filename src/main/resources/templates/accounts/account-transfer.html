@@ -10,17 +10,23 @@
 
 <h1>Открытие счета</h1>
 
-<form action="#" th:action="@{/accounts/new}" th:object="${account}" th:method="POST">
+<form action="#" th:action="@{/accounts/transfer}" th:object="${form}" th:method="POST">
     <div>
+
         <label for="type">Сумма</label>
         <input type="text" th:field="*{amount}" id="type">
         <p th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name Error</p>
         <br>
 
-        <div th:each="aP : ${accountPlans}">
-            <input type="radio" th:field="*{accountPlan}" th:value="${aP.id}" />
-            <label th:for="${#ids.prev('accountPlan')}" th:text="${aP.type}"></label>
-        </div>
+        <label for="type">Номер телефона</label>
+        <input type="text" th:field="*{phoneNumber}" id="type">
+        <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Name Error</p>
+        <br>
+
+        <select th:field="*{account}">
+            <option th:each="a : ${accounts}" th:value="${a.id}" th:text="${a}">
+            </option>
+        </select>
 
         <input type="submit" value="Добавить">
     </div>

@@ -21,11 +21,9 @@ public class UserDTO {
 
     private Long id;
     @NotBlank(message = "Name incorrect")
-    @Min(value = 2)
     private String name;
 
     @NotBlank(message = "Surname incorrect")
-    @Min(value = 2)
     private String surname;
 
     @NotBlank(message = "Login must be min 6 characters")

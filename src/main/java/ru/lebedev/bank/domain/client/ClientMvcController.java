@@ -1,5 +1,6 @@
 package ru.lebedev.bank.domain.client;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -23,17 +24,16 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/client")
+@RequiredArgsConstructor
 public class ClientMvcController {
 
     private final ClientService clientService;
-    private IAuthenticationFacade authenticationFacade;
 
-    @Autowired
-    public ClientMvcController(ClientServiceImpl clientService, IAuthenticationFacade authenticationFacade) {
-        this.clientService = clientService;
-        this.authenticationFacade = authenticationFacade;
+    @GetMapping
+    public String client(Model model, Principal principal){
+        model.addAttribute("client", clientService.findByUserLogin(principal.getName()).orElseThrow());
+        return "client/client";
     }
-
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -60,7 +60,6 @@ public class ClientMvcController {
             model.addAttribute("client", clientCreate);
             return "client/new";
         }
-
 
         return "redirect:/";
     }

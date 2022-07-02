@@ -22,12 +22,18 @@ public class Card {
     @Column(name = "id")
     Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @Column(name = "card_number")
+    private String cardNumber;
 
     @Column(name = "pin")
     private String pin;
+
+    @Column(name = "is_blocked")
+    private Boolean isBlocked;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -36,4 +42,6 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "plan_id")
     private CardPlan cardPlan;
+
+
 }

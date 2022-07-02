@@ -1,7 +1,5 @@
 package ru.lebedev.bank.domain.transaction;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.lebedev.bank.domain.TransactionStatus;
@@ -11,15 +9,11 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class TransactionDTO {
+public class TransactionFormDTO {
 
-    private Long id;
+    private String phoneNumber;
     private BigDecimal amount;
-    private LocalDateTime date;
-    private AccountDTO sourceAccount;
-    private AccountDTO targetAccount;
-    private TransactionStatus status;
+    private AccountDTO account;
+
 }
