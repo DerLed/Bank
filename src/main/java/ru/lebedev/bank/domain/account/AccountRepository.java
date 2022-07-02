@@ -21,6 +21,10 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     //@Query("select a from Account a where a.client.phoneNumber = :phoneNumber")
     List<Account> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
 
+    @Query("select a from Card c join c.account a where c.cardNumber = :cardNumber " +
+            "and a.isClosed = false and c.isClosed = false and a.client.user.status = ru.lebedev.bank.domain.Status.ACTIVE ")
+    Optional<Account> findByCardNumber(String cardNumber);
+
     @Modifying(clearAutomatically = true)
     @Query("update Account set isClosed = true where id = :id")
     void closeById(Long id);

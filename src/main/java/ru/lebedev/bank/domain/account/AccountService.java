@@ -16,6 +16,7 @@ public interface AccountService {
 
     List<AccountDTO> findByClientId (Long clientId);
     List<AccountDTO> findByPhoneNumber (String phoneNumber);
+    Optional<AccountDTO> findByCardNumber (String cardNumber);
 
     List<AccountDTO> findByClientLogin (String login);
     List<AccountDTO> findByClientLoginLoanAccounts (String login);

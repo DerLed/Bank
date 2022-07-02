@@ -15,6 +15,7 @@ import java.util.Optional;
 @RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
 public class AccountController {
+
     private final AccountService accountService;
 
     @GetMapping("/client/{clientId}")
@@ -29,12 +30,12 @@ public class AccountController {
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
-//    @GetMapping("/cardNumber/{cardNumber}")
-//    public ResponseEntity<Optional<AccountDTO>> findByCardNumber (@PathVariable String cardNumber) {
-//        Optional<AccountDTO> account = accountService.findByCardNumber(cardNumber);
-//        return new ResponseEntity<>(account, HttpStatus.OK);
-//    }
-//
+    @GetMapping("/cardNumber/{cardNumber}")
+    public ResponseEntity<Optional<AccountDTO>> findByCardNumber (@PathVariable String cardNumber) {
+        Optional<AccountDTO> account = accountService.findByCardNumber(cardNumber);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
     @GetMapping("/history/{accountId}")
     public ResponseEntity<List<TransactionDTO>> getHistory (@PathVariable Long accountId) {
         List<TransactionDTO> transactions = accountService.getHistory(accountId);

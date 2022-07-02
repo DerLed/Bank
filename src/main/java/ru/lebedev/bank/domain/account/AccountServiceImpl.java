@@ -97,6 +97,12 @@ public class AccountServiceImpl implements AccountService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<AccountDTO> findByCardNumber(String cardNumber) {
+        Optional<Account> account = accountRepository.findByCardNumber(cardNumber);
+        return account.map(accountMapper::toDTO);
+    }
+
     @Transactional(noRollbackFor = AccountTransferException.class)
     public void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount) {
         List<Account> accounts = accountRepository.findByClientPhoneNumberAndIsClosedFalse(phoneNumber);

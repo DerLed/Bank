@@ -15,6 +15,7 @@ public class CardDTO {
     private String cardNumber;
     private String pin;
     private Boolean isBlocked;
+    private Boolean isClosed;
 
     private AccountDTO accountDTO;
     private ClientDTO clientDTO;

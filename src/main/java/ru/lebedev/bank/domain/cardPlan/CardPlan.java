@@ -1,6 +1,7 @@
 package ru.lebedev.bank.domain.cardPlan;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,12 +13,16 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class CardPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_plan_gen")
     @SequenceGenerator(name = "card_plan_gen", sequenceName = "card_plan_id_seq", allocationSize = 1)
     @Column(name = "id")
     Long id;
+
+    @Column(name = "is_credit")
+    private Boolean isCredit;
 
     @Column(name = "percent")
     private BigDecimal percent;

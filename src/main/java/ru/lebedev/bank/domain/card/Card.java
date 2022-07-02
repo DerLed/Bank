@@ -31,6 +31,9 @@ public class Card {
     @Column(name = "is_blocked")
     private Boolean isBlocked;
 
+    @Column(name = "is_closed")
+    private Boolean isClosed;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
