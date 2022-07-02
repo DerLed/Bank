@@ -19,9 +19,16 @@ public class AccountPlan {
     @Column(name = "id")
     Long id;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "percent")
     private BigDecimal percent;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "type")
+    private TypeAccount type;
 }

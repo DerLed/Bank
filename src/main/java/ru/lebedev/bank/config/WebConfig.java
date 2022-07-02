@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import ru.lebedev.bank.converter.LongAccountConverter;
 import ru.lebedev.bank.converter.LongAccountPlanConverter;
 
 import java.util.List;
@@ -14,10 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
     public class WebConfig implements WebMvcConfigurer {
     private final LongAccountPlanConverter accountPlanConverter;
+    private final LongAccountConverter accountConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(accountPlanConverter);
+        registry.addConverter(accountConverter);
     }
 }
 

@@ -12,13 +12,26 @@
 
 <form action="#" th:action="@{/account_plan/add}" th:object="${accountPlan}" th:method="POST">
     <div>
-        <label for="type">Тип</label>
-        <input type="text" th:field="*{type}" id="type">
+        <label for="type">Название</label>
+        <input type="text" th:field="*{title}" id="type">
         <p th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Name Error</p>
         <br>
+
+        <label for="description">Описание</label>
+        <input type="text" th:field="*{description}" id="description">
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Name Error</p>
+        <br>
+
         <label for="percent">Проценты</label>
         <input type="text" th:field="*{percent}" id="percent">
         <p th:if="${#fields.hasErrors('percent')}" th:errors="*{percent}">Surname Error</p>
+        <br>
+
+        <label for="type">Тип</label>
+        <select th:field="*{type}" id="type">
+            <option th:each="t : ${type}" th:value="${t}" th:text="${t}"></option>
+        </select>
+        <br>
 
         <input type="submit" value="Добавить">
     </div>
