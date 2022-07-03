@@ -29,7 +29,7 @@ public class CardController {
 
     @GetMapping(value = "/user/{id}")
     public ResponseEntity<List<CardDTO>> getAllByUserId(@PathVariable Long id) {
-        List<CardDTO> cards = cardService.findByUserId(id);
+        List<CardDTO> cards = cardService.findByClientId(id);
         return new ResponseEntity<>(cards, HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package ru.lebedev.bank.domain.account;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,8 @@ public class AccountDTO {
 
     private Long id;
     private BigDecimal amount;
+
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDateTime dateOpened;
     private Boolean isDefault;
     private Boolean isClosed;

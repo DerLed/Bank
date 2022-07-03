@@ -36,7 +36,8 @@
 
                     <td th:text="${account.amount}"></td>
                     <td th:text="${account.accountPlan.title}"></td>
-                    <td th:text="${account.dateOpened}"></td>
+                    <td th:text="${#temporals.format(account.dateOpened, 'dd-MMM-yyyy')}"></td>
+
                     <td><a th:href="@{/accounts/history/{id}(id=${account.id})}">Edit</a></td>
                     <!--        <td><a th:href="@{/account_plan/remove/{id}(id=${accountPlan.id})}">Delete</a></td>-->
                 </tr>

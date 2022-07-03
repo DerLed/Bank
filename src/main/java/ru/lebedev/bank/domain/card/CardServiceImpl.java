@@ -48,9 +48,16 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public List<CardDTO> findByUserId(Long userId) {
+    public List<CardDTO> findByClientId(Long userId) {
         List<Card> cards = cardRepository.findByClientIdAndIsClosedFalse(userId);
         return cards.stream()
+                .map(cardMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CardDTO> findByClientUserLogin(String login) {
+        return cardRepository.findByClientUserLoginAndIsClosedFalse(login).stream()
                 .map(cardMapper::toDTO)
                 .collect(Collectors.toList());
     }

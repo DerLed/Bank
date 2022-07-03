@@ -6,21 +6,17 @@ import lombok.NoArgsConstructor;
 import ru.lebedev.bank.domain.account.AccountDTO;
 import ru.lebedev.bank.domain.cardPlan.CardPlanDTO;
 import ru.lebedev.bank.domain.client.ClientDTO;
-import ru.lebedev.bank.domain.user.UserDTO;
+
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CardDTO {
+public class CardCreateDTO {
 
-    private Long id;
-    private String cardNumber;
-    private String pin;
-    private Boolean isBlocked;
-    private Boolean isClosed;
-
+    @NotNull
     private AccountDTO accountDTO;
-    private ClientDTO clientDTO;
+    @NotNull
     private CardPlanDTO cardPlanDTO;
 
 }

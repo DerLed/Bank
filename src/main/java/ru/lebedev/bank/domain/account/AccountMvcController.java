@@ -71,7 +71,7 @@ public class AccountMvcController {
         return "redirect:accounts";
     }
 
-    @GetMapping("/add_money")
+    @GetMapping("/add-money")
     public String showAddMoney(Model model, Principal principal){
         List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
         model.addAttribute("accounts", accounts);
@@ -79,7 +79,7 @@ public class AccountMvcController {
         return "accounts/account-add-money";
     }
 
-    @PostMapping("/add_money")
+    @PostMapping("/add-money")
     public String accountsAddMoney(@RequestParam String amount,
                                    @RequestParam AccountDTO account,
                                    Principal principal){

@@ -12,7 +12,9 @@ public interface CardService {
 
     void blockById(Long id);
 
-    List<CardDTO> findByUserId(Long userId);
+    List<CardDTO> findByClientId(Long userId);
+
+    List<CardDTO> findByClientUserLogin(String login);
 
     Optional<CardDTO> findById(Long id);
 

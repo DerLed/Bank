@@ -10,18 +10,19 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.lebedev.bank.converter.LongAccountConverter;
 import ru.lebedev.bank.converter.LongAccountPlanConverter;
-import ru.lebedev.bank.formatter.AccountFormatter;
+import ru.lebedev.bank.formatter.AccountDTOFormatter;
+
 
 import java.util.List;
 
-
+@EnableWebMvc
 @Configuration
 @ComponentScan("ru.lebedev")
 @RequiredArgsConstructor
     public class WebConfig implements WebMvcConfigurer {
     private final LongAccountPlanConverter accountPlanConverter;
     private final LongAccountConverter accountConverter;
-    private final AccountFormatter accountFormatter;
+    private final AccountDTOFormatter accountFormatter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {

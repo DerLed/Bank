@@ -1,5 +1,6 @@
 package ru.lebedev.bank.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,5 +42,6 @@ public class UserDTO {
     @NotNull(message = "Role must be filled in")
     private Role role;
 
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDateTime dateRegister;
 }
