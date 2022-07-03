@@ -13,6 +13,7 @@ import ru.lebedev.bank.domain.transaction.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.TransactionFormDTO;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class AccountMvcController {
         List<AccountDTO> accounts = accountService.findByClientLoginLoanAccounts(principal.getName());
         model.addAttribute("accounts", accounts);
         model.addAttribute("title", "Ваши кредиты");
-
         return "accounts/account-list";
     }
 
@@ -38,7 +38,6 @@ public class AccountMvcController {
         List<AccountDTO> accounts = accountService.findByClientLoginSavingAccounts(principal.getName());
         model.addAttribute("accounts", accounts);
         model.addAttribute("title", "Ваши накопительные счета");
-
         return "accounts/account-list";
     }
 
@@ -47,7 +46,6 @@ public class AccountMvcController {
         List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
         model.addAttribute("accounts", accounts);
         model.addAttribute("title", "Ваши депозитные счета");
-
         return "accounts/account-list";
     }
 
@@ -57,7 +55,6 @@ public class AccountMvcController {
         model.addAttribute("form", new TransactionFormDTO());
         model.addAttribute("accounts", accounts);
         model.addAttribute("title", "Ваши депозитные счета");
-
         return "accounts/account-transfer";
     }
 
@@ -65,16 +62,30 @@ public class AccountMvcController {
     public String accountsTransfer(@ModelAttribute("form") @Valid TransactionFormDTO transactionFormDTO,
                                    BindingResult bindingResult,
                                    Principal principal){
-
         List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
         if (bindingResult.hasErrors()) {
-            return "accounts/account-new";
+            return "accounts/account-transfer";
         }
-
         accountService.transferMoneyByUserPhoneNumber(transactionFormDTO.getAccount().getId(),
                 transactionFormDTO.getPhoneNumber(), transactionFormDTO.getAmount());
-
         return "redirect:accounts";
+    }
+
+    @GetMapping("/add_money")
+    public String showAddMoney(Model model, Principal principal){
+        List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
+        model.addAttribute("accounts", accounts);
+
+        return "accounts/account-add-money";
+    }
+
+    @PostMapping("/add_money")
+    public String accountsAddMoney(@RequestParam String amount,
+                                   @RequestParam AccountDTO account,
+                                   Principal principal){
+
+        accountService.addMoney(account.getId(), new BigDecimal(amount));
+        return "redirect:/client";
     }
 
 
@@ -106,17 +117,58 @@ public class AccountMvcController {
 
     @PostMapping("/checking/new")
     public String newCheckingAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
-                                   BindingResult bindingResult, Principal principal){
+                                   BindingResult bindingResult, Principal principal, Model model){
         if (bindingResult.hasErrors()) {
+            model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.CHECKING));
             return "accounts/account-new";
         }
         ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
         accountDTO.setClient(clientDTO);
-        accountDTO.setIsDefault(false);
-        accountDTO.setIsClosed(false);
         accountService.save(accountDTO);
         return "redirect:/client";
     }
+
+    @GetMapping("/saving/new")
+    public String newSavingAccount(Model model){
+        model.addAttribute("account", new AccountDTO());
+        model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.SAVING));
+        return "accounts/account-new";
+    }
+
+    @PostMapping("/saving/new")
+    public String newSavingAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
+                                           BindingResult bindingResult, Principal principal, Model model){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.SAVING));
+            return "accounts/account-new";
+        }
+        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
+        accountDTO.setClient(clientDTO);
+        accountService.save(accountDTO);
+        return "redirect:/client";
+    }
+
+    @GetMapping("/loan/new")
+    public String newLoanAccount(Model model){
+        model.addAttribute("account", new AccountDTO());
+        model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.LOAN));
+        return "accounts/account-new";
+    }
+
+    @PostMapping("/loan/new")
+    public String newLoanAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
+                                         BindingResult bindingResult, Principal principal, Model model){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.LOAN));
+            return "accounts/account-new";
+        }
+        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
+        accountDTO.setClient(clientDTO);
+        accountService.save(accountDTO);
+        return "redirect:/client";
+    }
+
+
 
     @GetMapping("/history/{accountId}")
     public String newCheckingAccount(@PathVariable Long accountId, Model model){

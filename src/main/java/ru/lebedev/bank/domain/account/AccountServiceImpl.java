@@ -127,6 +127,16 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
+    public void addMoney(Long accountId, BigDecimal amount) {
+        Optional<Account> refillAccount = accountRepository.findByIdAndIsClosedFalse(accountId);
+        if (refillAccount.isEmpty()) {
+            throw new AccountTransferException(String.format(ACCOUNT_BY_ID_NOT_FOUND_MESSAGE, accountId));
+        }
+        addMoneyToAccount(amount, refillAccount.get());
+    }
+
+    @Override
+    @Transactional
     public void close(Long id) {
         accountRepository.closeById(id);
     }
@@ -134,14 +144,7 @@ public class AccountServiceImpl implements AccountService {
 
     private void transferAmount(BigDecimal amount, Long accountId, Account accountTarget) {
         Account accountSource = getAccount(accountId);
-
-
-        //Transaction transaction = getTransaction(amount, accountSource, accountTarget);
-        Transaction transaction = Transaction.builder()
-                .amount(amount)
-                .sourceAccount(accountSource)
-                .targetAccount(accountTarget)
-                .build();
+        Transaction transaction = getTransaction(amount,accountSource, accountTarget);
 
         if (accountSource.getAmount().compareTo(amount) < 0) {
            transaction.setStatus(TransactionStatus.CANCELLED);
@@ -154,6 +157,16 @@ public class AccountServiceImpl implements AccountService {
             transactionService.save(transactionMapper.toDTO(transaction));
         }
     }
+
+    private void addMoneyToAccount(BigDecimal amount, Account refillAccount) {
+
+        Transaction transaction = getTransaction(amount, refillAccount, refillAccount);
+        transaction.setStatus(TransactionStatus.REFILL);
+        refillAccount.setAmount(refillAccount.getAmount().add(amount));
+        transactionService.save(transactionMapper.toDTO(transaction));
+
+    }
+
 
     private Account getAccount(Long accountId) {
         Optional<Account> account = accountRepository.findByIdAndIsClosedFalse(accountId);
@@ -170,6 +183,14 @@ public class AccountServiceImpl implements AccountService {
             return account;
         }
         return account;
+    }
+
+    private Transaction getTransaction(BigDecimal amount, Account sourceAccount, Account targetAccount){
+        return Transaction.builder()
+                .amount(amount)
+                .sourceAccount(sourceAccount)
+                .targetAccount(targetAccount)
+                .build();
     }
 
 }

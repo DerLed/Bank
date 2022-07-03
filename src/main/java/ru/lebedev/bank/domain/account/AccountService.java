@@ -27,4 +27,5 @@ public interface AccountService {
 
     void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount);
     void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount);
+    void addMoney(Long accountId, BigDecimal amount);
 }
