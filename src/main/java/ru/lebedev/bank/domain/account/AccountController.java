@@ -59,15 +59,15 @@ public class AccountController {
         accountService.close(accountId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-//
-//    @PutMapping("/cardNumber/{accountId}")
-//    public ResponseEntity<Void> transferMoneyByCardNumber (@PathVariable Long accountId,
-//                                                           @RequestBody String cardNumber,
-//                                                           @RequestParam BigDecimal amount) {
-//        accountService.transferMoneyByCardNumber(accountId, cardNumber, amount);
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//    }
-//
+
+    @PutMapping("/cardNumber/{accountId}")
+    public ResponseEntity<Void> transferMoneyByCardNumber (@PathVariable Long accountId,
+                                                           @RequestBody String cardNumber,
+                                                           @RequestParam BigDecimal amount) {
+        accountService.transferMoneyByCardNumber(accountId, cardNumber, amount);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     @PutMapping("/phoneNumber/{accountId}")
     public ResponseEntity<Void> transferMoneyByUserPhoneNumber (@PathVariable Long accountId,
                                                                 @RequestBody String phoneNumber,

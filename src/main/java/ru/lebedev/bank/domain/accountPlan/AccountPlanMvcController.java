@@ -49,6 +49,7 @@ public class AccountPlanMvcController {
         AccountPlanDTO accountPlanDTO = accountPlanService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid accountPlan Id:" + id));
         model.addAttribute("accountPlan", accountPlanDTO);
+        model.addAttribute("type", Arrays.asList(TypeAccount.values()));
         return "account-plan/account-plan-edit";
     }
 

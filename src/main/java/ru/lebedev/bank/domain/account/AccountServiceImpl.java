@@ -27,6 +27,7 @@ public class AccountServiceImpl implements AccountService {
             "Transfer amount higher than source account amount";
     private static final String ACCOUNT_BY_PHONE_NUMBER_NOT_FOUND_MESSAGE =
             "Account with phone number: %s is not found";
+    private static final String ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE = "Account with card number: %s is not found";
 
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
@@ -41,8 +42,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDTO save(AccountDTO accountDTO) {
-        Account account = accountMapper.toEntity(accountDTO);
-        Account savedAccount = accountRepository.saveAndFlush(account);
+        Account checkedAccount = checkAccount(accountMapper.toEntity(accountDTO));
+        checkedAccount.setIsClosed(false);
+        Account savedAccount = accountRepository.saveAndFlush(checkedAccount);
         return accountMapper.toDTO(savedAccount);
     }
 
@@ -114,6 +116,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional(noRollbackFor = AccountTransferException.class)
+    public void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount) {
+        Optional<Account> targetAccount = accountRepository.findByCardNumber(cardNumber);
+        if (targetAccount.isEmpty()) {
+            throw new AccountTransferException(String.format(ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE, cardNumber));
+        }
+        transferAmount(amount, accountId, targetAccount.get());
+    }
+
+    @Override
     @Transactional
     public void close(Long id) {
         accountRepository.closeById(id);
@@ -150,15 +162,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-    private Transaction getTransaction(BigDecimal amount, Account accountSource, Account accountTarget) {
-        TransactionDTO transactionDTO = transactionService.create(TransactionDTO.builder()
-                .sourceAccount(accountMapper.toDTO(accountSource))
-                .targetAccount(accountMapper.toDTO(accountTarget))
-                .amount(amount)
-                .status(TransactionStatus.NEW)
-                .build());
-
-        return transactionMapper.toEntity(transactionDTO);
+    private Account checkAccount(Account account){
+        if(account.getAccountPlan().getType().equals(TypeAccount.CHECKING)){
+            boolean notDefaultAccount = accountRepository.findByClientIdAndIsDefaultTrueAndIsClosedFalse(account.getClient().getId()).isEmpty();
+            account.setIsDefault(notDefaultAccount);
+            account.setAmount(BigDecimal.ZERO);
+            return account;
+        }
+        return account;
     }
 
 }

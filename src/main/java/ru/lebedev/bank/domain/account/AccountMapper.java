@@ -1,9 +1,10 @@
 package ru.lebedev.bank.domain.account;
 
+import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import ru.lebedev.bank.domain.EntityMapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface AccountMapper extends EntityMapper<AccountDTO, Account> {
 
 }

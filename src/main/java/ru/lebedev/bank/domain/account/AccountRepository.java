@@ -28,4 +28,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     @Modifying(clearAutomatically = true)
     @Query("update Account set isClosed = true where id = :id")
     void closeById(Long id);
+
+    List<Account> findByClientIdAndIsDefaultTrueAndIsClosedFalse(Long clientId);
 }

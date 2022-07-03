@@ -33,6 +33,9 @@ public class Account {
     @CreatedDate
     LocalDateTime dateOpened;
 
+    @Column(name = "is_default")
+    private Boolean isDefault;
+
     @Column(name = "is_closed")
     private Boolean isClosed;
 

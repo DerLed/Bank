@@ -4,20 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Личный кабинет клиента</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<h1 >Здравствуйте <span th:text="${client.userDTO.name}"></span></h1>
 
-<div class="nav-scroller py-1 mb-2">
-    <nav class="nav d-flex justify-content-between">
-        <a href="/accounts/checking" class="list-group-item list-group-item-action">Ваши депозитные счета</a>
-        <a href="/accounts/loan" class="list-group-item list-group-item-action">Ваши кредиты</a>
-        <a href="/accounts/saving" class="list-group-item list-group-item-action">Ваши накопительные счета</a>
-        <a href="/client/cards" class="list-group-item list-group-item-action">Карты</a>
-        <a href="/client/transactions" class="list-group-item list-group-item-action">История</a>
-        <a href="/accounts/transfer" class="list-group-item list-group-item-action">Перевод денег</a>
-    </nav>
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <h1 class="display-3">Здравствуйте <span th:text="${client.userDTO.name}"></span></h1>
+        </div>
+    </header>
+
+
+    <div class="p-5 text-center bg-light">
+        <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-between">
+                <a href="/accounts/checking/new" class="list-group-item list-group-item-action">Открыть новый счет</a>
+                <a href="/accounts/checking" class="list-group-item list-group-item-action">Ваши депозитные счета</a>
+                <a href="/accounts/loan" class="list-group-item list-group-item-action">Ваши кредиты</a>
+                <a href="/accounts/saving" class="list-group-item list-group-item-action">Ваши накопительные счета</a>
+                <a href="/client/cards" class="list-group-item list-group-item-action">Карты</a>
+                <a href="/client/transactions" class="list-group-item list-group-item-action">История</a>
+                <a href="/accounts/transfer" class="list-group-item list-group-item-action">Перевод денег</a>
+            </nav>
+        </div>
+    </div>
 </div>
 
 </body>

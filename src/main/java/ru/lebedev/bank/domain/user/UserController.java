@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDTO> update(@RequestBody UserDTO user) {
+    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserDTO user) {
         UserDTO savedUser = userService.save(user);
         return new ResponseEntity<>(savedUser, HttpStatus.OK);
     }

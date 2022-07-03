@@ -9,6 +9,7 @@ import ru.lebedev.bank.domain.client.ClientDTO;
 import ru.lebedev.bank.domain.user.UserDTO;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class AccountDTO {
 
     private Long id;
     private BigDecimal amount;
+    private LocalDateTime dateOpened;
     private Boolean isDefault;
     private Boolean isClosed;
     private ClientDTO client;

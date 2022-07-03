@@ -49,7 +49,7 @@ public class CardServiceImpl implements CardService{
 
     @Override
     public List<CardDTO> findByUserId(Long userId) {
-        List<Card> cards = cardRepository.findByUserIdAndIsClosedFalse(userId);
+        List<Card> cards = cardRepository.findByClientIdAndIsClosedFalse(userId);
         return cards.stream()
                 .map(cardMapper::toDTO)
                 .collect(Collectors.toList());

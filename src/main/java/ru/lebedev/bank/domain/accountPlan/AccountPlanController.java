@@ -9,12 +9,20 @@ import ru.lebedev.bank.domain.account.AccountService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/account_plans")
 @RequiredArgsConstructor
 public class AccountPlanController {
     private final AccountPlanService accountPlanService;
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<AccountPlanDTO> findById(@PathVariable Long id) {
+        Optional<AccountPlanDTO> accountPlan = accountPlanService.findById(id);
+        return accountPlan.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     @GetMapping
     public ResponseEntity<List<AccountPlanDTO>> findAll () {
@@ -23,9 +31,16 @@ public class AccountPlanController {
     }
 
     @PostMapping
-    public ResponseEntity<AccountPlanDTO> save (@RequestBody @Valid AccountPlanDTO account) {
-        AccountPlanDTO savedAccount = accountPlanService.save(account);
+    public ResponseEntity<AccountPlanDTO> save (@RequestBody @Valid AccountPlanDTO accountPlanDTO) {
+        AccountPlanDTO savedAccount = accountPlanService.save(accountPlanDTO);
         return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> delete(@RequestBody @Valid AccountPlanDTO accountPlanDTO) {
+        accountPlanService.delete(accountPlanDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }

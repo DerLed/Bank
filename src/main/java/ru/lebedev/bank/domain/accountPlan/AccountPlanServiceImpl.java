@@ -23,6 +23,13 @@ public class AccountPlanServiceImpl implements AccountPlanService{
     }
 
     @Override
+    public List<AccountPlanDTO> findByType(TypeAccount typeAccount) {
+        return accountPlanRepository.findByTypeEquals(typeAccount).stream()
+                .map(accountPlanMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public AccountPlanDTO save(AccountPlanDTO accountPlanDTO) {
         AccountPlan accountPlan = accountPlanMapper.toEntity(accountPlanDTO);
         accountPlanRepository.saveAndFlush(accountPlan);
@@ -36,7 +43,15 @@ public class AccountPlanServiceImpl implements AccountPlanService{
     }
 
     @Override
+    public void delete(AccountPlanDTO accountPlanDTO) {
+        AccountPlan accountPlan = accountPlanMapper.toEntity(accountPlanDTO);
+        accountPlanRepository.delete(accountPlan);
+    }
+
+    @Override
     public void deleteById(Long id) {
         accountPlanRepository.deleteById(id);
     }
+
+
 }

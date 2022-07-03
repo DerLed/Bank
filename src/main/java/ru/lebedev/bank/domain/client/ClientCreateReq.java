@@ -16,22 +16,21 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class ClientCreateReq {
 
-    @NotBlank(message = "Name incorrect")
+    @NotBlank(message = "Поле имя не может быть пустым")
     private String name;
 
-    @NotBlank(message = "Surname incorrect")
+    @NotBlank(message = "Поле фамилия не может быть пустым")
     private String surname;
 
     @Email
-    @NotBlank(message = "Email not be empty")
+    @NotBlank(message = "Поле Email не может быть пустым")
     private String email;
 
-    @NotBlank(message = "Phone Number not be empty")
-    @Min(value = 6, message = "Phone Number must be min 6 characters")
+
+    @Min(value = 6, message = "Номер телефона не может быть пустым")
     private String phoneNumber;
 
-    @NotBlank(message = "Password must be min 8 characters")
-    @Min(value = 8)
+    @Min(value = 8, message = "Минимум 8 символов")
     private String password;
 
 

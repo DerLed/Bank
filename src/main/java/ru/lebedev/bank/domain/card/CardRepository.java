@@ -21,7 +21,7 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     @Query("update Card set isBlocked = true where id = :id")
     void blockById(Long id);
 
-    List<Card> findByUserIdAndIsClosedFalse(Long userId);
+    List<Card> findByClientIdAndIsClosedFalse(Long clientId);
 
     Optional<Card> findByIdAndIsClosedFalse(Long id);
 

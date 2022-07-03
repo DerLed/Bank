@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,18 +22,18 @@ public class CardPlanController {
     }
 
     @PostMapping
-    public ResponseEntity<CardPlanDTO> create(@RequestBody CardPlanDTO cardPlanDTO){
+    public ResponseEntity<CardPlanDTO> create(@RequestBody @Valid CardPlanDTO cardPlanDTO){
         CardPlanDTO responseDTO = cardPlanService.save(cardPlanDTO);
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         cardPlanService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CardPlanDTO> findById(@PathVariable Long id) {
         Optional<CardPlanDTO> cardPlanDTO = cardPlanService.findById(id);
         return cardPlanDTO.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))

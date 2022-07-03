@@ -4,13 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.accountPlan.AccountPlanService;
+import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 import ru.lebedev.bank.domain.client.ClientDTO;
 import ru.lebedev.bank.domain.client.ClientService;
+import ru.lebedev.bank.domain.transaction.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.TransactionFormDTO;
 
 import javax.validation.Valid;
@@ -94,10 +93,36 @@ public class AccountMvcController {
         }
         ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
         accountDTO.setClient(clientDTO);
+        accountService.save(accountDTO);
+        return "redirect:/client";
+    }
+
+    @GetMapping("/checking/new")
+    public String newCheckingAccount(Model model){
+        model.addAttribute("account", new AccountDTO());
+        model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.CHECKING));
+        return "accounts/account-new";
+    }
+
+    @PostMapping("/checking/new")
+    public String newCheckingAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
+                                   BindingResult bindingResult, Principal principal){
+        if (bindingResult.hasErrors()) {
+            return "accounts/account-new";
+        }
+        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
+        accountDTO.setClient(clientDTO);
         accountDTO.setIsDefault(false);
         accountDTO.setIsClosed(false);
         accountService.save(accountDTO);
         return "redirect:/client";
+    }
+
+    @GetMapping("/history/{accountId}")
+    public String newCheckingAccount(@PathVariable Long accountId, Model model){
+        List<TransactionDTO> transactions = accountService.getHistory(accountId);
+        model.addAttribute("transactions", transactions);
+        return "transaction/transaction-list";
     }
 
 }

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,13 +16,13 @@ public class CardController {
     private final CardService cardService;
 
     @PostMapping
-    public ResponseEntity<CardDTO> create(@RequestBody CardDTO card) {
+    public ResponseEntity<CardDTO> create(@RequestBody @Valid CardDTO card) {
         CardDTO savedCard = cardService.save(card);
         return new ResponseEntity<>(savedCard, HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<CardDTO> update(@RequestBody CardDTO card) {
+    public ResponseEntity<CardDTO> update(@RequestBody @Valid CardDTO card) {
         CardDTO savedCard = cardService.save(card);
         return new ResponseEntity<>(savedCard, HttpStatus.OK);
     }

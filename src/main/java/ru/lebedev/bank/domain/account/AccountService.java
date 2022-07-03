@@ -26,4 +26,5 @@ public interface AccountService {
     List<TransactionDTO> getHistory (Long id);
 
     void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount);
+    void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount);
 }

@@ -36,7 +36,7 @@ public class ClientController {
     }
 
     @PutMapping
-    public ResponseEntity<ClientDTO> update(@RequestBody ClientDTO client) {
+    public ResponseEntity<ClientDTO> update(@RequestBody @Valid ClientDTO client) {
         ClientDTO savedClient = clientService.save(client);
         return new ResponseEntity<>(savedClient, HttpStatus.OK);
     }
