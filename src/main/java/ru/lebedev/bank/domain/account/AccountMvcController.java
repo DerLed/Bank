@@ -128,46 +128,46 @@ public class AccountMvcController {
         accountService.save(accountDTO);
         return "redirect:/client";
     }
-
-    @GetMapping("/saving/new")
-    public String newSavingAccount(Model model){
-        model.addAttribute("account", new AccountDTO());
-        model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.SAVING));
-        return "accounts/account-new";
-    }
-
-    @PostMapping("/saving/new")
-    public String newSavingAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
-                                           BindingResult bindingResult, Principal principal, Model model){
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.SAVING));
-            return "accounts/account-new";
-        }
-        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
-        accountDTO.setClient(clientDTO);
-        accountService.save(accountDTO);
-        return "redirect:/client";
-    }
-
-    @GetMapping("/loan/new")
-    public String newLoanAccount(Model model){
-        model.addAttribute("account", new AccountDTO());
-        model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.LOAN));
-        return "accounts/account-new";
-    }
-
-    @PostMapping("/loan/new")
-    public String newLoanAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
-                                         BindingResult bindingResult, Principal principal, Model model){
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.LOAN));
-            return "accounts/account-new";
-        }
-        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
-        accountDTO.setClient(clientDTO);
-        accountService.save(accountDTO);
-        return "redirect:/client";
-    }
+//
+//    @GetMapping("/saving/new")
+//    public String newSavingAccount(Model model){
+//        model.addAttribute("account", new AccountDTO());
+//        model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.SAVING));
+//        return "accounts/account-new";
+//    }
+//
+//    @PostMapping("/saving/new")
+//    public String newSavingAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
+//                                           BindingResult bindingResult, Principal principal, Model model){
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.SAVING));
+//            return "accounts/account-new";
+//        }
+//        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
+//        accountDTO.setClient(clientDTO);
+//        accountService.save(accountDTO);
+//        return "redirect:/client";
+//    }
+//
+//    @GetMapping("/loan/new")
+//    public String newLoanAccount(Model model){
+//        model.addAttribute("account", new AccountDTO());
+//        model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.LOAN));
+//        return "accounts/account-new";
+//    }
+//
+//    @PostMapping("/loan/new")
+//    public String newLoanAccountCreate(@ModelAttribute("account") @Valid AccountDTO accountDTO,
+//                                         BindingResult bindingResult, Principal principal, Model model){
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("accountPlans", accountPlanService.findByType(TypeAccount.LOAN));
+//            return "accounts/account-new";
+//        }
+//        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
+//        accountDTO.setClient(clientDTO);
+//        accountService.save(accountDTO);
+//        return "redirect:/client";
+//    }
 
 
 
