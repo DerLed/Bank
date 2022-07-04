@@ -21,7 +21,7 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
 
 
-            <form action="#" th:action="@{/accounts/checking/new}" th:object="${account}" th:method="POST">
+            <form action="#" th:action="@{/accounts/{type}/new (type = ${typeAccount})} "  th:object="${account}" th:method="POST">
 
 
                 <div class="card-group">
