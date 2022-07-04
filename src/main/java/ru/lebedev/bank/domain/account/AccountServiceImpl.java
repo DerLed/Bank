@@ -63,27 +63,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<AccountDTO> findByClientLogin(String login) {
-        return accountRepository.findByClientUserLogin(login).stream()
-                .map(accountMapper::toDTO).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<AccountDTO> findByClientLoginLoanAccounts(String login) {
-        return accountRepository.findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(login, TypeAccount.LOAN).stream()
-                .map(accountMapper::toDTO).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<AccountDTO> findByClientLoginSavingAccounts(String login) {
-        return accountRepository.findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(login, TypeAccount.SAVING).stream()
-                .map(accountMapper::toDTO).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<AccountDTO> findByClientLoginCheckingAccounts(String login) {
-        return accountRepository.findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(login, TypeAccount.CHECKING).stream()
-                .map(accountMapper::toDTO).collect(Collectors.toList());
+    public List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type) {
+        return accountRepository.findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(login, type)
+                .stream().map(accountMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override

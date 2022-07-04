@@ -16,9 +16,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByClientId(Long ClientId);
     List<Account> findByClientUserLogin(String login);
 
-    //@Query("select a from Account a where a.client.user.login = :login and a.accountPlan.type = "LOAN" ")
+
     List<Account> findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(String login, TypeAccount type);
-    //@Query("select a from Account a where a.client.phoneNumber = :phoneNumber")
     List<Account> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
 
     @Query("select a from Card c join c.account a where c.cardNumber = :cardNumber " +

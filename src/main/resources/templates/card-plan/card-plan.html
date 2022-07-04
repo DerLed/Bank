@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Банковские проедложения</title>
+    <title>Предложения по картам</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -11,24 +11,24 @@
 <div class="container">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-            <h1 class="display-3">Банковские проедложения</h1>
+            <h1 class="display-3">Предложения по картам</h1>
         </div>
     </header>
 
     <div class="p-5 text-center bg-light">
         <div class="card-group">
-        <div th:each="accountPlan : ${accountPlans}" class="card" style="width: 18rem;">
+        <div th:each="cardPlan : ${cardPlans}" class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 th:text="${accountPlan.title}" class="card-title">Card title</h5>
-                <h6 th:text="'Процентная ставка: ' + ${accountPlan.percent} + '%'" class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p th:text="${accountPlan.description}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a th:href="@{/account_plan/edit/{id}(id=${accountPlan.id})}" class="card-link">Редактировать</a>
-                <a th:href="@{/account_plan/remove/{id}(id=${accountPlan.id})}" class="card-link">Удалить</a>
+<!--                <h5 th:text="${accountPlan.title}" class="card-title">Card title</h5>-->
+                <h6 th:text="'Процентная ставка: ' + ${cardPlan.percent} + '%'" class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p th:text="${cardPlan.isCredit} ? 'Кредитная' : 'Дебетовая' " class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a th:href="@{/card-plan/edit/{id}(id=${cardPlan.id})}" class="card-link">Редактировать</a>
+                <a th:href="@{/card-plan/remove/{id}(id=${cardPlan.id})}" class="card-link">Удалить</a>
             </div>
         </div>
             </div>
 
-        <a class="btn btn-info" href="account_plan/add" role="button">Добавить</a>
+        <a class="btn btn-info" href="card-plan/add" role="button">Добавить</a>
 
     </div>
 

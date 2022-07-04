@@ -1,6 +1,7 @@
 package ru.lebedev.bank.domain.account;
 
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 
 import java.math.BigDecimal;
@@ -18,10 +19,7 @@ public interface AccountService {
     List<AccountDTO> findByPhoneNumber (String phoneNumber);
     Optional<AccountDTO> findByCardNumber (String cardNumber);
 
-    List<AccountDTO> findByClientLogin (String login);
-    List<AccountDTO> findByClientLoginLoanAccounts (String login);
-    List<AccountDTO> findByClientLoginSavingAccounts(String login);
-    List<AccountDTO> findByClientLoginCheckingAccounts (String login);
+    List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type);
 
     List<TransactionDTO> getHistory (Long id);
 

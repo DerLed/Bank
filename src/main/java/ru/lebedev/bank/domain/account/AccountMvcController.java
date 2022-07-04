@@ -26,33 +26,17 @@ public class AccountMvcController {
     private final ClientService clientService;
     private final AccountPlanService accountPlanService;
 
-    @GetMapping("/loan")
-    public String accountsLoan(Model model, Principal principal){
-        List<AccountDTO> accounts = accountService.findByClientLoginLoanAccounts(principal.getName());
+    @GetMapping("/{type}")
+    public String accountsLoan(@PathVariable("type") TypeAccount typeAccount, Model model, Principal principal){
+        List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), typeAccount);
         model.addAttribute("accounts", accounts);
-        model.addAttribute("title", "Ваши кредиты");
-        return "accounts/account-list";
-    }
-
-    @GetMapping("/saving")
-    public String accountsSaving(Model model, Principal principal){
-        List<AccountDTO> accounts = accountService.findByClientLoginSavingAccounts(principal.getName());
-        model.addAttribute("accounts", accounts);
-        model.addAttribute("title", "Ваши накопительные счета");
-        return "accounts/account-list";
-    }
-
-    @GetMapping("/checking")
-    public String accountsChecking(Model model, Principal principal){
-        List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
-        model.addAttribute("accounts", accounts);
-        model.addAttribute("title", "Ваши депозитные счета");
+        model.addAttribute("title", typeAccount.toString());
         return "accounts/account-list";
     }
 
     @GetMapping("/transfer")
     public String showAccountsTransfer(Model model, Principal principal){
-        List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
+        List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
         model.addAttribute("form", new TransactionFormDTO());
         model.addAttribute("accounts", accounts);
         model.addAttribute("title", "Ваши депозитные счета");
@@ -63,7 +47,7 @@ public class AccountMvcController {
     public String accountsTransfer(@ModelAttribute("form") @Valid TransactionFormDTO transactionFormDTO,
                                    BindingResult bindingResult,
                                    Principal principal){
-        List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
+        List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
         if (bindingResult.hasErrors()) {
             return "accounts/account-transfer";
         }
@@ -74,7 +58,7 @@ public class AccountMvcController {
 
     @GetMapping("/add-money")
     public String showAddMoney(Model model, Principal principal){
-        List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
+        List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
         model.addAttribute("accounts", accounts);
 
         return "accounts/account-add-money";

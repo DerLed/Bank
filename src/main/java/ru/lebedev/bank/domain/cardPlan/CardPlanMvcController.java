@@ -20,8 +20,8 @@ public class CardPlanMvcController {
 
     @GetMapping()
     public String accountPlan(Model model){
-        List<CardPlanDTO> accountPlans = cardPlanService.findAll();
-        model.addAttribute("accountPlans", accountPlans);
+        List<CardPlanDTO> cardPlans = cardPlanService.findAll();
+        model.addAttribute("cardPlans", cardPlans);
         return "card-plan/card-plan";
     }
 
@@ -37,7 +37,7 @@ public class CardPlanMvcController {
             return "card-plan/card-plan-add";
         }
         cardPlanService.save(cardPlanDTO);
-        return "redirect:/card_plan";
+        return "redirect:/card-plan";
     }
 
     @GetMapping("/edit/{id}")
@@ -57,12 +57,12 @@ public class CardPlanMvcController {
         }
 
         cardPlanService.save(cardPlanDTO);
-        return "redirect:/account_plan";
+        return "redirect:/account-plan";
     }
 
     @GetMapping("/remove/{id}")
     public String removeAccountPlan(@PathVariable("id") Long id, Model model) {
         cardPlanService.deleteById(id);
-        return "redirect:/account_plan";
+        return "redirect:/account-plan";
     }
 }
