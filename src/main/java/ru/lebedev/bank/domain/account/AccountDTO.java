@@ -9,6 +9,7 @@ import ru.lebedev.bank.domain.accountPlan.AccountPlanDTO;
 import ru.lebedev.bank.domain.client.ClientDTO;
 import ru.lebedev.bank.domain.user.UserDTO;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -19,12 +20,15 @@ import java.time.LocalDateTime;
 public class AccountDTO {
 
     private Long id;
+
+    @NotNull
     private BigDecimal amount;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDateTime dateOpened;
     private Boolean isDefault;
     private Boolean isClosed;
+   // private String accountNumber;
     private ClientDTO client;
     private AccountPlanDTO accountPlan;
 

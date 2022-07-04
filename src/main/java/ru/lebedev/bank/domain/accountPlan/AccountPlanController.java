@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/account_plans")
+@RequestMapping("/api/v1/account-plans")
 @RequiredArgsConstructor
 public class AccountPlanController {
     private final AccountPlanService accountPlanService;

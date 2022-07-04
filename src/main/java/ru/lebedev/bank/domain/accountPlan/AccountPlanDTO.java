@@ -3,9 +3,7 @@ package ru.lebedev.bank.domain.accountPlan;
 import lombok.*;
 
 import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -23,7 +21,8 @@ public class AccountPlanDTO {
     private String description;
 
     @NotNull(message = "Проценты не заполнено")
-    @PositiveOrZero(message = "Проценты не могут быть отрицательными")
+    @DecimalMax(value = "100.0", inclusive = false, message = "Проценты не могут больше 100%")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Проценты не могут быть отрицательными")
     private BigDecimal percent;
 
     @NotNull(message = "Не выбран тип счета")

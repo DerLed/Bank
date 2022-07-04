@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Банковские проедложения</title>
@@ -7,34 +8,38 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+<div th:insert="header :: header"></div>
 
 <div class="container">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-            <h1 class="display-3">Банковские проедложения</h1>
+            <h1 class="display-3">Банковские предложения</h1>
         </div>
     </header>
 
     <div class="p-5 text-center bg-light">
-        <div class="card-group">
-        <div th:each="accountPlan : ${accountPlans}" class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 th:text="${accountPlan.title}" class="card-title">Card title</h5>
-                <h6 th:text="'Процентная ставка: ' + ${accountPlan.percent} + '%'" class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p th:text="${accountPlan.description}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a th:href="@{/account_plan/edit/{id}(id=${accountPlan.id})}" class="card-link">Редактировать</a>
-                <a th:href="@{/account_plan/remove/{id}(id=${accountPlan.id})}" class="card-link">Удалить</a>
+        <div class="row row-cols-3 row-cols-md-2">
+            <div class="col mb-4" th:each="accountPlan : ${accountPlans}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 th:text="${accountPlan.title}" class="card-title">Card title</h5>
+                        <h6 th:text="'Процентная ставка: ' + ${accountPlan.percent} + '%'"
+                            class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p th:text="${accountPlan.description}" class="card-text">text.</p>
+                        <a th:href="@{/account-plan/edit/{id}(id=${accountPlan.id})}"
+                           class="card-link">Редактировать</a>
+                        <a th:href="@{/account-plan/remove/{id}(id=${accountPlan.id})}" class="card-link">Удалить</a>
+                    </div>
+                </div>
             </div>
         </div>
-            </div>
 
-        <a class="btn btn-info" href="account_plan/add" role="button">Добавить</a>
+        <a class="btn btn-info" href="account-plan/add" role="button">Добавить</a>
 
     </div>
 
 
 </div>
-
 
 
 </body>

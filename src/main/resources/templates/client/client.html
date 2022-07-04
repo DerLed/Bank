@@ -8,31 +8,43 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
+<div th:insert="header :: header"></div>
 <div class="container">
-    <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-            <h1 class="display-3">Здравствуйте <span th:text="${client.userDTO.name}"></span></h1>
-        </div>
-    </header>
+    <main role="main" class="container">
+        <section class="jumbotron text-center">
 
+            <h1 class="jumbotron-heading">Здравствуйте <span th:text="${client.userDTO.name}"></span></h1>
 
-    <div class="p-5 text-center bg-light">
-        <div class="nav-scroller py-1 mb-2">
-            <nav class="nav d-flex justify-content-between">
-                <a href="/accounts/checking/new" class="list-group-item list-group-item-action">Открыть новый счет</a>
-                <a href="/accounts/add-money" class="list-group-item list-group-item-action">Пополнить счет</a>
-                <a href="/accounts/saving/new" class="list-group-item list-group-item-action">Открыть новый накопительный счет</a>
-                <a href="/accounts/loan/new" class="list-group-item list-group-item-action">Взять кредит</a>
-                <a href="/accounts/checking" class="list-group-item list-group-item-action">Ваши депозитные счета</a>
-                <a href="/accounts/loan" class="list-group-item list-group-item-action">Ваши кредиты</a>
-                <a href="/accounts/saving" class="list-group-item list-group-item-action">Ваши накопительные счета</a>
-                <a href="/client/cards" class="list-group-item list-group-item-action">Карты</a>
-                <a href="/client/transactions" class="list-group-item list-group-item-action">История</a>
-                <a href="/accounts/transfer" class="list-group-item list-group-item-action">Перевод денег</a>
-            </nav>
-        </div>
-    </div>
+            <div class="d-flex gap-5 justify-content-center">
+                <div class="list-group mx-0">
+                    <h3 class="h4">Открыть новый продукт</h3>
+                    <a href="/accounts/checking/new" class="list-group-item list-group-item-action">Открыть новый
+                        счет</a>
+                    <a href="/accounts/saving/new" class="list-group-item list-group-item-action">Открыть новый
+                        накопительный счет</a>
+                    <a href="/accounts/loan/new" class="list-group-item list-group-item-action">Взять кредит</a>
+                </div>
+
+                <div class="list-group mx-0">
+                    <h4 class="h4">Информация по текущим продуктам</h4>
+                    <a href="/accounts/checking" class="list-group-item list-group-item-action">Ваши депозитные
+                        счета</a>
+                    <a href="/accounts/loan" class="list-group-item list-group-item-action">Ваши кредиты</a>
+                    <a href="/accounts/saving" class="list-group-item list-group-item-action">Ваши накопительные
+                        счета</a>
+                    <a href="/client/cards" class="list-group-item list-group-item-action">Карты</a>
+                </div>
+                <div class="list-group mx-0">
+                    <h4 class="h4">Сервисы</h4>
+                    <a href="/accounts/add-money" class="list-group-item list-group-item-action">Пополнить счет</a>
+                    <a href="/accounts/transfer" class="list-group-item list-group-item-action">Перевод денег</a>
+                    <a href="/client/transactions" class="list-group-item list-group-item-action">История</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
 </div>
 
 </body>

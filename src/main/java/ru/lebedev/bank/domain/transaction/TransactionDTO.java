@@ -1,9 +1,6 @@
 package ru.lebedev.bank.domain.transaction;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ru.lebedev.bank.domain.TransactionStatus;
 import ru.lebedev.bank.domain.account.AccountDTO;
 
@@ -14,12 +11,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class TransactionDTO {
 
     private Long id;
     private BigDecimal amount;
     private LocalDateTime date;
+    @EqualsAndHashCode.Exclude
     private AccountDTO sourceAccount;
+    @EqualsAndHashCode.Exclude
     private AccountDTO targetAccount;
     private TransactionStatus status;
 }

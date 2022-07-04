@@ -90,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
         List<TransactionDTO> transactionsByTargetId = transactionService.findAllByTargetAccountId(id);
         return Stream.concat(transactionsBySourceId.stream(), transactionsByTargetId.stream())
                 .sorted(Comparator.comparing(TransactionDTO::getDate))
-                .collect(Collectors.toList());
+                .distinct().collect(Collectors.toList());
     }
 
     public List<AccountDTO> findByPhoneNumber(String phoneNumber) {

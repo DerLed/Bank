@@ -50,7 +50,7 @@ public class AccountMvcController {
     }
 
     @GetMapping("/transfer")
-    public String showAaccountsTransfer(Model model, Principal principal){
+    public String showAccountsTransfer(Model model, Principal principal){
         List<AccountDTO> accounts = accountService.findByClientLoginCheckingAccounts(principal.getName());
         model.addAttribute("form", new TransactionFormDTO());
         model.addAttribute("accounts", accounts);
@@ -68,7 +68,7 @@ public class AccountMvcController {
         }
         accountService.transferMoneyByUserPhoneNumber(transactionFormDTO.getAccount().getId(),
                 transactionFormDTO.getPhoneNumber(), transactionFormDTO.getAmount());
-        return "redirect:accounts";
+        return "redirect:/client";
     }
 
     @GetMapping("/add-money")
@@ -174,6 +174,7 @@ public class AccountMvcController {
     public String newCheckingAccount(@PathVariable Long accountId, Model model){
         List<TransactionDTO> transactions = accountService.getHistory(accountId);
         model.addAttribute("transactions", transactions);
+        model.addAttribute("accountId", accountId);
         return "transaction/transaction-list";
     }
 

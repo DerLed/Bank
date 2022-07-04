@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/account_plan")
+@RequestMapping("/account-plan")
 @RequiredArgsConstructor
 public class AccountPlanMvcController {
 
@@ -36,12 +36,14 @@ public class AccountPlanMvcController {
     }
 
     @PostMapping("/add")
-    public String create(@ModelAttribute("accountPlan") @Valid AccountPlanDTO accountPlanDTO, BindingResult bindingResult){
+    public String create(@ModelAttribute("accountPlan") @Valid AccountPlanDTO accountPlanDTO,
+                         BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
+            model.addAttribute("type", Arrays.asList(TypeAccount.values()));
             return "account-plan/account-plan-add";
         }
         accountPlanService.save(accountPlanDTO);
-        return "redirect:/account_plan";
+        return "redirect:/account-plan";
     }
 
     @GetMapping("/edit/{id}")
@@ -61,12 +63,12 @@ public class AccountPlanMvcController {
         }
 
         accountPlanService.save(accountPlanDTO);
-        return "redirect:/account_plan";
+        return "redirect:/account-plan";
     }
 
     @GetMapping("/remove/{id}")
     public String removeAccountPlan(@PathVariable("id") Long id, Model model) {
         accountPlanService.deleteById(id);
-        return "redirect:/account_plan";
+        return "redirect:/account-plan";
     }
 }

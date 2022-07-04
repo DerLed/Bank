@@ -39,6 +39,9 @@ public class Account {
     @Column(name = "is_closed")
     private Boolean isClosed;
 
+//    @Column(name = "account_number")
+//    private String accountNumber;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     @ToString.Exclude
