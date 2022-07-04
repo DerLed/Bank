@@ -5,14 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.lebedev.bank.domain.client.ClientCreateReq;
-import ru.lebedev.bank.domain.client.ClientDTO;
+import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/account-plan")

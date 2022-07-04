@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 
 import javax.validation.Valid;
 import java.util.List;

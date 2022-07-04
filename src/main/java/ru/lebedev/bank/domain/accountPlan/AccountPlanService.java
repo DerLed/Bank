@@ -1,6 +1,7 @@
 package ru.lebedev.bank.domain.accountPlan;
 
 import org.springframework.validation.annotation.Validated;
+import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

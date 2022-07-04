@@ -1,8 +1,8 @@
-package ru.lebedev.bank.domain.transaction;
+package ru.lebedev.bank.domain.transaction.dto;
 
 import lombok.*;
 import ru.lebedev.bank.domain.TransactionStatus;
-import ru.lebedev.bank.domain.account.AccountDTO;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

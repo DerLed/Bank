@@ -1,9 +1,7 @@
 package ru.lebedev.bank.domain.transaction;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface TransactionService {

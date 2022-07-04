@@ -2,7 +2,8 @@ package ru.lebedev.bank.domain.transaction;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
+import ru.lebedev.bank.domain.transaction.mapper.TransactionMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,5 +1,7 @@
 package ru.lebedev.bank.domain.client;
 
+import ru.lebedev.bank.domain.client.dto.ClientCreateReq;
+import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.exception.UserAlreadyExistException;
 
 import java.util.List;

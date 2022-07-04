@@ -1,13 +1,12 @@
-package ru.lebedev.bank.domain.account;
+package ru.lebedev.bank.domain.account.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.lebedev.bank.domain.accountPlan.AccountPlanDTO;
-import ru.lebedev.bank.domain.client.ClientDTO;
-import ru.lebedev.bank.domain.user.UserDTO;
+import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
+import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.user;
+package ru.lebedev.bank.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

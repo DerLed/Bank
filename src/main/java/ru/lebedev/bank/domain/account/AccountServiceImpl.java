@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.TransactionStatus;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.account.mapper.AccountMapper;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 import ru.lebedev.bank.domain.transaction.Transaction;
-import ru.lebedev.bank.domain.transaction.TransactionDTO;
-import ru.lebedev.bank.domain.transaction.TransactionMapper;
+import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
+import ru.lebedev.bank.domain.transaction.mapper.TransactionMapper;
 import ru.lebedev.bank.domain.transaction.TransactionService;
 import ru.lebedev.bank.exception.AccountTransferException;
 

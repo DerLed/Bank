@@ -1,12 +1,11 @@
-package ru.lebedev.bank.domain.card;
+package ru.lebedev.bank.domain.card.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.lebedev.bank.domain.account.AccountDTO;
-import ru.lebedev.bank.domain.cardPlan.CardPlanDTO;
-import ru.lebedev.bank.domain.client.ClientDTO;
-import ru.lebedev.bank.domain.user.UserDTO;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.cardPlan.dto.CardPlanDTO;
+import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
 @Data
 @AllArgsConstructor

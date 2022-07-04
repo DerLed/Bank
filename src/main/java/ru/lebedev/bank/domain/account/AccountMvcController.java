@@ -5,12 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.accountPlan.AccountPlanService;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
-import ru.lebedev.bank.domain.client.ClientDTO;
+import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.domain.client.ClientService;
-import ru.lebedev.bank.domain.transaction.TransactionDTO;
-import ru.lebedev.bank.domain.transaction.TransactionFormDTO;
+import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
+import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;

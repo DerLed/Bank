@@ -1,5 +1,7 @@
 package ru.lebedev.bank.domain.cardPlan;
 
+import ru.lebedev.bank.domain.cardPlan.dto.CardPlanDTO;
+
 import java.util.List;
 import java.util.Optional;
 

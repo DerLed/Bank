@@ -1,6 +1,6 @@
 package ru.lebedev.bank.domain.user;
 
-import ru.lebedev.bank.domain.client.ClientDTO;
+import ru.lebedev.bank.domain.user.dto.UserDTO;
 
 import java.util.List;
 import java.util.Optional;

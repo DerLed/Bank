@@ -3,7 +3,7 @@ package ru.lebedev.bank.converter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import ru.lebedev.bank.domain.accountPlan.AccountPlanDTO;
+import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 import ru.lebedev.bank.domain.accountPlan.AccountPlanService;
 
 @Component

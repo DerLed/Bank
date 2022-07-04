@@ -6,14 +6,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.lebedev.bank.domain.Role;
 import ru.lebedev.bank.domain.Status;
-import ru.lebedev.bank.domain.user.UserDTO;
+import ru.lebedev.bank.domain.client.dto.ClientCreateReq;
+import ru.lebedev.bank.domain.client.dto.ClientDTO;
+import ru.lebedev.bank.domain.client.mapper.ClientMapper;
+import ru.lebedev.bank.domain.user.dto.UserDTO;
 import ru.lebedev.bank.domain.user.UserService;
 import ru.lebedev.bank.exception.UserAlreadyExistException;
 
-import javax.validation.ConstraintViolation;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

@@ -5,7 +5,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.lebedev.bank.domain.Role;
 import ru.lebedev.bank.domain.Status;
-import ru.lebedev.bank.domain.client.ClientDTO;
+import ru.lebedev.bank.domain.user.dto.UserDTO;
+import ru.lebedev.bank.domain.user.mapper.UserMapper;
 
 import java.util.List;
 import java.util.Optional;

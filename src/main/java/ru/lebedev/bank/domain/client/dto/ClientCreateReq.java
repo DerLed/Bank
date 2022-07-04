@@ -1,13 +1,9 @@
-package ru.lebedev.bank.domain.client;
+package ru.lebedev.bank.domain.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.lebedev.bank.domain.Role;
-import ru.lebedev.bank.domain.Status;
-import ru.lebedev.bank.domain.user.UserDTO;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;

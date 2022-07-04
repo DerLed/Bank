@@ -3,18 +3,15 @@ package ru.lebedev.bank.domain.card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.lebedev.bank.domain.account.AccountDTO;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.account.AccountService;
-import ru.lebedev.bank.domain.cardPlan.CardPlanDTO;
+import ru.lebedev.bank.domain.card.dto.CardCreateDTO;
+import ru.lebedev.bank.domain.card.dto.CardDTO;
+import ru.lebedev.bank.domain.cardPlan.dto.CardPlanDTO;
 import ru.lebedev.bank.domain.cardPlan.CardPlanService;
-import ru.lebedev.bank.domain.client.ClientDTO;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 

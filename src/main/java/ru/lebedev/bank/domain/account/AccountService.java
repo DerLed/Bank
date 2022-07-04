@@ -1,7 +1,7 @@
 package ru.lebedev.bank.domain.account;
 
-import net.bytebuddy.dynamic.DynamicType;
-import ru.lebedev.bank.domain.transaction.TransactionDTO;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,11 +1,7 @@
 package ru.lebedev.bank.domain.client;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,14 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.lebedev.bank.domain.client.dto.ClientCreateReq;
 import ru.lebedev.bank.exception.UserAlreadyExistException;
-import ru.lebedev.bank.security.IAuthenticationFacade;
-import ru.lebedev.bank.security.SecurityUser;
 
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller

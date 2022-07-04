@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.cardPlan;
+package ru.lebedev.bank.domain.cardPlan.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
