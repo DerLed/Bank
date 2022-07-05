@@ -1,10 +1,11 @@
-package ru.lebedev.bank.domain.account;
+package ru.lebedev.bank.domain.account.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.lebedev.bank.domain.account.AccountService;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.accountPlan.AccountPlanService;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
@@ -12,6 +13,8 @@ import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
+import ru.lebedev.bank.exception.AccountTransferException;
+import ru.lebedev.bank.exception.UserAlreadyExistException;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -39,20 +42,29 @@ public class AccountMvcController {
         List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
         model.addAttribute("form", new TransactionFormDTO());
         model.addAttribute("accounts", accounts);
-        model.addAttribute("title", "Ваши депозитные счета");
         return "accounts/account-transfer";
     }
 
     @PostMapping("/transfer")
     public String accountsTransfer(@ModelAttribute("form") @Valid TransactionFormDTO transactionFormDTO,
                                    BindingResult bindingResult,
-                                   Principal principal){
+                                   Principal principal, Model model){
         List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
         if (bindingResult.hasErrors()) {
+            model.addAttribute("accounts", accounts);
             return "accounts/account-transfer";
         }
-        accountService.transferMoneyByUserPhoneNumber(transactionFormDTO.getAccount().getId(),
-                transactionFormDTO.getPhoneNumber(), transactionFormDTO.getAmount());
+
+        try {
+            accountService.transferMoneyByUserPhoneNumber(transactionFormDTO.getAccount().getId(),
+                    transactionFormDTO.getPhoneNumber(), transactionFormDTO.getAmount());
+        }catch (AccountTransferException e){
+            bindingResult.rejectValue("phoneNumber", "phoneNumber","Данного номера нет в системе.");
+            model.addAttribute("form", transactionFormDTO);
+            model.addAttribute("accounts", accounts);
+            return "accounts/account-transfer";
+        }
+
         return "redirect:/client";
     }
 

@@ -30,8 +30,7 @@
                             <h5 th:text="${accountPlan.title}" class="card-title">Card title</h5>
                             <h6 th:text="'Процентная ставка: ' + ${accountPlan.percent} + '%'"
                                 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p th:text="${accountPlan.description}" class="card-text">Some quick example text to build
-                                on the card title and make up the bulk of the card's content.</p>
+                            <p th:text="${accountPlan.description}" class="card-text"></p>
                             <input type="radio" th:field="*{accountPlan}" th:value="${accountPlan.id}"/>
                         </div>
                     </div>

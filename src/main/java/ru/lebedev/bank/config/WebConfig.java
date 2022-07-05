@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.lebedev.bank.converter.LongAccountConverter;
 import ru.lebedev.bank.converter.LongAccountPlanConverter;
+import ru.lebedev.bank.converter.LongCardPlanConverter;
 import ru.lebedev.bank.converter.StringToTypeAccountConverter;
 import ru.lebedev.bank.formatter.AccountDTOFormatter;
 
@@ -26,12 +27,14 @@ import java.util.List;
     private final LongAccountConverter accountConverter;
     private final AccountDTOFormatter accountFormatter;
     private final StringToTypeAccountConverter stringToTypeAccountConverter;
+    private final LongCardPlanConverter longCardPlanConverter;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(accountPlanConverter);
         registry.addConverter(accountConverter);
         registry.addConverter(stringToTypeAccountConverter);
+        registry.addConverter(longCardPlanConverter);
         registry.addFormatter(accountFormatter);
     }
 

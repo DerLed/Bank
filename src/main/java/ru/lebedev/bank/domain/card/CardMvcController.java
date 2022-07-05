@@ -49,8 +49,16 @@ public class CardMvcController {
         return "card/card-new";
     }
 
+    /**
+     *
+     * @param cardDTO
+     * @param bindingResult
+     * @param principal
+     * @param model
+     * @return
+     */
     @PostMapping("/new")
-    public String newAccountCreate(@ModelAttribute("account") @Valid CardCreateDTO cardDTO,
+    public String newAccountCreate(@ModelAttribute("newCard") @Valid CardCreateDTO cardDTO,
                                    BindingResult bindingResult, Principal principal, Model model){
         if (bindingResult.hasErrors()) {
             List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);

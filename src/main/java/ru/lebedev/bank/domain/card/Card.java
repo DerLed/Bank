@@ -46,5 +46,13 @@ public class Card {
     @JoinColumn(name = "plan_id")
     private CardPlan cardPlan;
 
+    @PrePersist
+    private void create() {
+
+        if(isClosed == null) isClosed = false;
+        if(isBlocked == null) isBlocked = false;
+
+    }
+
 
 }

@@ -59,12 +59,4 @@ public class ClientMvcController {
         return "redirect:/";
     }
 
-//    @PostMapping("/login")
-//    public String login(Model model) {
-//        model.addAttribute("title", "Форма входа");
-//        return "client/login";
-//    }
-
-
-
 }
