@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.TransactionStatus;
+import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.account.mapper.AccountMapper;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
@@ -44,9 +45,31 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDTO save(AccountDTO accountDTO) {
-        Account checkedAccount = checkAccount(accountMapper.toEntity(accountDTO));
-        checkedAccount.setIsClosed(false);
+        Account checkedAccount = setDefaultAccount(accountMapper.toEntity(accountDTO));
         Account savedAccount = accountRepository.saveAndFlush(checkedAccount);
+        return accountMapper.toDTO(savedAccount);
+    }
+
+    @Override
+    @Transactional
+    public AccountDTO create(AccountCreateDTO accountCreateDTO) {
+        //проеобразуем dto формы в обычный accountDto
+        AccountDTO accountDTO = AccountDTO.builder()
+                .accountPlan(accountCreateDTO.getAccountPlan())
+                .client(accountCreateDTO.getClient())
+                .build();
+        //проверка что CHECKING аккаунта на наличие дефолтного, если нет то устанавливается
+        Account checkedAccount = setDefaultAccount(accountMapper.toEntity(accountDTO));
+
+        Account savedAccount = accountRepository.saveAndFlush(checkedAccount);
+
+        //если счет накопительный переводим на него деньги с депозитного счета выбраного при оформлении
+        if(accountCreateDTO.getAccountPlan().getType().equals(TypeAccount.SAVING)) {
+            transferAmount(accountCreateDTO.getAmount(),
+                    accountCreateDTO.getSourceAccount().getId(),
+                    savedAccount);
+        }
+
         return accountMapper.toDTO(savedAccount);
     }
 
@@ -159,11 +182,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-    private Account checkAccount(Account account){
+    private Account setDefaultAccount(Account account){
         if(account.getAccountPlan().getType().equals(TypeAccount.CHECKING)){
             boolean notDefaultAccount = accountRepository.findByClientIdAndIsDefaultTrueAndIsClosedFalse(account.getClient().getId()).isEmpty();
             account.setIsDefault(notDefaultAccount);
-            account.setAmount(BigDecimal.ZERO);
             return account;
         }
         return account;

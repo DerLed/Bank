@@ -24,6 +24,8 @@ public class AccountDTOFormatter implements Formatter<AccountDTO> {
 
     @Override
     public String print(AccountDTO object, Locale locale) {
-        return String.format("Наш объект %d", object.getId());
+        return String.format("Баланс: %s, Тип: %s, Номер счета: %s", object.getAmount().toString(),
+                object.getAccountPlan().getClass(),
+                object.getAccountNumber());
     }
 }

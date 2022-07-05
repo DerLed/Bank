@@ -7,7 +7,9 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import ru.lebedev.bank.domain.accountPlan.AccountPlan;
+import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 import ru.lebedev.bank.domain.client.Client;
+import ru.lebedev.bank.utills.AccountNumberGenerator;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -39,8 +41,8 @@ public class Account {
     @Column(name = "is_closed")
     private Boolean isClosed;
 
-//    @Column(name = "account_number")
-//    private String accountNumber;
+    @Column(name = "account_number")
+    private String accountNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
@@ -50,4 +52,23 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "plan_id")
     private AccountPlan accountPlan;
+
+    @PrePersist
+    private void create() {
+
+        if(isClosed == null) isClosed = false;
+
+        if (accountNumber == null) {
+            accountNumber = AccountNumberGenerator.genNumberAccount(this);
+        }
+
+        if(amount == null)
+            amount = BigDecimal.ZERO;
+        if (accountPlan.getType().equals(TypeAccount.SAVING)){
+            isDefault = false;
+        }
+        if (accountPlan.getType().equals(TypeAccount.LOAN)){
+            isDefault = false;
+        }
+    }
 }

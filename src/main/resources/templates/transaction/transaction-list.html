@@ -24,9 +24,9 @@
                 <thead>
                 <tr>
                     <th scope="col">Сумма</th>
-                    <th scope="col">Дата</th>
+                    <th scope="col">Дата операции</th>
                     <th scope="col">Тип</th>
-                    <th scope="col">Наименование</th>
+                    <th scope="col">Номер счета</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -46,18 +46,15 @@
                         th:text="${transaction.sourceAccount.id == accountId} ? 'Списание' : 'Прием' "></td>
 
                     <td th:unless="${transaction.sourceAccount.id == transaction.targetAccount.id}"
-                        th:text="${transaction.sourceAccount.id == accountId} ? ${transaction.sourceAccount.id}
-                        : ${transaction.targetAccount.id} "></td>
+                        th:text="${transaction.sourceAccount.id == accountId} ? ${transaction.sourceAccount.accountNumber}
+                        : ${transaction.targetAccount.accountNumber} "></td>
 
-
-                    <!--                    <td><a th:href="@{/account/history/{id}(id=${account.id})}">Edit</a></td>-->
-                    <!--        <td><a th:href="@{/account_plan/remove/{id}(id=${accountPlan.id})}">Delete</a></td>-->
                 </tr>
                 </tbody>
             </table>
 
             <div th:if="${#lists.isEmpty(transactions)}">
-                <h2>У Вас еще не открыто счетов</h2>
+                <h2>Список пуст</h2>
             </div>
             <a class="btn btn-info" href="/client" role="button">В личный кабинет</a>
         </div>

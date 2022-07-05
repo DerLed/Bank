@@ -16,27 +16,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AccountDTO {
+public class AccountCreateDTO {
 
-    private Long id;
 
     @NotNull
     private BigDecimal amount;
 
-    @JsonFormat(pattern = "dd.MM.yyyy")
-    private LocalDateTime dateOpened;
-    private Boolean isDefault;
-    private Boolean isClosed;
-
-    private String accountNumber;
-
-    @NotNull
-    private ClientDTO client;
     @NotNull
     private AccountPlanDTO accountPlan;
 
-    private BigDecimal savingAmount;
+    private ClientDTO client;
 
-
+    private AccountDTO sourceAccount;
 
 }

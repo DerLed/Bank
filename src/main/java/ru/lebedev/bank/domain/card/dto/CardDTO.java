@@ -24,4 +24,7 @@ public class CardDTO {
     private ClientDTO clientDTO;
     private CardPlanDTO cardPlanDTO;
 
+    private String month;
+    private String year;
+
 }

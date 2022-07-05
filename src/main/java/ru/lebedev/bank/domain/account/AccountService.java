@@ -1,5 +1,6 @@
 package ru.lebedev.bank.domain.account;
 
+import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
@@ -11,6 +12,9 @@ import java.util.Optional;
 public interface AccountService {
 
     List<AccountDTO> findAll();
+
+    AccountDTO create(AccountCreateDTO accountCreateDTO);
+
     Optional<AccountDTO> findById(Long id);
     AccountDTO save(AccountDTO accountDTO);
     void close(Long id);

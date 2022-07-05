@@ -23,7 +23,7 @@ public class AccountPlanDTO {
 
     @NotNull(message = "Проценты не заполнено")
     @DecimalMax(value = "100.0", inclusive = false, message = "Проценты не могут больше 100%")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Проценты не могут быть отрицательными")
+    @DecimalMin(value = "0", message = "Проценты не могут быть отрицательными")
     private BigDecimal percent;
 
     @NotNull(message = "Не выбран тип счета")

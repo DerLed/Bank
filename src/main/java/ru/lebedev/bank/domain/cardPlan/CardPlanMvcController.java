@@ -43,7 +43,7 @@ public class CardPlanMvcController {
     @GetMapping("/edit/{id}")
     public String editAccountPlan(@PathVariable("id") Long id, Model model) {
         CardPlanDTO accountPlanDTO = cardPlanService.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid accountPlan Id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid cardPlan Id:" + id));
         model.addAttribute("accountPlan", accountPlanDTO);
         model.addAttribute("type", Arrays.asList(TypeAccount.values()));
         return "card-plan/card-plan-edit";
