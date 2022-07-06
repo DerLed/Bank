@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.lebedev.bank.domain.account.AccountService;
@@ -17,7 +18,7 @@ import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
 import ru.lebedev.bank.exception.AccountTransferException;
-
+import ru.lebedev.bank.validator.AccountCreateValidator;
 
 
 import javax.validation.Valid;
@@ -32,6 +33,13 @@ public class AccountMvcController {
     private final AccountService accountService;
     private final ClientService clientService;
     private final AccountPlanService accountPlanService;
+    private final AccountCreateValidator accountCreateValidator;
+
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(accountCreateValidator);
+    }
 
     @GetMapping("/{type}")
     public String accountsLoan(@PathVariable("type") TypeAccount typeAccount, Model model, Principal principal){
@@ -101,7 +109,7 @@ public class AccountMvcController {
 
     @PostMapping("/{type}/new")
     public String newCheckingAccountCreate(@PathVariable("type") TypeAccount typeAccount,
-                                           @ModelAttribute("accountCreate") AccountCreateDTO accountCreateDTO,
+                                           @ModelAttribute("accountCreate") @Valid AccountCreateDTO accountCreateDTO,
                                            BindingResult bindingResult,
                                            Principal principal,
                                            Model model){
@@ -109,6 +117,7 @@ public class AccountMvcController {
         if (bindingResult.hasErrors()) {
             List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
             model.addAttribute("checkingAccounts", accounts);
+            model.addAttribute("typeAccount", typeAccount.toString());
             model.addAttribute("accountPlans", accountPlanService.findByType(typeAccount));
             return "accounts/account-new";
         }
