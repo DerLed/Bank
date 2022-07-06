@@ -1,5 +1,8 @@
 package ru.lebedev.bank.domain.account.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/accounts")
+@Tag(name = "Account controller")
 @RequiredArgsConstructor
 public class AccountController {
 
@@ -70,6 +74,7 @@ public class AccountController {
      * @return 200
      */
     @PutMapping("/cardNumber/{accountId}")
+    @Operation(summary = "Transfer money by card number")
     public ResponseEntity<Void> transferMoneyByCardNumber (@PathVariable Long accountId,
                                                            @RequestBody String cardNumber,
                                                            @RequestParam BigDecimal amount) {
@@ -78,9 +83,12 @@ public class AccountController {
     }
 
     @PutMapping("/phoneNumber/{accountId}")
-    public ResponseEntity<Void> transferMoneyByUserPhoneNumber (@PathVariable Long accountId,
-                                                                @RequestBody String phoneNumber,
-                                                                @RequestParam BigDecimal amount) {
+    public ResponseEntity<Void> transferMoneyByUserPhoneNumber (@PathVariable @Parameter(description = "Id аккаунта списания")
+                                                                Long accountId,
+                                                                @RequestBody @Parameter(description = "Номер телефона на который осуществляется перевод")
+                                                                String phoneNumber,
+                                                                @RequestParam @Parameter(description = "Сумма перевода")
+                                                                BigDecimal amount) {
         accountService.transferMoneyByUserPhoneNumber(accountId, phoneNumber, amount);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

@@ -6,13 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
-@ApiIgnore
+
 @Controller
 @RequestMapping("/account-plan")
 @RequiredArgsConstructor

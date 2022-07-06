@@ -1,3 +1,6 @@
+http://localhost:8080/swagger-ui.html
+
+
 ## Ссылки к источникам
 spring security: https://www.youtube.com/watch?v=7uxROJ1nduk  
 При маппинге вложеные сущности загружались как null, решение @InheritInverseConfiguration
