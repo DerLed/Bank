@@ -14,6 +14,7 @@ import ru.lebedev.bank.utills.AccountNumberGenerator;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "account")
@@ -26,20 +27,25 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_gen")
     @SequenceGenerator(name = "account_gen", sequenceName = "account_id_seq", allocationSize = 1)
     @Column(name = "id")
-    Long id;
+    private Long id;
 
     @Column(name = "amount")
-    BigDecimal amount;
+    private BigDecimal amount;
 
     @Column(name = "date_opened")
     @CreatedDate
-    LocalDateTime dateOpened;
+    private LocalDateTime dateOpened;
 
+    //Является ли данный счет счетом по умолчанию
     @Column(name = "is_default")
     private Boolean isDefault;
 
+    //
     @Column(name = "is_closed")
     private Boolean isClosed;
+
+    @Column(name = "period")
+    private Long period;
 
     @Column(name = "account_number")
     private String accountNumber;
@@ -64,6 +70,10 @@ public class Account {
 
         if(amount == null)
             amount = BigDecimal.ZERO;
+
+        if (accountPlan.getType().equals(TypeAccount.CHECKING)){
+            period = ChronoUnit.DAYS.between(dateOpened, dateOpened.plusYears(101L));
+        }
         if (accountPlan.getType().equals(TypeAccount.SAVING)){
             isDefault = false;
         }

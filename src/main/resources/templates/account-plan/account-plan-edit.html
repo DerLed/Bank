@@ -22,7 +22,7 @@
 
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-            <form action="#" th:action="@{/account_plan/update/{id} (id=${accountPlan.id})}" th:object="${accountPlan}" th:method="POST">
+            <form action="#" th:action="@{/account-plan/update/{id} (id=${accountPlan.id})}" th:object="${accountPlan}" th:method="POST">
 
                 <div class="form-group">
                     <label for="title">Название</label>
@@ -53,7 +53,7 @@
                 <button type="submit" class="btn btn-primary">Сохранить</button>
                 <br>
                 <br>
-                <a class="btn btn-info" href="/account_plan" role="button">Все банковские предложения</a>
+                <a class="btn btn-info" href="/account-plan" role="button">Все банковские предложения</a>
             </form>
         </div>
     </div>

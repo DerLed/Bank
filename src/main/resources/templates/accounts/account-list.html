@@ -51,7 +51,7 @@
                     <td th:text="${#temporals.format(account.dateOpened, 'dd-MMM-yyyy')}"></td>
 
                     <td><a th:href="@{/accounts/history/{id}(id=${account.id})}">Посмотреть транзакции</a></td>
-                    <!--        <td><a th:href="@{/account_plan/remove/{id}(id=${accountPlan.id})}">Delete</a></td>-->
+                    <td><a th:href="@{/accounts/close/{id}(id=${account.id})}">Закрыть</a></td>
                 </tr>
                 </tbody>
             </table>

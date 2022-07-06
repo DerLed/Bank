@@ -25,8 +25,8 @@
                 <tr>
                     <th scope="col">Баланс</th>
                     <th scope="col">Номер карты</th>
-                    <th scope="col">Дата открытия</th>
-                    <th scope="col">История</th>
+                    <th scope="col">Срок действия</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +36,7 @@
 
                     <td th:text="${card.accountDTO.amount}"></td>
                     <td th:text="${card.cardNumber}"></td>
+                    <td th:text="${card.month} + '/' + ${card.year}"></td>
 <!--                    <td th:text="${#temporals.format(account.dateOpened, 'dd-MMM-yyyy')}"></td>-->
 
 <!--                    <td><a th:href="@{/accounts/history/{id}(id=${account.id})}">Edit</a></td>-->

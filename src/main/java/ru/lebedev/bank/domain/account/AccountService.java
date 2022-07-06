@@ -24,6 +24,7 @@ public interface AccountService {
     Optional<AccountDTO> findByCardNumber (String cardNumber);
 
     List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type);
+    List<AccountDTO> findAllByClientLogin(String login);
 
     List<TransactionDTO> getHistory (Long id);
 

@@ -13,6 +13,7 @@ import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.mapper.TransactionMapper;
 import ru.lebedev.bank.domain.transaction.TransactionService;
 import ru.lebedev.bank.exception.AccountTransferException;
+import ru.lebedev.bank.utills.DepositCalc;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
@@ -92,6 +93,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<AccountDTO> findAllByClientLogin(String login) {
+        return accountRepository.findByClientUserLoginAndIsClosedFalse(login).stream()
+                .map(accountMapper::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
     public List<TransactionDTO> getHistory(Long id) {
         List<TransactionDTO> transactionsBySourceId = transactionService.findAllBySourceAccountId(id);
         List<TransactionDTO> transactionsByTargetId = transactionService.findAllByTargetAccountId(id);
@@ -142,13 +149,33 @@ public class AccountServiceImpl implements AccountService {
         addMoneyToAccount(amount, refillAccount.get());
     }
 
+    /**
+     * Метод удаления аккаунта,
+     * сначала переводим деньги с закрываемого аккаунта на аккаунт по умолчанию,
+     * а затем закрываем его
+     * @param id id удаляемаого аккаунта
+     */
     @Override
-    @Transactional
+    @Transactional(noRollbackFor = AccountTransferException.class)
     public void close(Long id) {
+        Account closeAccount = accountRepository.findById(id).orElseThrow();
+        Account defaultAccount = accountRepository.findByAccountIdDefaultAccount(id).orElseThrow();
+
+        //При закрытии накопительного счета начисляем проценты
+        if(closeAccount.getAccountPlan().getType().equals(TypeAccount.SAVING)){
+            closeAccount.setAmount(closeAccount.getAmount().add(DepositCalc.depositCalc(closeAccount)));
+        }
+        transferAmount(closeAccount.getAmount(), closeAccount.getId(), defaultAccount);
         accountRepository.closeById(id);
     }
 
-
+    /**
+     * Метод для перевода денег с одного аккаунта на другой,
+     * также производится запись в транзакции
+     * @param amount сумма перевода
+     * @param accountId id аккаунта с которого будут списаны средства
+     * @param accountTarget аккаунт на который будут зачислены деньги
+     */
     private void transferAmount(BigDecimal amount, Long accountId, Account accountTarget) {
         Account accountSource = getAccount(accountId);
         Transaction transaction = getTransaction(amount,accountSource, accountTarget);

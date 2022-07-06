@@ -1,10 +1,12 @@
 package ru.lebedev.bank.domain.account.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.lebedev.bank.domain.account.AccountService;
 import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
@@ -15,7 +17,7 @@ import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
 import ru.lebedev.bank.exception.AccountTransferException;
-import ru.lebedev.bank.exception.UserAlreadyExistException;
+
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -117,11 +119,36 @@ public class AccountMvcController {
     }
 
     @GetMapping("/history/{accountId}")
-    public String newCheckingAccount(@PathVariable Long accountId, Model model){
+    public String history(@PathVariable Long accountId, Model model){
         List<TransactionDTO> transactions = accountService.getHistory(accountId);
         model.addAttribute("transactions", transactions);
         model.addAttribute("accountId", accountId);
         return "transaction/transaction-list";
+    }
+
+    @GetMapping("/close/{accountId}")
+    public String viewClose(@PathVariable Long accountId, Principal principal, Model model){
+        AccountDTO closeAccount = accountService.findById(accountId).orElseThrow();
+        List<AccountDTO> allAccounts = accountService.findAllByClientLogin(principal.getName());
+        boolean isOwner = allAccounts.stream().anyMatch(a -> a.getId().equals(closeAccount.getId()));
+        if(isOwner) {
+            model.addAttribute("closeAccount", closeAccount);
+        }
+        else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "HTTP Status will be NOT FOUND (CODE 404)\n");
+        return "accounts/account-close";
+    }
+
+    @PostMapping("/close/{accountId}")
+    public String close (@PathVariable Long accountId, Principal principal) {
+
+        AccountDTO closeAccount = accountService.findById(accountId).orElseThrow();
+        List<AccountDTO> allAccounts = accountService.findAllByClientLogin(principal.getName());
+        boolean isOwner = allAccounts.stream().anyMatch(a -> a.getId().equals(closeAccount.getId()));
+        if(isOwner) {
+            accountService.close(accountId);
+        }
+
+        return "redirect:/client";
     }
 
 }
