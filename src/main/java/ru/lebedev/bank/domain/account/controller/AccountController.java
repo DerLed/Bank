@@ -62,6 +62,13 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    /**
+     *
+     * @param accountId id аккаунта списания денег
+     * @param cardNumber номер карты для получения денег
+     * @param amount сумма
+     * @return 200
+     */
     @PutMapping("/cardNumber/{accountId}")
     public ResponseEntity<Void> transferMoneyByCardNumber (@PathVariable Long accountId,
                                                            @RequestBody String cardNumber,

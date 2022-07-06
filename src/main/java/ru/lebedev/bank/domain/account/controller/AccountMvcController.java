@@ -17,13 +17,14 @@ import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
 import ru.lebedev.bank.exception.AccountTransferException;
+import springfox.documentation.annotations.ApiIgnore;
 
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
-
+@ApiIgnore
 @Controller
 @RequestMapping("/accounts")
 @RequiredArgsConstructor
