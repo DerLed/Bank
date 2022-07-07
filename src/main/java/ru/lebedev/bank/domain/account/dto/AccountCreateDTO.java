@@ -1,10 +1,7 @@
 package ru.lebedev.bank.domain.account.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ru.lebedev.bank.domain.account.dto.validGroup.LoanCreateInfo;
 import ru.lebedev.bank.domain.account.dto.validGroup.SavingCreateInfo;
 import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
@@ -19,10 +16,13 @@ import java.time.LocalDateTime;
 /**
  *
  */
-@Data
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class AccountCreateDTO {
 
 
@@ -33,7 +33,7 @@ public class AccountCreateDTO {
 
     //Срок в месяцах
 
-    private Integer period;
+    private Long period;
 
 
     private AccountDTO sourceAccount;

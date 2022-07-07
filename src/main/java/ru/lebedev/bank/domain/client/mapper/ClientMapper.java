@@ -12,7 +12,6 @@ public interface ClientMapper extends EntityMapper<ClientDTO, Client> {
 
     @Override
     @Mapping(target = "user", source = "userDTO")
-
     Client toEntity(ClientDTO dto);
 
     @Override

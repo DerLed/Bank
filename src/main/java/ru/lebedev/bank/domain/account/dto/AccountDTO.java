@@ -25,6 +25,7 @@ public class AccountDTO {
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDateTime dateOpened;
+    private Long period;
     private Boolean isDefault;
     private Boolean isClosed;
 

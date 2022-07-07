@@ -1,19 +1,23 @@
 package ru.lebedev.bank.validator;
 
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 
 
 import java.math.BigDecimal;
 
 @Component
-public class AccountCreateValidator implements Validator {
+@NoArgsConstructor
+public class AccountCreateDTOValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
-        return AccountCreateDTO.class.equals(clazz);
+        boolean a = AccountCreateDTO.class.equals(clazz);
+        return a;
     }
 
     @Override

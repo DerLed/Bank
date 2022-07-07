@@ -66,6 +66,45 @@
                     </select>
                 </div>
 
+                <div th:if="${typeAccount == 'SAVING'}" class="form-group">
+
+                    <label for="amount">Период вклада в месяцах</label>
+                    <input type="text" th:field="*{period}" class="form-control" id="period"
+                           aria-describedby="periodHelp"
+                           placeholder="Период">
+                    <small th:if="${#fields.hasErrors('period')}" th:errors="*{period}" id="periodHelp"
+                           class="form-text text-danger">Error</small>
+                </div>
+
+                <div th:if="${typeAccount == 'LOAN'}" class="form-group">
+
+                    <label for="amount">Желаемая сумма кредита</label>
+                    <input type="text" th:field="*{amount}" class="form-control" id="amount"
+                           aria-describedby="amountHelp"
+                           placeholder="Сумма">
+                    <small th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" id="amountHelp"
+                           class="form-text text-danger">Error</small>
+                </div>
+
+                <div th:if="${typeAccount == 'LOAN'}" class="form-group">
+
+                    <label for="amount">Желаемый срок кредита</label>
+                    <input type="text" th:field="*{period}" class="form-control" id="period"
+                           aria-describedby="periodHelp"
+                           placeholder="Период">
+                    <small th:if="${#fields.hasErrors('period')}" th:errors="*{period}" id="periodHelp"
+                           class="form-text text-danger">Error</small>
+                </div>
+
+                <div th:if="${typeAccount == 'LOAN'}" class="form-group">
+                    <label for="account">Выберите для зачисления денежных средств</label>
+                    <select th:field="*{sourceAccount}" class="form-control" id="account">
+                        <option th:each="a : ${checkingAccounts}" th:value="${a.id}"
+                                th:text="'Баланс: ' + ${a.amount} + ' Тип: ' + ${a.accountPlan.title} ">
+                        </option>
+                    </select>
+                </div>
+
 
                 <button type="submit" class="btn btn-primary">Добавить</button>
 

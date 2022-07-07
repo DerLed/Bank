@@ -6,8 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.TransactionStatus;
 import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.account.mapper.AccountCreateMapper;
 import ru.lebedev.bank.domain.account.mapper.AccountMapper;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
+import ru.lebedev.bank.domain.loan.Loan;
+import ru.lebedev.bank.domain.loan.LoanRepository;
 import ru.lebedev.bank.domain.transaction.Transaction;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.mapper.TransactionMapper;
@@ -37,6 +40,8 @@ public class AccountServiceImpl implements AccountService {
     private final AccountMapper accountMapper;
     private final TransactionService transactionService;
     private final TransactionMapper transactionMapper;
+    private final AccountCreateMapper accountCreateMapper;
+    private final LoanRepository loanRepository;
 
     public List<AccountDTO> findAll() {
         return accountRepository.findAll().stream()
@@ -54,21 +59,33 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public AccountDTO create(AccountCreateDTO accountCreateDTO) {
-        //проеобразуем dto формы в обычный accountDto
-        AccountDTO accountDTO = AccountDTO.builder()
-                .accountPlan(accountCreateDTO.getAccountPlan())
-                .client(accountCreateDTO.getClient())
-                .build();
-        //проверка что CHECKING аккаунта на наличие дефолтного, если нет то устанавливается
-        Account checkedAccount = setDefaultAccount(accountMapper.toEntity(accountDTO));
+
+        //проверка, что CHECKING аккаунта на наличие дефолтного, если нет то устанавливается
+        Account checkedAccount = setDefaultAccount(accountCreateMapper.toEntity(accountCreateDTO));
 
         Account savedAccount = accountRepository.saveAndFlush(checkedAccount);
 
-        //если счет накопительный переводим на него деньги с депозитного счета выбраного при оформлении
+        //если счет накопительный переводим на него деньги с депозитного счета выбранного при оформлении
         if(accountCreateDTO.getAccountPlan().getType().equals(TypeAccount.SAVING)) {
             transferAmount(accountCreateDTO.getAmount(),
                     accountCreateDTO.getSourceAccount().getId(),
                     savedAccount);
+        }
+
+        if(accountCreateDTO.getAccountPlan().getType().equals(TypeAccount.LOAN)) {
+
+            Account linkedAccount = accountMapper.toEntity(accountCreateDTO.getSourceAccount());
+
+            Loan loan = loanRepository.saveAndFlush(new Loan());
+
+            loan.setAccount(savedAccount);
+            loan.setClient(savedAccount.getClient());
+            loan.setLinkedAccount(linkedAccount);
+            loan.setIsClosed(false);
+
+            transferAmount(accountCreateDTO.getAmount(),
+                    savedAccount.getId(), linkedAccount);
+            savedAccount.setAmount(accountCreateDTO.getAmount());
         }
 
         return accountMapper.toDTO(savedAccount);

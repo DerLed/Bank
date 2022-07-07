@@ -43,40 +43,6 @@
                 </div>
 
 
-
-<!--                <div class="card-group">-->
-<!--                    <div th:each="accountPlan : ${accountPlans}" class="card" style="width: 18rem;">-->
-<!--                        <div class="card-body">-->
-<!--                            <h5 th:text="${accountPlan.title}" class="card-title">Card title</h5>-->
-<!--                            <h6 th:text="'Процентная ставка: ' + ${accountPlan.percent} + '%'"-->
-<!--                                class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
-<!--                            <p th:text="${accountPlan.description}" class="card-text"></p>-->
-<!--                            <input type="radio" th:field="*{accountPlan}" th:value="${accountPlan.id}"/>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div th:if="${typeAccount == 'SAVING'}" class="form-group">-->
-
-<!--                    <label for="amount">Сумма</label>-->
-<!--                    <input type="text" th:field="*{amount}" class="form-control" id="amount"-->
-<!--                           aria-describedby="amountHelp"-->
-<!--                           placeholder="Сумма">-->
-<!--                    <small th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" id="amountHelp"-->
-<!--                           class="form-text text-danger">Error</small>-->
-<!--                </div>-->
-
-
-<!--                <div th:if="${typeAccount == 'SAVING'}" class="form-group">-->
-<!--                    <label for="account">Выберите счет зачисления</label>-->
-<!--                    <select th:field="*{sourceAccount}" class="form-control" id="account">-->
-<!--                        <option th:each="a : ${checkingAccounts}" th:value="${a.id}"-->
-<!--                                th:text="'Баланс: ' + ${a.amount} + ' Тип: ' + ${a.accountPlan.title} ">-->
-<!--                        </option>-->
-<!--                    </select>-->
-<!--                </div>-->
-
-
                 <button type="submit" class="btn btn-primary">Подтвердить</button>
 
             </form>

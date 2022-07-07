@@ -18,7 +18,8 @@ import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
 import ru.lebedev.bank.exception.AccountTransferException;
-import ru.lebedev.bank.validator.AccountCreateValidator;
+import ru.lebedev.bank.validator.AccountCreateDTOValidator;
+
 
 
 import javax.validation.Valid;
@@ -33,12 +34,18 @@ public class AccountMvcController {
     private final AccountService accountService;
     private final ClientService clientService;
     private final AccountPlanService accountPlanService;
-    private final AccountCreateValidator accountCreateValidator;
+    private final AccountCreateDTOValidator accountCreateValidator;
 
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.addValidators(accountCreateValidator);
+
+        if (binder.getTarget() == null) return;
+        if (accountCreateValidator.supports(binder.getTarget().getClass())) {
+                binder.addValidators(accountCreateValidator);
+        }
+
+
     }
 
     @GetMapping("/{type}")
@@ -99,11 +106,14 @@ public class AccountMvcController {
 
     @GetMapping("/{type}/new")
     public String newCheckingAccount(@PathVariable("type") TypeAccount typeAccount, Principal principal, Model model){
-        List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
-        model.addAttribute("accountCreate", new AccountCreateDTO());
-        model.addAttribute("checkingAccounts", accounts);
-        model.addAttribute("typeAccount", typeAccount.toString());
         model.addAttribute("accountPlans", accountPlanService.findByType(typeAccount));
+        model.addAttribute("typeAccount", typeAccount.toString());
+        model.addAttribute("accountCreate", new AccountCreateDTO());
+        if(!typeAccount.equals(TypeAccount.CHECKING)){
+            //здесь список депозитных аккаунтов, для открытия счета
+            List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
+            model.addAttribute("checkingAccounts", accounts);
+        }
         return "accounts/account-new";
     }
 
