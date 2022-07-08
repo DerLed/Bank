@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface AccountCreateMapper extends EntityMapper<AccountCreateDTO, Account> {
-    @Override
-    @Mapping(target = "amount", ignore = true)
-    Account toEntity(AccountCreateDTO dto);
-
-    @Override
-    @InheritInverseConfiguration
-    AccountCreateDTO toDTO(Account entity);
+//    @Override
+////    @Mapping(target = "amount", ignore = true)
+//    Account toEntity(AccountCreateDTO dto);
+//
+//    @Override
+////    @InheritInverseConfiguration
+//    AccountCreateDTO toDTO(Account entity);
 }

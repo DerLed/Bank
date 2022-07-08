@@ -9,6 +9,8 @@ import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.account.mapper.AccountCreateMapper;
 import ru.lebedev.bank.domain.account.mapper.AccountMapper;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
+import ru.lebedev.bank.domain.client.Client;
+import ru.lebedev.bank.domain.client.mapper.ClientMapper;
 import ru.lebedev.bank.domain.loan.Loan;
 import ru.lebedev.bank.domain.loan.LoanRepository;
 import ru.lebedev.bank.domain.transaction.Transaction;
@@ -42,6 +44,7 @@ public class AccountServiceImpl implements AccountService {
     private final TransactionMapper transactionMapper;
     private final AccountCreateMapper accountCreateMapper;
     private final LoanRepository loanRepository;
+    private final ClientMapper clientMapper;
 
     public List<AccountDTO> findAll() {
         return accountRepository.findAll().stream()
@@ -59,6 +62,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public AccountDTO create(AccountCreateDTO accountCreateDTO) {
+
+        Account newAccount = Account.builder()
+                .client(clientMapper.toEntity(accountCreateDTO.getClient()))
+                .
+                .build();
 
         //проверка, что CHECKING аккаунта на наличие дефолтного, если нет то устанавливается
         Account checkedAccount = setDefaultAccount(accountCreateMapper.toEntity(accountCreateDTO));
@@ -175,6 +183,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional(noRollbackFor = AccountTransferException.class)
     public void close(Long id) {
+
         Account closeAccount = accountRepository.findById(id).orElseThrow();
         Account defaultAccount = accountRepository.findByAccountIdDefaultAccount(id).orElseThrow();
 
