@@ -26,7 +26,10 @@ public class AccountPlanDTO {
     @DecimalMin(value = "0", message = "Проценты не могут быть отрицательными")
     private BigDecimal percent;
 
-    @NotNull(message = "Не выбран тип счета")
-    private TypeAccount type;
+
+    private BigDecimal minAmount;
+
+
+    private Long minPeriod;
 
 }

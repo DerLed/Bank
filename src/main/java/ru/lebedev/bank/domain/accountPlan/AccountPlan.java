@@ -28,7 +28,10 @@ public class AccountPlan {
     @Column(name = "percent")
     private BigDecimal percent;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "type")
-    private TypeAccount type;
+    @Column(name = "min_amount")
+    private BigDecimal minAmount;
+
+    @Column(name = "min_period")
+    private Long minPeriod;
+
 }

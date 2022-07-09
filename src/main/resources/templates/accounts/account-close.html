@@ -14,14 +14,14 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <h1 class="display-3">
-                <td th:switch="${typeAccount}">
-                    <span th:case="'CHECKING'">Закрытие депозитного счета</span>
-                    <span th:case="'SAVING'">Закрытие накопительного счета</span>
-                    <span th:case="'LOAN'">Кредиты</span>
-                    <div th:case="*">
+<!--                <td th:switch="${typeAccount}">-->
+<!--                    <span th:case="'CHECKING'">Закрытие депозитного счета</span>-->
+<!--                    <span th:case="'SAVING'">Закрытие накопительного счета</span>-->
+<!--                    <span th:case="'LOAN'">Кредиты</span>-->
+<!--                    <div th:case="*">-->
 
-                    </div>
-                </td>
+<!--                    </div>-->
+<!--                </td>-->
             </h1>
         </div>
     </header>
@@ -30,13 +30,13 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
 
 
-            <form action="#" th:action="@{/accounts/close/{id} (id = ${closeAccount.id})} "
+            <form action="#" th:action="@{/checking/close/{id} (id = ${closeAccount.id})} "
                   th:method="POST">
 
                 <div class="border border-warning">
                     <h6 class="h6">Закрыть счет?</h6>
                     <p class="text-center">Счет номер: <span th:text="${closeAccount.accountNumber}"></span> </p>
-                    <p class="text-center">Тип: <span th:text="${closeAccount.accountPlan.title}"></span> </p>
+<!--                    <p class="text-center">Тип: <span th:text="${closeAccount.accountPlan.title}"></span> </p>-->
                     <br>
                     <p class="text-center">Все средства будут перечислены на счет по умолчанию. </p>
 

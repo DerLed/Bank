@@ -20,7 +20,7 @@
         <div  class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="p-5 text-center bg-light">
 
-                <form th:if="${not #lists.isEmpty(accounts)}" action="#" th:action="@{/accounts/add-money}"  th:method="POST">
+                <form th:if="${not #lists.isEmpty(accounts)}" action="#" th:action="@{/checking/add-money}"  th:method="POST">
 
                     <div class="form-group">
                         <label for="amount">Сумма</label>
@@ -36,7 +36,7 @@
                         <label for="account">Выберите счет для пополнения</label>
                         <select class="form-control" id="account" name="account">
                             <option th:each="a : ${accounts}" th:value="${a.id}"
-                                    th:text="'Баланс: ' + ${a.amount} + ' Cчет:' + ${a.accountPlan.title} ">
+                                    th:text="'Баланс: ' + ${a.amount} + ' Cчет:' + ${a.accountNumber} ">
                             </option>
                         </select>
                     </div>

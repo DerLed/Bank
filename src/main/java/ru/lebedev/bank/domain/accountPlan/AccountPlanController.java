@@ -37,7 +37,7 @@ public class AccountPlanController {
 
     @DeleteMapping
     public ResponseEntity<String> delete(@RequestBody @Valid AccountPlanDTO accountPlanDTO) {
-        accountPlanService.delete(accountPlanDTO);
+        accountPlanService.deleteById(accountPlanDTO.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

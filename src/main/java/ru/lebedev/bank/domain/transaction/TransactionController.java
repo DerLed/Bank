@@ -14,18 +14,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TransactionController {
 
-    private final TransactionService transactionService;
-
-    @GetMapping
-    public ResponseEntity<List<TransactionDTO>> findAll(){
-        List<TransactionDTO> transactionDTOs = transactionService.findAll();
-        return new ResponseEntity<>(transactionDTOs, HttpStatus.OK);
-    }
-
-    @DeleteMapping
-    public ResponseEntity<String> delete(@RequestBody @Valid TransactionDTO transactionDTO){
-        transactionService.delete(transactionDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    private final TransactionService transactionService;
+//
+//    @GetMapping
+//    public ResponseEntity<List<TransactionDTO>> findAll(){
+//        List<TransactionDTO> transactionDTOs = transactionService.findAll();
+//        return new ResponseEntity<>(transactionDTOs, HttpStatus.OK);
+//    }
+//
+//    @DeleteMapping
+//    public ResponseEntity<String> delete(@RequestBody @Valid TransactionDTO transactionDTO){
+//        transactionService.delete(transactionDTO);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 }

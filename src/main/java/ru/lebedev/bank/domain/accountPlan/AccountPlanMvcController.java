@@ -29,7 +29,7 @@ public class AccountPlanMvcController {
     @GetMapping("/add")
     public String add(Model model){
         model.addAttribute("accountPlan", new AccountPlanDTO());
-        model.addAttribute("type", Arrays.asList(TypeAccount.values()));
+
         return "account-plan/account-plan-add";
     }
 
@@ -37,7 +37,7 @@ public class AccountPlanMvcController {
     public String create(@ModelAttribute("accountPlan") @Valid AccountPlanDTO accountPlanDTO,
                          BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
-            model.addAttribute("type", Arrays.asList(TypeAccount.values()));
+
             return "account-plan/account-plan-add";
         }
         accountPlanService.save(accountPlanDTO);

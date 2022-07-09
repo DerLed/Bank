@@ -1,23 +1,15 @@
 package ru.lebedev.bank.domain.accountPlan;
 
 import org.springframework.validation.annotation.Validated;
+import ru.lebedev.bank.domain.BaseRepository;
+import ru.lebedev.bank.domain.BaseService;
 import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-@Validated
-public interface AccountPlanService {
 
-    List<AccountPlanDTO> findAll();
-    List<AccountPlanDTO> findByType(TypeAccount typeAccount);
+public interface AccountPlanService extends BaseService<AccountPlanDTO, Long> {
 
-    AccountPlanDTO save(@NotNull AccountPlanDTO accountPlanDTO);
-
-    Optional<AccountPlanDTO> findById(@NotNull Long id);
-
-    void delete(@NotNull AccountPlanDTO accountPlanDTO);
-
-    void deleteById(@NotNull Long id);
 }

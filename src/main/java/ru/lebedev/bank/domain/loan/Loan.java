@@ -20,21 +20,21 @@ public class Loan {
     @SequenceGenerator(name = "loan_gen", sequenceName = "loan_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "is_closed")
-    private Boolean isClosed;
-
-    @ManyToOne
-    @JoinColumn(name = "linked_account_id")
-    private Account linkedAccount;
-
-    @OneToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
-    private Client client;
+//
+//    @Column(name = "is_closed")
+//    private Boolean isClosed;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "linked_account_id")
+//    private Account linkedAccount;
+//
+//    @OneToOne
+//    @JoinColumn(name = "account_id")
+//    private Account account;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "client_id")
+//    private Client client;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "plan_id")

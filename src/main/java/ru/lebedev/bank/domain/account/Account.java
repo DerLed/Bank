@@ -13,13 +13,15 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-@Entity
-@Table(name = "account")
+
+
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Entity
+@Inheritance(
+        strategy = InheritanceType.JOINED
+)
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_gen")
@@ -33,17 +35,9 @@ public class Account {
     @Column(name = "date_opened")
     @CreatedDate
     private LocalDateTime dateOpened;
-
-    //Является ли данный счет счетом по умолчанию
-    @Column(name = "is_default")
-    private Boolean isDefault;
-
     //
     @Column(name = "is_closed")
     private Boolean isClosed;
-
-    @Column(name = "period")
-    private Long period;
 
     @Column(name = "account_number")
     private String accountNumber;
@@ -52,10 +46,6 @@ public class Account {
     @JoinColumn(name = "client_id")
     @ToString.Exclude
     private Client client;
-
-    @ManyToOne
-    @JoinColumn(name = "plan_id")
-    private AccountPlan accountPlan;
 
     @PrePersist
     private void create() {
@@ -69,14 +59,14 @@ public class Account {
         if(amount == null)
             amount = BigDecimal.ZERO;
 
-        if (accountPlan.getType().equals(TypeAccount.CHECKING)){
-            period = ChronoUnit.DAYS.between(dateOpened, dateOpened.plusYears(101L));
-        }
-        if (accountPlan.getType().equals(TypeAccount.SAVING)){
-            isDefault = false;
-        }
-        if (accountPlan.getType().equals(TypeAccount.LOAN)){
-            isDefault = false;
-        }
+//        if (accountPlan.getType().equals(TypeAccount.CHECKING)){
+//            period = ChronoUnit.DAYS.between(dateOpened, dateOpened.plusYears(101L));
+//        }
+//        if (accountPlan.getType().equals(TypeAccount.SAVING)){
+//            isDefault = false;
+//        }
+//        if (accountPlan.getType().equals(TypeAccount.LOAN)){
+//            isDefault = false;
+//        }
     }
 }

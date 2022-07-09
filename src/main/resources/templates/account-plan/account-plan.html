@@ -25,6 +25,10 @@
                         <h5 th:text="${accountPlan.title}" class="card-title">Card title</h5>
                         <h6 th:text="'Процентная ставка: ' + ${accountPlan.percent} + '%'"
                             class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <h6 th:text="'Срок от : ' + ${accountPlan.minPeriod} + ' мес'"
+                            class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <h6 th:text="'Сумма вклада от : ' + ${accountPlan.minAmount} + ' руб'"
+                            class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                         <p th:text="${accountPlan.description}" class="card-text">text.</p>
                         <a th:href="@{/account-plan/edit/{id}(id=${accountPlan.id})}"
                            class="card-link">Редактировать</a>

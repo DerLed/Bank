@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AccountPlanRepository extends JpaRepository<AccountPlan, Long> {
 
-    List<AccountPlan> findByTypeEquals(TypeAccount typeAccount);
+
 }

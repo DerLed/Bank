@@ -26,25 +26,25 @@ import java.util.List;
 @RequestMapping("/cards")
 @RequiredArgsConstructor
 public class CardMvcController {
-    private final CardService cardService;
-    private final AccountService accountService;
-    private final CardPlanService cardPlanService;
-    private final ClientService clientService;
+//    private final CardService cardService;
+//    private final AccountService accountService;
+//    private final CardPlanService cardPlanService;
+//    private final ClientService clientService;
 
     @GetMapping
     public String accountsLoan(Model model, Principal principal){
-        List<CardDTO> cards = cardService.findByClientUserLogin(principal.getName());
-        model.addAttribute("cards", cards);
+//        List<CardDTO> cards = cardService.findByClientUserLogin(principal.getName());
+//        model.addAttribute("cards", cards);
         return "card/card-list";
     }
 
     @GetMapping("/new")
     public String newCard(Model model, Principal principal){
-        List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
-        List<CardPlanDTO> cardPlans = cardPlanService.findAll();
-        model.addAttribute("accounts", accounts);
-        model.addAttribute("cardPlans", cardPlans);
-        model.addAttribute("newCard", new CardCreateDTO());
+//        List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
+//        List<CardPlanDTO> cardPlans = cardPlanService.findAll();
+//        model.addAttribute("accounts", accounts);
+//        model.addAttribute("cardPlans", cardPlans);
+//        model.addAttribute("newCard", new CardCreateDTO());
 
         return "card/card-new";
     }
@@ -60,20 +60,20 @@ public class CardMvcController {
     @PostMapping("/new")
     public String newCardCreate(@ModelAttribute("newCard") @Valid CardCreateDTO cardDTO,
                                    BindingResult bindingResult, Principal principal, Model model){
-        if (bindingResult.hasErrors()) {
-            List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
-            List<CardPlanDTO> cardPlans = cardPlanService.findAll();
-            model.addAttribute("accounts", accounts);
-            model.addAttribute("cardPlans", cardPlans);
-            return "card/card-new";
-        }
-        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
-        CardDTO savedCard = CardDTO.builder()
-                .clientDTO(clientDTO)
-                .cardPlanDTO(cardDTO.getCardPlanDTO())
-                .accountDTO(cardDTO.getAccountDTO())
-                .build();
-        cardService.save(savedCard);
+//        if (bindingResult.hasErrors()) {
+//            List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
+//            List<CardPlanDTO> cardPlans = cardPlanService.findAll();
+//            model.addAttribute("accounts", accounts);
+//            model.addAttribute("cardPlans", cardPlans);
+//            return "card/card-new";
+//        }
+//        ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
+//        CardDTO savedCard = CardDTO.builder()
+//                .clientDTO(clientDTO)
+//                .cardPlanDTO(cardDTO.getCardPlanDTO())
+//                .accountDTO(cardDTO.getAccountDTO())
+//                .build();
+//        cardService.save(savedCard);
         return "redirect:/client";
     }
 }

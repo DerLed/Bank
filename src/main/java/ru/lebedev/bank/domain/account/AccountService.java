@@ -11,24 +11,24 @@ import java.util.Optional;
 
 public interface AccountService {
 
-    List<AccountDTO> findAll();
-
-    AccountDTO create(AccountCreateDTO accountCreateDTO);
-
+//    List<AccountDTO> findAll();
+//
+//    AccountDTO create(AccountCreateDTO accountCreateDTO);
+//
     Optional<AccountDTO> findById(Long id);
-    AccountDTO save(AccountDTO accountDTO);
-    void close(Long id);
-
-    List<AccountDTO> findByClientId (Long clientId);
-    List<AccountDTO> findByPhoneNumber (String phoneNumber);
-    Optional<AccountDTO> findByCardNumber (String cardNumber);
-
-    List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type);
+//    AccountDTO save(AccountDTO accountDTO);
+//    void close(Long id);
+//
+//    List<AccountDTO> findByClientId (Long clientId);
+//    List<AccountDTO> findByPhoneNumber (String phoneNumber);
+//    Optional<AccountDTO> findByCardNumber (String cardNumber);
+//
+//    List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type);
     List<AccountDTO> findAllByClientLogin(String login);
-
-    List<TransactionDTO> getHistory (Long id);
-
+//
+//    List<TransactionDTO> getHistory (Long id);
+//
     void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount);
-    void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount);
-    void addMoney(Long accountId, BigDecimal amount);
+//    void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount);
+//    void addMoney(Long accountId, BigDecimal amount);
 }

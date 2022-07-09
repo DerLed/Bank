@@ -15,12 +15,12 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Card {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_gen")
-    @SequenceGenerator(name = "card_gen", sequenceName = "card_id_seq", allocationSize = 1)
-    @Column(name = "id")
-    Long id;
+public class Card extends Account{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "card_gen")
+//    @SequenceGenerator(name = "card_gen", sequenceName = "card_id_seq", allocationSize = 1)
+//    @Column(name = "id")
+//    Long id;
 
     @Column(name = "card_number")
     private String cardNumber;
@@ -34,25 +34,25 @@ public class Card {
     @Column(name = "is_closed")
     private Boolean isClosed;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+//    @ManyToOne
+//    @JoinColumn(name = "account_id")
+//    private Account account;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+//    @ManyToOne
+//    @JoinColumn(name = "client_id")
+//    private Client client;
 
     @ManyToOne
     @JoinColumn(name = "plan_id")
     private CardPlan cardPlan;
 
-    @PrePersist
-    private void create() {
-
-        if(isClosed == null) isClosed = false;
-        if(isBlocked == null) isBlocked = false;
-
-    }
+//    @PrePersist
+//    private void create() {
+//
+//        if(isClosed == null) isClosed = false;
+//        if(isBlocked == null) isBlocked = false;
+//
+//    }
 
 
 }

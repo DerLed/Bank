@@ -44,13 +44,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="type">Тип</label>
-                    <select th:field="*{type}" class="form-control" id="type">
-                        <option th:each="t : ${type}" th:value="${t}" th:text="${t}"></option>
-                    </select>
-                    <small th:if="${#fields.hasErrors('type')}" th:errors="*{type}" id="typeHelp"
+                    <label for="minAmount">Минимальная сумма</label>
+                    <input type="text" th:field="*{minAmount}" class="form-control" id="minAmount" aria-describedby="percentHelp">
+                    <small th:if="${#fields.hasErrors('minAmount')}" th:errors="*{minAmount}" id="minAmountHelp"
                            class="form-text text-danger"></small>
                 </div>
+
+                <div class="form-group">
+                    <label for="percent">Минимальный срок</label>
+                    <input type="text" th:field="*{minPeriod}" class="form-control" id="minPeriod" aria-describedby="percentHelp">
+                    <small th:if="${#fields.hasErrors('minPeriod')}" th:errors="*{minPeriod}" id="minPeriodtHelp"
+                           class="form-text text-danger"></small>
+                </div>
+
                 <br>
 
                 <button type="submit" class="btn btn-primary">Добавить</button>

@@ -7,4 +7,7 @@ import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 
 @Mapper(componentModel = "spring")
 public interface AccountPlanMapper extends EntityMapper<AccountPlanDTO, AccountPlan> {
+
+
+
 }

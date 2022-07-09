@@ -16,9 +16,9 @@ public interface AccountMapper extends EntityMapper<AccountDTO, Account> {
 
     @AfterMapping // or @BeforeMapping
     default void calculateSavingAmount(Account account, @MappingTarget AccountDTO dto) {
-        if(account.getAccountPlan().getType().equals(TypeAccount.SAVING)) {
-            dto.setSavingAmount(DepositCalc.depositCalc(account));
-        }
+//        if(account.getAccountPlan().getType().equals(TypeAccount.SAVING)) {
+//            dto.setSavingAmount(DepositCalc.depositCalc(account));
+//        }
     }
 
 }
