@@ -80,12 +80,11 @@ public class AccountServiceImpl implements AccountService {
 //                .collect(Collectors.toList());
 //    }
 //
-//    @Override
-//    public AccountDTO save(AccountDTO accountDTO) {
-//        Account checkedAccount = setDefaultAccount(accountMapper.toEntity(accountDTO));
-//        Account savedAccount = accountRepository.saveAndFlush(checkedAccount);
-//        return accountMapper.toDTO(savedAccount);
-//    }
+    @Override
+    public AccountDTO save(AccountDTO accountDTO) {
+        Account savedAccount = accountRepository.saveAndFlush(accountMapper.toEntity(accountDTO));
+        return accountMapper.toDTO(savedAccount);
+    }
 //
 //    @Override
 //    @Transactional
@@ -182,6 +181,13 @@ public class AccountServiceImpl implements AccountService {
         Account targetAccount = accounts.get(0);
         transferAmount(amount, accountId, targetAccount);
     }
+
+    @Override
+    @Transactional(noRollbackFor = AccountTransferException.class)
+    public void transferMoney(BigDecimal amount, Long accountId, Account accountTarget) {
+
+        transferAmount(amount, accountId, accountTarget);
+    }
 //
 //    @Override
 //    @Transactional(noRollbackFor = AccountTransferException.class)
@@ -275,9 +281,9 @@ public class AccountServiceImpl implements AccountService {
 //
     private Transaction getTransaction(BigDecimal amount, Account sourceAccount, Account targetAccount){
         return Transaction.builder()
-//                .amount(amount)
-//                .sourceAccount(sourceAccount)
-//                .targetAccount(targetAccount)
+                .amount(amount)
+                .sourceAccount(sourceAccount)
+                .targetAccount(targetAccount)
                 .build();
     }
 

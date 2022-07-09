@@ -46,7 +46,11 @@
                                            th:field="*{accountPlanDTO}" th:value="${accountPlan.id}"/>
                                 </div>
                             </div>
+
+
                         </div>
+                        <small th:if="${#fields.hasErrors('accountPlanDTO')}" th:errors="*{accountPlanDTO}" id="accountPlanDTOHelp"
+                               class="form-text text-danger"></small>
 
 
                     </div>

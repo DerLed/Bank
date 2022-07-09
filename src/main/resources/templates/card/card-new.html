@@ -18,37 +18,19 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
 
-
-            <form action="#" th:action="@{/cards/new}" th:object="${newCard}" th:method="POST">
-
-
-                <div class="card-group">
-                    <div th:each="cardPlan : ${cardPlans}" class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 th:text="${cardPlan.isCredit} ? 'Кредитная' : 'Дебетовая'" class="card-title">Card title</h5>
-                            <h6 th:if="${cardPlan.isCredit}" th:text="'Процентная ставка: ' + ${cardPlan.percent} + '%'"
-                                class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <input type="radio" th:field="*{cardPlanDTO}" th:value="${cardPlan.id}"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="account">Выберите счет для привязки карты</label>
-                    <select th:field="*{accountDTO}" class="form-control" id="account" name="account">
-                        <option th:each="a : ${accounts}"  th:value="${a.id}"
-                                th:text="'Баланс: ' + ${a.amount} + ' Cчет:' + ${a.accountPlan.title} ">
-                        </option>
-                    </select>
-                </div>
+            <form action="#" th:action="@{/cards/new} " th:object="${newCard}"
+                  th:method="POST"><p>Выпустить карту?</p>
 
 
-                <button type="submit" class="btn btn-primary">Добавить</button>
 
+                <button type="submit" class="btn btn-primary">Выпустить</button>
             </form>
+
             <a class="btn btn-info" href="/client" role="button">В личный кабинет</a>
+
         </div>
     </div>
+</div>
 </div>
 
 

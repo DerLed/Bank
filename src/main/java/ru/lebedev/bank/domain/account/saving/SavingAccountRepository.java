@@ -19,15 +19,12 @@ import java.util.Optional;
 //import java.util.Optional;
 //
 public interface SavingAccountRepository extends JpaRepository<SavingAccount, Long> {
-//
+
     Optional<SavingAccount> findByIdAndIsClosedFalse(Long id);
-////
-////    List<Account> findByClientId(Long ClientId);
+    List<SavingAccount> findByClientId(Long ClientId);
     List<SavingAccount> findByClientUserLoginAndIsClosedFalse(String login);
-////
-////
-////    List<Account> findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(String login, TypeAccount type);
-////    List<Account> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
+    List<SavingAccount> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
+
 ////
 ////    @Query("select a from Card c join c.account a where c.cardNumber = :cardNumber " +
 ////            "and a.isClosed = false and c.isClosed = false and a.client.user.status = ru.lebedev.bank.domain.Status.ACTIVE ")

@@ -35,4 +35,11 @@ public class SavingAccountDTO {
     private ClientDTO clientDTO;
 
     private Boolean isDefault;
+
+
+
+    private BigDecimal savingAmount;
+
+
+
 }

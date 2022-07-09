@@ -23,8 +23,8 @@ public interface SavingAccountService extends BaseService<SavingAccountDTO, Long
 //    AccountDTO save(AccountDTO accountDTO);
 //    void close(Long id);
 //
-//    List<AccountDTO> findByClientId (Long clientId);
-//    List<AccountDTO> findByPhoneNumber (String phoneNumber);
+    List<SavingAccountDTO> findByClientId (Long clientId);
+    List<SavingAccountDTO> findByPhoneNumber (String phoneNumber);
 //    Optional<AccountDTO> findByCardNumber (String cardNumber);
 //
 //    List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type);

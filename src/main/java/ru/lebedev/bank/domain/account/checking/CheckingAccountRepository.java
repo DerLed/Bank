@@ -18,14 +18,11 @@ import java.util.Optional;
 //import java.util.Optional;
 //
 public interface CheckingAccountRepository extends JpaRepository<CheckingAccount, Long> {
-//
+
     Optional<CheckingAccount> findByIdAndIsClosedFalse(Long id);
-////
-////    List<Account> findByClientId(Long ClientId);
+    List<CheckingAccount> findByClientId(Long ClientId);
     List<CheckingAccount> findByClientUserLoginAndIsClosedFalse(String login);
-////
-////
-////    List<Account> findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(String login, TypeAccount type);
+
     List<CheckingAccount> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
 ////
 ////    @Query("select a from Card c join c.account a where c.cardNumber = :cardNumber " +
@@ -33,15 +30,15 @@ public interface CheckingAccountRepository extends JpaRepository<CheckingAccount
 ////    Optional<Account> findByCardNumber(String cardNumber);
 ////
 ////
-////    @Query("select a from Account a where a.client = (select a1.client from Account a1 WHERE id = :id) and a.isDefault = true ")
-////    Optional<Account> findByAccountIdDefaultAccount(Long id);
-////
-////
-////
+    @Query("select a from CheckingAccount a where a.client = (select a1.client from Account a1 " +
+            "WHERE a1.id = :id  ) and a.isDefault = true and a.isClosed = false")
+    Optional<CheckingAccount> findByAccountIdDefaultAccount(Long id);
+
     @Modifying(clearAutomatically = true)
-//    @Query("update Account set isClosed = true where id = :id")
     @Query("update CheckingAccount set isClosed = true where id = :id")
     void closeById(Long id);
-////
-////    List<Account> findByClientIdAndIsDefaultTrueAndIsClosedFalse(Long clientId);
+
+    List<CheckingAccount> findByClientIdAndIsDefaultTrueAndIsClosedFalse(Long clientId);
+
+    Optional<CheckingAccount> findCheckingAccountByIsDefaultIsTrue();
 }

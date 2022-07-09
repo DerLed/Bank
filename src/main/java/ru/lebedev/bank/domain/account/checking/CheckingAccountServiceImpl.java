@@ -9,6 +9,7 @@ import ru.lebedev.bank.domain.account.mapper.CheckingAccountMapper;
 import ru.lebedev.bank.domain.transaction.Transaction;
 import ru.lebedev.bank.domain.transaction.TransactionRepository;
 import ru.lebedev.bank.exception.AccountTransferException;
+import ru.lebedev.bank.exception.CloseDefaultAccountException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -53,7 +54,8 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
 
     @Override
     public CheckingAccountDTO save(CheckingAccountDTO dto) {
-        CheckingAccount checkingAccount = checkingAccountMapper.toEntity(dto);
+        //Проверяем есть ли у данного пользователя аккаунт по умолчанию, если нет то устанавливаем
+        CheckingAccount checkingAccount = setDefaultAccount(checkingAccountMapper.toEntity(dto));
         CheckingAccount sCheckingAccount = checkingAccountRepository.saveAndFlush(checkingAccount);
         return checkingAccountMapper.toDTO(sCheckingAccount);
     }
@@ -66,7 +68,11 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-        checkingAccountRepository.closeById(id);
+        CheckingAccount checkingAccount = checkingAccountRepository.findById(id).orElseThrow();
+        if(checkingAccount.getIsDefault()){
+            throw new CloseDefaultAccountException(id);
+        }
+        else checkingAccountRepository.closeById(id);
     }
 
     @Override
@@ -89,16 +95,28 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
 
     }
 
-//    @Override
-//    @Transactional(noRollbackFor = AccountTransferException.class)
-//    public void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount) {
-//        List<CheckingAccount> accounts = checkingAccountRepository.findByClientPhoneNumberAndIsClosedFalse(phoneNumber);
-//        if (accounts.isEmpty()) {
-//            throw new AccountTransferException(String.format(ACCOUNT_BY_PHONE_NUMBER_NOT_FOUND_MESSAGE, phoneNumber));
-//        }
-//        CheckingAccount targetAccount = accounts.get(0);
-//        transferAmount(amount, accountId, targetAccount);
-//    }
+    @Override
+    public List<CheckingAccountDTO> findByClientId(Long clientId) {
+        return checkingAccountRepository.findByClientId(clientId).stream()
+                .map(checkingAccountMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CheckingAccountDTO> findByPhoneNumber(String phoneNumber) {
+                return checkingAccountRepository.findByClientPhoneNumberAndIsClosedFalse(phoneNumber).stream()
+                .map(checkingAccountMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    private CheckingAccount setDefaultAccount(CheckingAccount account){
+
+            boolean notDefaultAccount = checkingAccountRepository
+                    .findByClientIdAndIsDefaultTrueAndIsClosedFalse(account.getClient().getId()).isEmpty();
+            account.setIsDefault(notDefaultAccount);
+            return account;
+
+    }
 
 
 

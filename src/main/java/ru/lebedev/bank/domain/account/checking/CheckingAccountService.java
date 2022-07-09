@@ -22,8 +22,8 @@ public interface CheckingAccountService extends BaseService<CheckingAccountDTO, 
 //    AccountDTO save(AccountDTO accountDTO);
 //    void close(Long id);
 //
-//    List<AccountDTO> findByClientId (Long clientId);
-//    List<AccountDTO> findByPhoneNumber (String phoneNumber);
+    List<CheckingAccountDTO> findByClientId (Long clientId);
+    List<CheckingAccountDTO> findByPhoneNumber (String phoneNumber);
 //    Optional<AccountDTO> findByCardNumber (String cardNumber);
 //
 //    List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type);

@@ -17,23 +17,13 @@ import java.time.LocalDateTime;
 @Builder
 public class SavingAccountCreateDTO {
 
-    private Long id;
-
     private BigDecimal amount;
-
-    private LocalDateTime dateOpened;
 
     private Long period;
 
     private AccountPlanDTO accountPlanDTO;
 
-    private Boolean isClosed;
-
-    private String accountNumber;
-
     private ClientDTO clientDTO;
-
-    private Boolean isDefault;
 
     private CheckingAccountDTO checkingAccountDTO;
 }

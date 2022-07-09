@@ -11,9 +11,9 @@ public interface TransactionService extends BaseService<TransactionDTO, Long> {
 //
 //    TransactionDTO save(TransactionDTO transactionRequestDTO);
 //
-//    List<TransactionDTO> findAllByTargetAccountId(Long id);
-//
-//    List<TransactionDTO> findAllBySourceAccountId(Long id);
+    List<TransactionDTO> findAllByTargetAccountId(Long id);
+
+    List<TransactionDTO> findAllBySourceAccountId(Long id);
 //
 //    void delete(TransactionDTO transactionDTO);
 

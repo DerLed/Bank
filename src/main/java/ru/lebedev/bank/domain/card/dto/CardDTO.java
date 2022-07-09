@@ -16,13 +16,13 @@ public class CardDTO {
 
     private Long id;
     private String cardNumber;
-    private String pin;
+
     private Boolean isBlocked;
     private Boolean isClosed;
 
     private AccountDTO accountDTO;
     private ClientDTO clientDTO;
-    private CardPlanDTO cardPlanDTO;
+
 
     private String month;
     private String year;

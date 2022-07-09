@@ -60,21 +60,21 @@ public class TransactionServiceImpl implements TransactionService{
 //        return transactionMapper.toDTO(transaction);
 //    }
 //
-//    @Override
-//    public List<TransactionDTO> findAllByTargetAccountId(Long id) {
-//        List<Transaction> transactions = transactionRepository.findAllByTargetAccountId(id);
-//        return transactions.stream()
-//                .map(transactionMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public List<TransactionDTO> findAllByTargetAccountId(Long id) {
+        List<Transaction> transactions = transactionRepository.findAllByTargetAccountId(id);
+        return transactions.stream()
+                .map(transactionMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 //
-//    @Override
-//    public List<TransactionDTO> findAllBySourceAccountId(Long id) {
-//        List<Transaction> transactions = transactionRepository.findAllBySourceAccountId(id);
-//        return transactions.stream()
-//                .map(transactionMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public List<TransactionDTO> findAllBySourceAccountId(Long id) {
+        List<Transaction> transactions = transactionRepository.findAllBySourceAccountId(id);
+        return transactions.stream()
+                .map(transactionMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 //
 //    @Override
 //    public void delete(TransactionDTO transactionDTO) {

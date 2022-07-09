@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.account.AccountService;
 import ru.lebedev.bank.domain.client.ClientService;
 
-@Controller
-@RequestMapping("/accounts")
+
+
 @RequiredArgsConstructor
 public class AccountMvcController {
     private final AccountService accountService;

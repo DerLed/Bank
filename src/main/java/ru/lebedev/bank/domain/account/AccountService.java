@@ -16,7 +16,7 @@ public interface AccountService {
 //    AccountDTO create(AccountCreateDTO accountCreateDTO);
 //
     Optional<AccountDTO> findById(Long id);
-//    AccountDTO save(AccountDTO accountDTO);
+    AccountDTO save(AccountDTO accountDTO);
 //    void close(Long id);
 //
 //    List<AccountDTO> findByClientId (Long clientId);
@@ -25,10 +25,12 @@ public interface AccountService {
 //
 //    List<AccountDTO> findByClientLoginAndType(String login, TypeAccount type);
     List<AccountDTO> findAllByClientLogin(String login);
+
 //
 //    List<TransactionDTO> getHistory (Long id);
 //
     void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount);
+    void transferMoney(BigDecimal amount, Long accountId, Account accountTarget);
 //    void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount);
 //    void addMoney(Long accountId, BigDecimal amount);
 }

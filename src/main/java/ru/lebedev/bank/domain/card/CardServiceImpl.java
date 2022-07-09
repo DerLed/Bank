@@ -4,6 +4,11 @@ import lombok.RequiredArgsConstructor;
 import net.andreinc.mockneat.MockNeat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.lebedev.bank.domain.account.Account;
+import ru.lebedev.bank.domain.account.AccountRepository;
+import ru.lebedev.bank.domain.account.AccountService;
+import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.card.dto.CardCreateDTO;
 import ru.lebedev.bank.domain.card.dto.CardDTO;
 import ru.lebedev.bank.domain.card.mapper.CardMapper;
 
@@ -17,19 +22,30 @@ import static net.andreinc.mockneat.types.enums.CreditCardType.*;
 @RequiredArgsConstructor
 public class CardServiceImpl implements CardService{
 
-//    private final CardRepository cardRepository;
+    private final CardRepository cardRepository;
+    private final AccountRepository accountRepository;
 //
-//    private final CardMapper cardMapper;
-//
-//    @Override
-//    public CardDTO save(CardDTO cardRequestDTO) {
-//        Card entity = cardMapper.toEntity(cardRequestDTO);
-//        if (entity.getCardNumber() == null) {
-//            entity.setCardNumber(getNewCardNumber());
-//        }
-//        cardRepository.saveAndFlush(entity);
-//        return cardMapper.toDTO(entity);
-//    }
+    private final AccountService accountService;
+    private final CardMapper cardMapper;
+
+    @Override
+    public CardDTO create(CardCreateDTO cardRequestDTO) {
+
+        AccountDTO accountDTO = AccountDTO.builder()
+                .client(cardRequestDTO.getClientDTO())
+                .build();
+
+        AccountDTO savedAccountDTO = accountService.save(accountDTO);
+
+        CardDTO cardDTO = CardDTO.builder()
+                .clientDTO(cardRequestDTO.getClientDTO())
+                .accountDTO(savedAccountDTO)
+                .cardNumber(getNewCardNumber())
+                .build();
+
+        Card card = cardRepository.saveAndFlush(cardMapper.toEntity(cardDTO));
+        return  cardMapper.toDTO(card);
+    }
 //
 //    @Override
 //    @Transactional
@@ -57,12 +73,12 @@ public class CardServiceImpl implements CardService{
 //                .collect(Collectors.toList());
 //    }
 //
-//    @Override
-//    public List<CardDTO> findByClientUserLogin(String login) {
-//        return cardRepository.findByClientUserLoginAndIsClosedFalse(login).stream()
-//                .map(cardMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public List<CardDTO> findByClientUserLogin(String login) {
+        return cardRepository.findByClientUserLoginAndIsClosedFalse(login).stream()
+                .map(cardMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 //
 //    @Override
 //    public Optional<CardDTO> findById(Long id) {
@@ -76,12 +92,12 @@ public class CardServiceImpl implements CardService{
 //        return card.map(cardMapper::toDTO);
 //    }
 //
-//    private String getNewCardNumber() {
-//        String cardNumber;
-//        do {
-//            cardNumber = MockNeat.old().creditCards().types(VISA_16, MASTERCARD, CHINA_UNION_PAY_16).get();
-//        } while (cardRepository.findByCardNumber(cardNumber).isPresent());
-//
-//        return cardNumber;
-//    }
+    private String getNewCardNumber() {
+        String cardNumber;
+        do {
+            cardNumber = MockNeat.old().creditCards().types(VISA_16, MASTERCARD, CHINA_UNION_PAY_16).get();
+        } while (cardRepository.findByCardNumber(cardNumber).isPresent());
+
+        return cardNumber;
+    }
 }

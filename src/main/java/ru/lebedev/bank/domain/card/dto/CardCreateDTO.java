@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.cardPlan.dto.CardPlanDTO;
+import ru.lebedev.bank.domain.client.Client;
+import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -13,9 +16,14 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class CardCreateDTO {
 
-    @NotNull
-    private AccountDTO accountDTO;
-    @NotNull
-    private CardPlanDTO cardPlanDTO;
+//    @NotNull
+//    private AccountDTO accountDTO;
+//    @NotNull
+//    private CardPlanDTO cardPlanDTO;
+
+
+
+
+    private ClientDTO clientDTO;
 
 }

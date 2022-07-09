@@ -10,15 +10,6 @@ import ru.lebedev.bank.utills.DepositCalc;
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface AccountMapper extends EntityMapper<AccountDTO, Account> {
 
-    @Override
-    @Mapping(target = "savingAmount", ignore = true)
-    AccountDTO toDTO(Account entity);
 
-    @AfterMapping // or @BeforeMapping
-    default void calculateSavingAmount(Account account, @MappingTarget AccountDTO dto) {
-//        if(account.getAccountPlan().getType().equals(TypeAccount.SAVING)) {
-//            dto.setSavingAmount(DepositCalc.depositCalc(account));
-//        }
-    }
 
 }

@@ -1,12 +1,13 @@
 package ru.lebedev.bank.domain.card;
 
+import ru.lebedev.bank.domain.card.dto.CardCreateDTO;
 import ru.lebedev.bank.domain.card.dto.CardDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CardService {
-//    CardDTO save(CardDTO cardDTO);
+    CardDTO create(CardCreateDTO cardCreateDTO);
 //
 //    void closeById(Long id);
 //
@@ -16,7 +17,7 @@ public interface CardService {
 //
 //    List<CardDTO> findByClientId(Long userId);
 //
-//    List<CardDTO> findByClientUserLogin(String login);
+    List<CardDTO> findByClientUserLogin(String login);
 //
 //    Optional<CardDTO> findById(Long id);
 //

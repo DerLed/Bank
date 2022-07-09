@@ -16,6 +16,7 @@ import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
 import ru.lebedev.bank.exception.AccountTransferException;
+import ru.lebedev.bank.exception.CloseDefaultAccountException;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -48,7 +49,6 @@ public class CheckingAccountMvcController {
     public String showAll(Model model, Principal principal){
         List<CheckingAccountDTO> accounts = checkingAccountService.findByClientLogin(principal.getName());
         model.addAttribute("accounts", accounts);
-//        model.addAttribute("typeAccount", typeAccount.toString());
         return "accounts/account-list";
     }
 
@@ -116,13 +116,7 @@ public class CheckingAccountMvcController {
         return "redirect:/client";
     }
 
-    @GetMapping("/history/{accountId}")
-    public String history(@PathVariable Long accountId, Model model){
-//        List<TransactionDTO> transactions = accountService.getHistory(accountId);
-//        model.addAttribute("transactions", transactions);
-//        model.addAttribute("accountId", accountId);
-        return "transaction/transaction-list";
-    }
+
 
     @GetMapping("/close/{accountId}")
     public String viewClose(@PathVariable Long accountId, Principal principal, Model model){
@@ -137,16 +131,25 @@ public class CheckingAccountMvcController {
     }
 
     @PostMapping("/close/{accountId}")
-    public String close (@PathVariable Long accountId, Principal principal) {
+    public String close (@PathVariable Long accountId, Model model, Principal principal) {
 
         CheckingAccountDTO closeAccount = checkingAccountService.findById(accountId).orElseThrow();
         List<CheckingAccountDTO> allAccounts = checkingAccountService.findByClientLogin(principal.getName());
         boolean isOwner = allAccounts.stream().anyMatch(a -> a.getId().equals(closeAccount.getId()));
         if(isOwner) {
-            checkingAccountService.deleteById(accountId);
+            try {
+                checkingAccountService.deleteById(accountId);
+            }catch (CloseDefaultAccountException e){
+                model.addAttribute("closeAccount", closeAccount);
+                model.addAttribute("error",
+                        "Данный аккаунт нельзя закрыть, это аккаунт по умолчанию.");
+                return "accounts/account-close";
+
+        }
         }
 
         return "redirect:/client";
     }
+
 
 }

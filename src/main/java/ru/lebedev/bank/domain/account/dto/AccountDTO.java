@@ -36,7 +36,7 @@ public class AccountDTO {
     @NotNull
     private AccountPlanDTO accountPlan;
 
-    private BigDecimal savingAmount;
+
 
 
 
