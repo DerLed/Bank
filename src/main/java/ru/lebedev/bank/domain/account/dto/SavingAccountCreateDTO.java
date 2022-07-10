@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 public class SavingAccountCreateDTO {
-
+    //Валидация всех полей происходит в кастомном валидаторе
     private BigDecimal amount;
 
     private Long period;
