@@ -16,10 +16,11 @@ public interface CardService {
 //    void blockById(Long id);
 //
 //    List<CardDTO> findByClientId(Long userId);
+//    List<CardDTO> findByClientId(Long userId);
 //
-    List<CardDTO> findByClientUserLogin(String login);
+    List<CardDTO> findByClientLogin(String login);
 //
-//    Optional<CardDTO> findById(Long id);
+    Optional<CardDTO> findById(Long id);
 //
 //    Optional<CardDTO> findByCardNumber(String cardNumber);
 }

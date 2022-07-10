@@ -74,17 +74,17 @@ public class CardServiceImpl implements CardService{
 //    }
 //
     @Override
-    public List<CardDTO> findByClientUserLogin(String login) {
+    public List<CardDTO> findByClientLogin(String login) {
         return cardRepository.findByClientUserLoginAndIsClosedFalse(login).stream()
                 .map(cardMapper::toDTO)
                 .collect(Collectors.toList());
     }
 //
-//    @Override
-//    public Optional<CardDTO> findById(Long id) {
-//        Optional<Card> card = cardRepository.findById(id);
-//        return card.map(cardMapper::toDTO);
-//    }
+    @Override
+    public Optional<CardDTO> findById(Long id) {
+        Optional<Card> card = cardRepository.findById(id);
+        return card.map(cardMapper::toDTO);
+    }
 //
 //    @Override
 //    public Optional<CardDTO> findByCardNumber(String cardNumber) {

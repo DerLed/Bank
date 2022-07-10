@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/saving")
-@Tag(name = "Checking account controller")
+@Tag(name = "Saving account controller")
 @RequiredArgsConstructor
 public class SavingAccountController {
 

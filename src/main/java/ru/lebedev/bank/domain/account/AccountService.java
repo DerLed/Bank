@@ -1,5 +1,6 @@
 package ru.lebedev.bank.domain.account;
 
+import ru.lebedev.bank.aop.SendMessageTransaction;
 import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
@@ -30,7 +31,9 @@ public interface AccountService {
 //    List<TransactionDTO> getHistory (Long id);
 //
     void transferMoneyByUserPhoneNumber(Long accountId, String phoneNumber, BigDecimal amount);
+
+
     void transferMoney(BigDecimal amount, Long accountId, Account accountTarget);
-//    void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount);
+    void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount);
 //    void addMoney(Long accountId, BigDecimal amount);
 }

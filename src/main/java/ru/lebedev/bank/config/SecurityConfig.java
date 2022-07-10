@@ -59,16 +59,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/perform-login")
                     .usernameParameter("user")
                     .passwordParameter("pass")
-                    .defaultSuccessUrl("/");
+                    .defaultSuccessUrl("/")
 
 
-//                .and()
-//                .logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
-//                .invalidateHttpSession(true)
-//                .clearAuthentication(true)
-//                .deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/auth/login");
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/");
     }
 
     @Override

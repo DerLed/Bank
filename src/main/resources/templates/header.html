@@ -27,7 +27,11 @@
                         <a class="btn btn-warning" href="/client/new" role="button">Регистрация</a>
                     </div>
                     <div sec:authorize="isAuthenticated()" class="text-end">
-                        <a class="btn btn-outline-light me-2" href="/logout" role="button">Выйти</a>
+<!--                        <a class="btn btn-outline-light me-2" href="/logout" role="button">Выйти</a>-->
+                        <form action="/logout" method="post">
+                            <button type="submit" class="btn btn-outline-light me-2">Выйти</button>
+                        </form>
+
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ package ru.lebedev.bank.domain.account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.lebedev.bank.aop.SendMessageTransaction;
 import ru.lebedev.bank.domain.TransactionStatus;
 import ru.lebedev.bank.domain.account.checking.CheckingAccount;
 import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
@@ -12,8 +13,7 @@ import ru.lebedev.bank.domain.account.mapper.AccountMapper;
 import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 import ru.lebedev.bank.domain.client.Client;
 import ru.lebedev.bank.domain.client.mapper.ClientMapper;
-import ru.lebedev.bank.domain.loan.Loan;
-import ru.lebedev.bank.domain.loan.LoanRepository;
+
 import ru.lebedev.bank.domain.transaction.Transaction;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.mapper.TransactionMapper;
@@ -37,7 +37,7 @@ public class AccountServiceImpl implements AccountService {
             "Transfer amount higher than source account amount";
     private static final String ACCOUNT_BY_PHONE_NUMBER_NOT_FOUND_MESSAGE =
             "Account with phone number: %s is not found";
-//    private static final String ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE = "Account with card number: %s is not found";
+    private static final String ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE = "Account with card number: %s is not found";
 //
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
@@ -57,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
      * @param accountId id аккаунта с которого будут списаны средства
      * @param accountTarget аккаунт на который будут зачислены деньги
      */
+    @SendMessageTransaction
     private void transferAmount(BigDecimal amount, Long accountId, Account accountTarget) {
         Account accountSource = getAccount(accountId);
         Transaction transaction = getTransaction(amount,accountSource, accountTarget);
@@ -188,16 +189,16 @@ public class AccountServiceImpl implements AccountService {
 
         transferAmount(amount, accountId, accountTarget);
     }
-//
-//    @Override
-//    @Transactional(noRollbackFor = AccountTransferException.class)
-//    public void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount) {
-//        Optional<Account> targetAccount = accountRepository.findByCardNumber(cardNumber);
-//        if (targetAccount.isEmpty()) {
-//            throw new AccountTransferException(String.format(ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE, cardNumber));
-//        }
-//        transferAmount(amount, accountId, targetAccount.get());
-//    }
+
+    @Override
+    @Transactional(noRollbackFor = AccountTransferException.class)
+    public void transferMoneyByCardNumber(Long accountId, String cardNumber, BigDecimal amount) {
+        Optional<Account> targetAccount = accountRepository.findByCardNumber(cardNumber);
+        if (targetAccount.isEmpty()) {
+            throw new AccountTransferException(String.format(ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE, cardNumber));
+        }
+        transferAmount(amount, accountId, targetAccount.get());
+    }
 //
 //    @Override
 //    @Transactional

@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/v1/accounts")
-@Tag(name = "Account controller")
+//@RestController
+//@RequestMapping("/api/v1/accounts")
+//@Tag(name = "Account controller")
 @RequiredArgsConstructor
 public class AccountController {
 //

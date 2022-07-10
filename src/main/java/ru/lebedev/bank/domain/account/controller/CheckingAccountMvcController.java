@@ -10,8 +10,12 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.lebedev.bank.domain.account.AccountService;
 import ru.lebedev.bank.domain.account.checking.CheckingAccount;
 import ru.lebedev.bank.domain.account.checking.CheckingAccountService;
+
+import ru.lebedev.bank.domain.account.dto.AccountCardTransferFormDTO;
 import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.card.CardService;
+import ru.lebedev.bank.domain.card.dto.CardDTO;
 import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
@@ -30,6 +34,7 @@ public class CheckingAccountMvcController {
     private final CheckingAccountService checkingAccountService;
     private final ClientService clientService;
     private final AccountService accountService;
+    private final CardService cardService;
 //    private final AccountPlanService accountPlanService;
 //    private final AccountCreateDTOValidator accountCreateValidator;
 
@@ -70,7 +75,7 @@ public class CheckingAccountMvcController {
             model.addAttribute("accounts", accounts);
             return "accounts/account-transfer";
         }
-//
+
         try {
             accountService.transferMoneyByUserPhoneNumber(transactionFormDTO.getAccount().getId(),
                     transactionFormDTO.getPhoneNumber(), transactionFormDTO.getAmount());
@@ -84,6 +89,47 @@ public class CheckingAccountMvcController {
 
         return "redirect:/client";
     }
+
+
+    @GetMapping("/transfer-card")
+    public String showCardTransfer(Model model, Principal principal){
+        List<CheckingAccountDTO> accounts = checkingAccountService.findByClientLogin(principal.getName());
+        List<CardDTO> cards = cardService.findByClientLogin(principal.getName());
+        model.addAttribute("form", new AccountCardTransferFormDTO());
+        model.addAttribute("accounts", accounts);
+        model.addAttribute("cards", cards);
+        return "accounts/account-transfer-card";
+    }
+
+    @PostMapping("/transfer-card")
+    public String cardTransfer(@ModelAttribute("form") @Valid AccountCardTransferFormDTO accountCardTransferFormDTO,
+                                   BindingResult bindingResult,
+                                   Principal principal, Model model){
+
+        if (bindingResult.hasErrors()) {
+            List<CheckingAccountDTO> accounts = checkingAccountService.findByClientLogin(principal.getName());
+            List<CardDTO> cards = cardService.findByClientLogin(principal.getName());
+            model.addAttribute("accounts", accounts);
+            model.addAttribute("cards", cards);
+            return "accounts/account-transfer-card";
+        }
+
+        try {
+            accountService.transferMoneyByCardNumber(accountCardTransferFormDTO.getAccountDTO().getId(),
+                    accountCardTransferFormDTO.getCardDTO().getCardNumber(), accountCardTransferFormDTO.getAmount());
+        }catch (AccountTransferException e){
+            bindingResult.rejectValue("amount", "amount","На счете не достаточно средств.");
+            model.addAttribute("form", accountCardTransferFormDTO);
+            List<CheckingAccountDTO> accounts = checkingAccountService.findByClientLogin(principal.getName());
+            List<CardDTO> cards = cardService.findByClientLogin(principal.getName());
+            model.addAttribute("accounts", accounts);
+            model.addAttribute("cards", cards);
+            return "accounts/account-transfer-card";
+        }
+
+        return "redirect:/client";
+    }
+
 
     @GetMapping("/add-money")
     public String showAddMoney(Model model, Principal principal){

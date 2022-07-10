@@ -23,14 +23,12 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 ////
 ////    List<Account> findByClientId(Long ClientId);
     List<Account> findByClientUserLoginAndIsClosedFalse(String login);
-////
-////
-////    List<Account> findByClientUserLoginAndIsClosedFalseAndAccountPlan_Type(String login, TypeAccount type);
+
     List<Account> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
 ////
-////    @Query("select a from Card c join c.account a where c.cardNumber = :cardNumber " +
-////            "and a.isClosed = false and c.isClosed = false and a.client.user.status = ru.lebedev.bank.domain.Status.ACTIVE ")
-////    Optional<Account> findByCardNumber(String cardNumber);
+    @Query("select a from Card c join c.account a on c.cardNumber = :cardNumber " +
+            "and a.isClosed = false and c.isClosed = false")
+    Optional<Account> findByCardNumber(String cardNumber);
 ////
 ////
 ////    @Query("select a from Account a where a.client = (select a1.client from Account a1 WHERE id = :id) and a.isDefault = true ")

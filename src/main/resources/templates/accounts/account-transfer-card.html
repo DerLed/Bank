@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Перевод денег по номеру телефона</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="header :: header"></div>
+
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <h1 class="display-3">Перевод денег по номеру телефона</h1>
+        </div>
+    </header>
+
+    <div class="row d-flex justify-content-center align-items-center h-100">
+
+        <div  class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="p-5 text-center bg-light">
+
+                <form th:if="${not #lists.isEmpty(accounts) || not #lists.isEmpty(cards)}" action="#" th:action="@{/checking/transfer-card}" th:object="${form}" th:method="POST">
+
+                    <div class="form-group">
+                        <label for="amount">Сумма</label>
+                        <input type="text" th:field="*{amount}" class="form-control" id="amount"
+                               aria-describedby="amountHelp"
+                               placeholder="Сумма">
+                        <small th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" id="amountHelp"
+                               class="form-text text-danger">Error</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="account">Выберите карту зачисления</label>
+                        <select th:field="*{cardDTO}" class="form-control" id="card">
+                            <option th:each="c : ${cards}" th:value="${c.id}"
+                                    th:text="'Баланс: ' + ${c.accountDTO.amount} + ' Cчет:' + ${c.cardNumber} ">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="account">Выберите счет списания</label>
+                        <select th:field="*{accountDTO}" class="form-control" id="account">
+                            <option th:each="a : ${accounts}" th:value="${a.id}"
+                                    th:text="'Баланс: ' + ${a.amount} + ' Cчет:' + ${a.accountNumber} ">
+                            </option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Перевести</button>
+
+                </form>
+
+                <div th:if="${#lists.isEmpty(accounts)}" class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="p-5 text-center bg-light">
+                        <h4 class="mb-3">У вас еще нет счетов для перевода</h4>
+                    </div>
+                </div>
+                <br>
+                <a class="btn btn-info" href="/client" role="button">В личный кабинет</a>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+
+
+</body>
+</html>
