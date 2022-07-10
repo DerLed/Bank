@@ -26,7 +26,7 @@ public interface CheckingAccountRepository extends JpaRepository<CheckingAccount
     List<CheckingAccount> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
 ////
 ////    @Query("select a from Card c join c.account a where c.cardNumber = :cardNumber " +
-////            "and a.isClosed = false and c.isClosed = false and a.client.user.status = ru.lebedev.bank.domain.Status.ACTIVE ")
+////            "and a.isClosed = false and c.isClosed = false and a.client.user.status = ru.lebedev.bank.domain.user.auth.Status.ACTIVE ")
 ////    Optional<Account> findByCardNumber(String cardNumber);
 ////
 ////

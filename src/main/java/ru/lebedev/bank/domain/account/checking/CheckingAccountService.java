@@ -1,6 +1,6 @@
 package ru.lebedev.bank.domain.account.checking;
 
-import ru.lebedev.bank.domain.BaseService;
+import ru.lebedev.bank.domain.helper.BaseService;
 import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
 
 import java.math.BigDecimal;

@@ -1,13 +1,9 @@
 package ru.lebedev.bank.domain.card.mapper;
 
 import org.mapstruct.*;
-import ru.lebedev.bank.domain.EntityMapper;
-import ru.lebedev.bank.domain.account.Account;
-import ru.lebedev.bank.domain.account.dto.AccountDTO;
-import ru.lebedev.bank.domain.accountPlan.TypeAccount;
+import ru.lebedev.bank.domain.helper.EntityMapper;
 import ru.lebedev.bank.domain.card.Card;
 import ru.lebedev.bank.domain.card.dto.CardDTO;
-import ru.lebedev.bank.utills.DepositCalc;
 
 import java.time.LocalDateTime;
 

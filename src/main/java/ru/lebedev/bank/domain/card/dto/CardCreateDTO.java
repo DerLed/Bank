@@ -3,9 +3,7 @@ package ru.lebedev.bank.domain.card.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.lebedev.bank.domain.account.dto.AccountDTO;
-import ru.lebedev.bank.domain.cardPlan.dto.CardPlanDTO;
-import ru.lebedev.bank.domain.client.Client;
+
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
 import javax.persistence.Column;

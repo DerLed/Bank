@@ -1,7 +1,7 @@
 package ru.lebedev.bank.domain.account.mapper;
 
 import org.mapstruct.*;
-import ru.lebedev.bank.domain.EntityMapper;
+import ru.lebedev.bank.domain.helper.EntityMapper;
 import ru.lebedev.bank.domain.account.checking.CheckingAccount;
 import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
 

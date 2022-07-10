@@ -1,7 +1,6 @@
 package ru.lebedev.bank.domain.account.saving;
 
-import ru.lebedev.bank.domain.BaseService;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.helper.BaseService;
 import ru.lebedev.bank.domain.account.dto.SavingAccountCreateDTO;
 import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
 

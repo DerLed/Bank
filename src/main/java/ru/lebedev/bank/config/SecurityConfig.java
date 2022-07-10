@@ -20,11 +20,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import ru.lebedev.bank.domain.user.auth.Role;
 
 import javax.sql.DataSource;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-
 
 
 @Configuration
@@ -42,24 +42,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                    .csrf().disable()
-                    .authorizeRequests()
+                .csrf().disable()
+                .authorizeRequests()
 
                 //.antMatchers("/client/login").permitAll()
                 .antMatchers("/client/new").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/account-plan/*").hasAuthority("WRITE")
+                .antMatchers("/account-plan*").hasAuthority("WRITE")
                 .antMatchers("/client/*").authenticated()
                 .antMatchers("/client").authenticated()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/").permitAll()
-//                    .anyRequest()
-//                    .authenticated()
+                    .anyRequest()
+                    .authenticated()
                 .and()
-                    .formLogin().permitAll()
-                    .loginPage("/client/login")
-                    .loginProcessingUrl("/perform-login")
-                    .usernameParameter("user")
-                    .passwordParameter("pass")
-                    .defaultSuccessUrl("/")
+                .formLogin().permitAll()
+                .loginPage("/client/login")
+                .loginProcessingUrl("/perform-login")
+                .usernameParameter("user")
+                .passwordParameter("pass")
+                .defaultSuccessUrl("/")
 
 
                 .and()

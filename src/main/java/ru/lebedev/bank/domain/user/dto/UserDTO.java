@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import ru.lebedev.bank.domain.Role;
-import ru.lebedev.bank.domain.Status;
+import ru.lebedev.bank.domain.user.auth.Role;
+import ru.lebedev.bank.domain.user.auth.Status;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data

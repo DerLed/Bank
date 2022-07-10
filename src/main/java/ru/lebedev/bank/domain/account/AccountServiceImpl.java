@@ -4,29 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.aop.SendMessageTransaction;
-import ru.lebedev.bank.domain.TransactionStatus;
-import ru.lebedev.bank.domain.account.checking.CheckingAccount;
-import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
+import ru.lebedev.bank.domain.transaction.TransactionStatus;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
-import ru.lebedev.bank.domain.account.mapper.AccountCreateMapper;
 import ru.lebedev.bank.domain.account.mapper.AccountMapper;
-import ru.lebedev.bank.domain.accountPlan.TypeAccount;
-import ru.lebedev.bank.domain.client.Client;
-import ru.lebedev.bank.domain.client.mapper.ClientMapper;
 
 import ru.lebedev.bank.domain.transaction.Transaction;
-import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 import ru.lebedev.bank.domain.transaction.mapper.TransactionMapper;
 import ru.lebedev.bank.domain.transaction.TransactionService;
 import ru.lebedev.bank.exception.AccountTransferException;
-import ru.lebedev.bank.utills.DepositCalc;
 
 import java.math.BigDecimal;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor

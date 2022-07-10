@@ -3,8 +3,8 @@ package ru.lebedev.bank.domain.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.lebedev.bank.domain.Role;
-import ru.lebedev.bank.domain.Status;
+import ru.lebedev.bank.domain.user.auth.Role;
+import ru.lebedev.bank.domain.user.auth.Status;
 import ru.lebedev.bank.domain.user.dto.UserDTO;
 import ru.lebedev.bank.domain.user.mapper.UserMapper;
 

@@ -24,10 +24,11 @@ public interface SavingAccountRepository extends JpaRepository<SavingAccount, Lo
     List<SavingAccount> findByClientId(Long ClientId);
     List<SavingAccount> findByClientUserLoginAndIsClosedFalse(String login);
     List<SavingAccount> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
+    List<SavingAccount> findAllByIsClosedFalse();
 
 ////
 ////    @Query("select a from Card c join c.account a where c.cardNumber = :cardNumber " +
-////            "and a.isClosed = false and c.isClosed = false and a.client.user.status = ru.lebedev.bank.domain.Status.ACTIVE ")
+////            "and a.isClosed = false and c.isClosed = false and a.client.user.status = ru.lebedev.bank.domain.user.auth.Status.ACTIVE ")
 ////    Optional<Account> findByCardNumber(String cardNumber);
 ////
 ////

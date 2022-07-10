@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain;
+package ru.lebedev.bank.domain.user.auth;
 
 import lombok.ToString;
 

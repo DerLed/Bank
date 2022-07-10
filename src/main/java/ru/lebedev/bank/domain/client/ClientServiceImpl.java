@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.lebedev.bank.domain.Role;
-import ru.lebedev.bank.domain.Status;
+import ru.lebedev.bank.domain.user.auth.Role;
+import ru.lebedev.bank.domain.user.auth.Status;
 import ru.lebedev.bank.domain.client.dto.ClientCreateReq;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.domain.client.mapper.ClientMapper;

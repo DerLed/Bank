@@ -3,7 +3,7 @@ package ru.lebedev.bank.domain.account.checking;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.lebedev.bank.domain.TransactionStatus;
+import ru.lebedev.bank.domain.transaction.TransactionStatus;
 import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
 import ru.lebedev.bank.domain.account.mapper.CheckingAccountMapper;
 import ru.lebedev.bank.domain.transaction.Transaction;

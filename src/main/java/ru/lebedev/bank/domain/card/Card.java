@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import ru.lebedev.bank.domain.account.Account;
-import ru.lebedev.bank.domain.cardPlan.CardPlan;
 import ru.lebedev.bank.domain.client.Client;
 
 import javax.persistence.*;
@@ -44,9 +43,6 @@ public class Card {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_id")
-    private CardPlan cardPlan;
 
     @PrePersist
     private void create() {

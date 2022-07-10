@@ -1,11 +1,7 @@
 package ru.lebedev.bank.domain.account.mapper;
 
 import org.mapstruct.*;
-import ru.lebedev.bank.domain.EntityMapper;
-import ru.lebedev.bank.domain.account.Account;
-import ru.lebedev.bank.domain.account.checking.CheckingAccount;
-import ru.lebedev.bank.domain.account.dto.AccountDTO;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.helper.EntityMapper;
 import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
 import ru.lebedev.bank.domain.account.saving.SavingAccount;
 import ru.lebedev.bank.utills.DepositCalc;
@@ -16,6 +12,7 @@ public interface SavingAccountMapper extends EntityMapper<SavingAccountDTO, Savi
     @Override
     @Mapping(target = "client", source = "clientDTO")
     @Mapping(target = "accountPlan", source = "accountPlanDTO")
+    @Mapping(target = "client.user", source = "clientDTO.userDTO")
     SavingAccount toEntity(SavingAccountDTO dto);
 
 

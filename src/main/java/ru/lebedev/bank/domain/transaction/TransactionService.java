@@ -1,6 +1,6 @@
 package ru.lebedev.bank.domain.transaction;
 
-import ru.lebedev.bank.domain.BaseService;
+import ru.lebedev.bank.domain.helper.BaseService;
 import ru.lebedev.bank.domain.transaction.dto.TransactionDTO;
 
 import java.util.List;

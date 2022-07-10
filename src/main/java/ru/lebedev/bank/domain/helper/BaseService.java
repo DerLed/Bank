@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain;
+package ru.lebedev.bank.domain.helper;
 
 import java.util.List;
 import java.util.Optional;

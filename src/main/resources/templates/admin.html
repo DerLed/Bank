@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет клиента</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="header :: header"></div>
+<div class="container">
+    <main role="main" class="container">
+        <section class="jumbotron text-center">
+
+            <h1 class="jumbotron-heading">Панель администратора</h1>
+            <br>
+            <br>
+            <div class="d-flex gap-5 justify-content-center">
+
+
+                <div class="list-group mx-0">
+                    <li class="list-group-item list-group-item-action list-group-item-dark"><h4 class="h4">
+                        <h4 class="h4">Информация </h4></h4></li>
+                    <a href="/account-plan" class="list-group-item list-group-item-action">Все банковские предложения</a>
+                    <a href="account-plan/add" class="list-group-item list-group-item-action">Добавить банковское предложение</a>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+</div>
+
+</body>
+</html>

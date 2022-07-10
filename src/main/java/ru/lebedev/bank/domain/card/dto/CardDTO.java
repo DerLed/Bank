@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
-import ru.lebedev.bank.domain.cardPlan.dto.CardPlanDTO;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
 @Data

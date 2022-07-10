@@ -1,16 +1,12 @@
 package ru.lebedev.bank.domain.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import ru.lebedev.bank.domain.Role;
-import ru.lebedev.bank.domain.Status;
+import ru.lebedev.bank.domain.user.auth.Role;
+import ru.lebedev.bank.domain.user.auth.Status;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity

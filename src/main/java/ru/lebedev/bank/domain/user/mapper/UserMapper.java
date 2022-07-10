@@ -2,7 +2,7 @@ package ru.lebedev.bank.domain.user.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.lebedev.bank.domain.EntityMapper;
+import ru.lebedev.bank.domain.helper.EntityMapper;
 import ru.lebedev.bank.domain.user.User;
 import ru.lebedev.bank.domain.user.dto.UserDTO;
 

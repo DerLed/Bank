@@ -3,7 +3,7 @@ package ru.lebedev.bank.domain.client.mapper;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import ru.lebedev.bank.domain.EntityMapper;
+import ru.lebedev.bank.domain.helper.EntityMapper;
 import ru.lebedev.bank.domain.client.Client;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
