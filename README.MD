@@ -34,7 +34,6 @@ ___
 - Spring boot
 - Java collection framework, Java Stream API
 - Spring data JPA, Hibernate
-- Количество сущностей: от 4-х
 - Валидация средствами spring (jsr303)
 - AOP
 - Docker compose
