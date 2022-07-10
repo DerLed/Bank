@@ -1,12 +1,8 @@
 package ru.lebedev.bank.scheduler;
 
 import lombok.RequiredArgsConstructor;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.lebedev.bank.aop.LoggingAspect;
-import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
 import ru.lebedev.bank.domain.account.saving.SavingAccount;
 import ru.lebedev.bank.domain.account.saving.SavingAccountRepository;
 import ru.lebedev.bank.domain.account.saving.SavingAccountService;
@@ -17,6 +13,12 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Класс производит автоматическое закрытие вкладов по истечении их срока.
+ * Проверка производится каждый день в 02:00.
+ * Начисление процентов по вкладу производится автоматически в service.
+ * Количество закрытых вкладов отображается в логере в консоли.
+ */
 @Component
 @RequiredArgsConstructor
 public class CloseSavingAccountScheduled {
