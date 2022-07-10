@@ -45,12 +45,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteById(Long id) {
-
+        userRepository.deleteById(id);
     }
 
     @Override
     public Optional<UserDTO> findByLogin(String login) {
-        return Optional.empty();
+        return userRepository.findByLogin(login).map(userMapper::toDTO);
     }
 
     @Override

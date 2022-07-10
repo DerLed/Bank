@@ -15,19 +15,15 @@ public interface SavingAccountMapper extends EntityMapper<SavingAccountDTO, Savi
     @Mapping(target = "client.user", source = "clientDTO.userDTO")
     SavingAccount toEntity(SavingAccountDTO dto);
 
-
-
     @Override
     @InheritInverseConfiguration
     @Mapping(target = "savingAmount", ignore = true)
     SavingAccountDTO toDTO(SavingAccount entity);
 
-    @AfterMapping // or @BeforeMapping
+    //Производится вычисление поля накопленной суммы
+    @AfterMapping
     default void calculateSavingAmount(SavingAccount account, @MappingTarget SavingAccountDTO dto) {
-
-//        if (! (account.getDateOpened() == null)) {
-            dto.setSavingAmount(DepositCalc.depositCalc(account));
-//        }
+        dto.setSavingAmount(DepositCalc.depositCalc(account));
     }
 
 }

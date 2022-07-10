@@ -24,7 +24,6 @@ public class AccountPlanServiceImpl implements AccountPlanService{
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public AccountPlanDTO save(AccountPlanDTO accountPlanDTO) {
         AccountPlan accountPlan = accountPlanMapper.toEntity(accountPlanDTO);
@@ -33,8 +32,10 @@ public class AccountPlanServiceImpl implements AccountPlanService{
     }
 
     @Override
-    public AccountPlanDTO updateById(Long aLong, AccountPlanDTO dto) {
-        return null;
+    public AccountPlanDTO updateById(Long aLong, AccountPlanDTO accountPlanDTO) {
+        AccountPlan accountPlan = accountPlanMapper.toEntity(accountPlanDTO);
+        accountPlanRepository.saveAndFlush(accountPlan);
+        return accountPlanMapper.toDTO(accountPlan);
     }
 
     @Override
@@ -43,11 +44,9 @@ public class AccountPlanServiceImpl implements AccountPlanService{
                 .map(accountPlanMapper::toDTO);
     }
 
-
     @Override
     public void deleteById(Long id) {
         accountPlanRepository.deleteById(id);
     }
-
 
 }

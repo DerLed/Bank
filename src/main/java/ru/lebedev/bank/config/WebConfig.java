@@ -1,28 +1,17 @@
 package ru.lebedev.bank.config;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//import ru.lebedev.bank.converter.LongAccountConverter;
 import ru.lebedev.bank.converter.LongAccountConverter;
 import ru.lebedev.bank.converter.LongAccountPlanConverter;
-//import ru.lebedev.bank.converter.LongCardPlanConverter;
-//import ru.lebedev.bank.converter.StringToTypeAccountConverter;
 import ru.lebedev.bank.converter.LongCardConverter;
 import ru.lebedev.bank.converter.LongCheckingAccountConverter;
-import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
 import ru.lebedev.bank.formatter.CheckingAccountDTOFormatter;
-//import ru.lebedev.bank.formatter.AccountDTOFormatter;
 
-
-
-import java.util.List;
 
 @EnableWebMvc
 @Configuration

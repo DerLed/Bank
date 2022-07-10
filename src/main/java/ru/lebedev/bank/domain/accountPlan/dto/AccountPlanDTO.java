@@ -1,9 +1,8 @@
 package ru.lebedev.bank.domain.accountPlan.dto;
 
 import lombok.*;
-import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 
-import javax.persistence.Column;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 

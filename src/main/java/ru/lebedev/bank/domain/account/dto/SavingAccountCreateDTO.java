@@ -8,8 +8,6 @@ import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 
 @Data
 @NoArgsConstructor

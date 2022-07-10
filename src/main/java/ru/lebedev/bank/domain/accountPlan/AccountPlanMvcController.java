@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -49,7 +48,6 @@ public class AccountPlanMvcController {
         AccountPlanDTO accountPlanDTO = accountPlanService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid accountPlan Id:" + id));
         model.addAttribute("accountPlan", accountPlanDTO);
-        model.addAttribute("type", Arrays.asList(TypeAccount.values()));
         return "account-plan/account-plan-edit";
     }
 

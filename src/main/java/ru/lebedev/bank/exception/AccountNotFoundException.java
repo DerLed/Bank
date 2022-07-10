@@ -5,7 +5,6 @@ public class AccountNotFoundException extends RuntimeException{
         super();
     }
 
-
     public AccountNotFoundException(Long id) {
         super("Could not find account id: " + id);
     }

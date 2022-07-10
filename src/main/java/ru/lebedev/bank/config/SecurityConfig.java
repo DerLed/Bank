@@ -10,21 +10,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import ru.lebedev.bank.domain.user.auth.Role;
-
-import javax.sql.DataSource;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
@@ -44,8 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-
-                //.antMatchers("/client/login").permitAll()
                 .antMatchers("/client/new").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/account-plan/*").hasAuthority("WRITE")
@@ -54,8 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/client").authenticated()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/").permitAll()
-                    .anyRequest()
-                    .authenticated()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
                 .loginPage("/client/login")
@@ -63,8 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("user")
                 .passwordParameter("pass")
                 .defaultSuccessUrl("/")
-
-
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))

@@ -5,8 +5,6 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import ru.lebedev.bank.domain.account.checking.CheckingAccountService;
 import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
-import ru.lebedev.bank.domain.accountPlan.AccountPlanService;
-import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 
 @Component
 @RequiredArgsConstructor

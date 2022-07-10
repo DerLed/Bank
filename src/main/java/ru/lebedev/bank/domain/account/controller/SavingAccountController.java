@@ -1,18 +1,14 @@
 package ru.lebedev.bank.domain.account.controller;
 
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.lebedev.bank.domain.account.AccountService;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
 import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
 import ru.lebedev.bank.domain.account.saving.SavingAccountService;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController

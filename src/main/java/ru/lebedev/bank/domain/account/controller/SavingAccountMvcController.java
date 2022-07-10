@@ -8,9 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ru.lebedev.bank.domain.account.checking.CheckingAccount;
 import ru.lebedev.bank.domain.account.checking.CheckingAccountService;
-import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
 import ru.lebedev.bank.domain.account.dto.SavingAccountCreateDTO;
 import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
@@ -18,7 +16,6 @@ import ru.lebedev.bank.domain.account.saving.SavingAccountService;
 import ru.lebedev.bank.domain.accountPlan.AccountPlanService;
 import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
-import ru.lebedev.bank.domain.transaction.dto.TransactionFormDTO;
 import ru.lebedev.bank.validator.SavingAccountCreateDTOValidator;
 
 import javax.validation.Valid;
@@ -41,9 +38,8 @@ public class SavingAccountMvcController {
 
         if (binder.getTarget() == null) return;
         if (accountCreateValidator.supports(binder.getTarget().getClass())) {
-                binder.addValidators(accountCreateValidator);
+            binder.addValidators(accountCreateValidator);
         }
-
 
     }
 
@@ -51,7 +47,6 @@ public class SavingAccountMvcController {
     public String showAll(Model model, Principal principal) {
         List<SavingAccountDTO> accounts = savingAccountService.findByClientLogin(principal.getName());
         model.addAttribute("accounts", accounts);
-//        model.addAttribute("typeAccount", typeAccount.toString());
         return "accounts/saving/account-list";
     }
 
@@ -61,7 +56,6 @@ public class SavingAccountMvcController {
         model.addAttribute("accountCreate", new SavingAccountCreateDTO());
         List<CheckingAccountDTO> checkingAccounts = checkingAccountService.findByClientLogin(principal.getName());
         model.addAttribute("checkingAccounts", checkingAccounts);
-
         return "accounts/saving/new";
     }
 
@@ -85,25 +79,23 @@ public class SavingAccountMvcController {
 
 
     @GetMapping("/close/{accountId}")
-    public String viewClose(@PathVariable Long accountId, Principal principal, Model model){
+    public String viewClose(@PathVariable Long accountId, Principal principal, Model model) {
         SavingAccountDTO closeAccount = savingAccountService.findById(accountId).orElseThrow();
         List<SavingAccountDTO> allAccounts = savingAccountService.findByClientLogin(principal.getName());
         boolean isOwner = allAccounts.stream().anyMatch(a -> a.getId().equals(closeAccount.getId()));
-        if(isOwner) {
+        if (isOwner) {
             model.addAttribute("closeAccount", closeAccount);
-        }
-        else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "HTTP Status will be NOT FOUND (CODE 404)\n");
+        } else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "HTTP Status will be NOT FOUND (CODE 404)\n");
         return "accounts/saving/close";
     }
 
     @PostMapping("/close/{accountId}")
-    public String close (@PathVariable Long accountId, Principal principal) {
+    public String close(@PathVariable Long accountId, Principal principal) {
 
         SavingAccountDTO closeAccount = savingAccountService.findById(accountId).orElseThrow();
         List<SavingAccountDTO> allAccounts = savingAccountService.findByClientLogin(principal.getName());
         boolean isOwner = allAccounts.stream().anyMatch(a -> a.getId().equals(closeAccount.getId()));
-        if(isOwner) {
-
+        if (isOwner) {
             savingAccountService.deleteById(accountId);
         }
 

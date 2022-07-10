@@ -18,11 +18,11 @@ public class ClientDTO {
     private Long id;
 
     @Email
-    @NotBlank(message = "Email not be empty")
+    @NotBlank(message = "Поле Email не может быть пустым")
     private String email;
 
-    @NotBlank(message = "Phone Number not be empty")
-    @Min(value = 6, message = "Phone Number must be min 6 characters")
+    @NotBlank(message = "Поле номер телефона не может быть пустым")
+    @Min(value = 6, message = "Номер телефона минимум 6 символов")
     private String phoneNumber;
 
     @Valid

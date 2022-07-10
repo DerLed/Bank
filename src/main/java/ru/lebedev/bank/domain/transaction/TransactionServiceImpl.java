@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService{
 
-        private final TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
     private final TransactionMapper transactionMapper;
 
     @Override
@@ -42,24 +42,7 @@ public class TransactionServiceImpl implements TransactionService{
     public void deleteById(Long aLong) {
 
     }
-//
 
-//
-//
-//    @Override
-//    public List<TransactionDTO> findAll() {
-//        List<Transaction> transactions = transactionRepository.findAll();
-//        return transactions.stream()
-//                .map(transactionMapper::toDTO)
-//                .collect(Collectors.toList());
-//    }
-//
-//    public TransactionDTO save(TransactionDTO transactionDTO){
-//        Transaction transaction = transactionMapper.toEntity(transactionDTO);
-//        transactionRepository.save(transaction);
-//        return transactionMapper.toDTO(transaction);
-//    }
-//
     @Override
     public List<TransactionDTO> findAllByTargetAccountId(Long id) {
         List<Transaction> transactions = transactionRepository.findAllByTargetAccountId(id);
@@ -75,10 +58,10 @@ public class TransactionServiceImpl implements TransactionService{
                 .map(transactionMapper::toDTO)
                 .collect(Collectors.toList());
     }
-//
-//    @Override
-//    public void delete(TransactionDTO transactionDTO) {
-//        Transaction transaction = transactionMapper.toEntity(transactionDTO);
-//        transactionRepository.delete(transaction);
-//    }
+
+    @Override
+    public void delete(TransactionDTO transactionDTO) {
+        Transaction transaction = transactionMapper.toEntity(transactionDTO);
+        transactionRepository.delete(transaction);
+    }
 }

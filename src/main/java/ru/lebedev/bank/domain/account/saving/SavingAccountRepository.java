@@ -13,8 +13,11 @@ public interface SavingAccountRepository extends JpaRepository<SavingAccount, Lo
     Optional<SavingAccount> findByIdAndIsClosedFalse(Long id);
 
     List<SavingAccount> findByClientId(Long ClientId);
+
     List<SavingAccount> findByClientUserLoginAndIsClosedFalse(String login);
+
     List<SavingAccount> findByClientPhoneNumberAndIsClosedFalse(String phoneNumber);
+
     List<SavingAccount> findAllByIsClosedFalse();
 
     @Modifying(clearAutomatically = true)

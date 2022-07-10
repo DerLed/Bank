@@ -1,13 +1,9 @@
 package ru.lebedev.bank.domain.account.dto;
 
 import lombok.*;
-import ru.lebedev.bank.domain.client.Client;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-
 
 @Data
 @NoArgsConstructor

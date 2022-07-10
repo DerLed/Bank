@@ -20,12 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CheckingAccountServiceImpl implements CheckingAccountService {
 
-        private static final String ACCOUNT_BY_ID_NOT_FOUND_MESSAGE = "Account with id %s is not found";
-    private static final String TRANSFER_AMOUNT_HIGHER_THEN_ACCOUNT_AMOUNT =
-            "Transfer amount higher than source account amount";
-    private static final String ACCOUNT_BY_PHONE_NUMBER_NOT_FOUND_MESSAGE =
-            "Account with phone number: %s is not found";
-    private static final String ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE = "Account with card number: %s is not found";
+    private static final String ACCOUNT_BY_ID_NOT_FOUND_MESSAGE = "Account with id %s is not found";
 
     private final CheckingAccountRepository checkingAccountRepository;
     private final CheckingAccountMapper checkingAccountMapper;
@@ -75,6 +70,12 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
         else checkingAccountRepository.closeById(id);
     }
 
+    /**
+     * В данном методе происходит пополнение счета, то есть по сути денежные средства беруться неоткуда
+     * добавлено для демонстрации работы
+     * @param accountId id пополняемого аккаунта
+     * @param amount сумма
+     */
     @Override
     @Transactional
     public void addMoney(Long accountId, BigDecimal amount) {
@@ -117,8 +118,5 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
             return account;
 
     }
-
-
-
 
 }

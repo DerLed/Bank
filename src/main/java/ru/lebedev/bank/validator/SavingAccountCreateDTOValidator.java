@@ -4,10 +4,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import ru.lebedev.bank.domain.account.dto.AccountCreateDTO;
-import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.account.dto.SavingAccountCreateDTO;
-import ru.lebedev.bank.domain.accountPlan.TypeAccount;
 
 
 import java.math.BigDecimal;
@@ -25,9 +22,7 @@ public class SavingAccountCreateDTOValidator implements Validator {
         SavingAccountCreateDTO createAccount = (SavingAccountCreateDTO) target;
 
         if (createAccount.getAccountPlanDTO() == null) {
-
             errors.rejectValue("accountPlanDTO", "accountPlan.error", "Не выбран продукт");
-
         }
 
         if (createAccount.getAccountPlanDTO() != null) {
@@ -35,8 +30,7 @@ public class SavingAccountCreateDTOValidator implements Validator {
             if (createAccount.getAmount() == null || createAccount.getAmount().compareTo(BigDecimal.ONE) < 0) {
                 errors.rejectValue("amount", "amount.error",
                         "Сумма меньше 1 или не заполнено");
-            }
-            else if(createAccount.getAmount().compareTo(createAccount.getAccountPlanDTO().getMinAmount()) < 0){
+            } else if (createAccount.getAmount().compareTo(createAccount.getAccountPlanDTO().getMinAmount()) < 0) {
                 errors.rejectValue("amount", "amount.error",
                         "Сумма вклада меньше допустимой");
             }
@@ -44,8 +38,7 @@ public class SavingAccountCreateDTOValidator implements Validator {
             if (createAccount.getPeriod() == null || createAccount.getPeriod() < 1) {
                 errors.rejectValue("period", "period.error",
                         "Период меньше 1 или не заполнено");
-            }
-            else if(createAccount.getPeriod() < createAccount.getAccountPlanDTO().getMinPeriod()){
+            } else if (createAccount.getPeriod() < createAccount.getAccountPlanDTO().getMinPeriod()) {
                 errors.rejectValue("period", "period.error",
                         "Срок вклада меньше допустимого");
             }
@@ -55,13 +48,6 @@ public class SavingAccountCreateDTOValidator implements Validator {
                         "Не выбран счет для списания");
             }
 
-
-
-
-
-
         }
-
-
     }
 }

@@ -12,15 +12,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(
-                        new Info().title("BANK EGAR API")
-                                .version("1.0.0").contact(
-                                        new Contact()
-                                                .name("Lebedev Dmitrii")
-                                )
-                )
-
-                ;
+                .info(new Info().title("BANK EGAR API")
+                                .version("1.0.0").contact(new Contact().name("Lebedev Dmitrii")));
     }
 
 }

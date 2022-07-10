@@ -5,7 +5,6 @@ public class CloseDefaultAccountException extends RuntimeException{
         super();
     }
 
-
     public CloseDefaultAccountException(Long id) {
         super("This is default account id: " + id);
     }

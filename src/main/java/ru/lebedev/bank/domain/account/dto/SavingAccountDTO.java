@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.lebedev.bank.domain.accountPlan.AccountPlan;
 import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 
 @Data
 @NoArgsConstructor
@@ -36,10 +34,6 @@ public class SavingAccountDTO {
 
     private Boolean isDefault;
 
-
-
     private BigDecimal savingAmount;
-
-
 
 }

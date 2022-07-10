@@ -24,12 +24,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SavingAccountServiceImpl implements SavingAccountService {
 
-    private static final String ACCOUNT_BY_ID_NOT_FOUND_MESSAGE = "Account with id %s is not found";
     private static final String TRANSFER_AMOUNT_HIGHER_THEN_ACCOUNT_AMOUNT =
             "Transfer amount higher than source account amount";
-    private static final String ACCOUNT_BY_PHONE_NUMBER_NOT_FOUND_MESSAGE =
-            "Account with phone number: %s is not found";
-    private static final String ACCOUNT_BY_CARD_NUMBER_NOT_FOUND_MESSAGE = "Account with card number: %s is not found";
 
     private final SavingAccountRepository savingAccountRepository;
     private final SavingAccountMapper savingAccountMapper;
@@ -62,10 +58,9 @@ public class SavingAccountServiceImpl implements SavingAccountService {
     @Transactional
     public SavingAccountDTO create(SavingAccountCreateDTO savingAccountCreateDTO) {
 
-
         CheckingAccount checkingAccount = checkingAccountRepository.findById(savingAccountCreateDTO.getCheckingAccountDTO().getId()).orElseThrow();
 
-        if (checkingAccount.getAmount().compareTo(savingAccountCreateDTO.getAmount()) < 0){
+        if (checkingAccount.getAmount().compareTo(savingAccountCreateDTO.getAmount()) < 0) {
             throw new AccountTransferException(TRANSFER_AMOUNT_HIGHER_THEN_ACCOUNT_AMOUNT);
         }
 
