@@ -18,10 +18,11 @@
 
     <div class="row d-flex justify-content-center align-items-center h-100">
 
-        <div  class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
             <div class="p-5 text-center bg-light">
 
-                <form th:if="${not #lists.isEmpty(accounts) || not #lists.isEmpty(cards)}" action="#" th:action="@{/checking/transfer-card}" th:object="${form}" th:method="POST">
+                <form th:if="${not #lists.isEmpty(accounts) || not #lists.isEmpty(cards)}" action="#"
+                      th:action="@{/checking/transfer-card}" th:object="${form}" th:method="POST">
 
                     <div class="form-group">
                         <label for="amount">Сумма</label>
@@ -63,10 +64,6 @@
                 <a class="btn btn-info" href="/client" role="button">В личный кабинет</a>
             </div>
         </div>
-
-
-
-
 
 
     </div>

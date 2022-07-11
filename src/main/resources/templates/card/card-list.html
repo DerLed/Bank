@@ -12,10 +12,9 @@
 <div class="container">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-            <h1  th:text="${title}" class="display-3">Счета</h1>
+            <h1 th:text="${title}" class="display-3">Счета</h1>
         </div>
     </header>
-
 
     <div class="p-5 text-center bg-light">
         <div class="nav-scroller py-1 mb-2">
@@ -37,10 +36,7 @@
                     <td th:text="${card.accountDTO.amount}"></td>
                     <td th:text="${card.cardNumber}"></td>
                     <td th:text="${card.month} + '/' + ${card.year}"></td>
-<!--                    <td th:text="${#temporals.format(account.dateOpened, 'dd-MMM-yyyy')}"></td>-->
 
-<!--                    <td><a th:href="@{/accounts/history/{id}(id=${account.id})}">Edit</a></td>-->
-                    <!--        <td><a th:href="@{/account_plan/remove/{id}(id=${accountPlan.id})}">Delete</a></td>-->
                 </tr>
                 </tbody>
             </table>
@@ -53,8 +49,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 </body>

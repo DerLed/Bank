@@ -11,23 +11,11 @@
 <div th:insert="header :: header"></div>
 
 
-
 <div class="container">
     <header class="blog-header py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-<!--            <h1 class="display-3">-->
-<!--                <td th:switch="${typeAccount}">-->
-<!--                <span th:case="'CHECKING'">Депозитные счета</span>-->
-<!--                <span th:case="'SAVING'">Накопительные счета</span>-->
-<!--                <span th:case="'LOAN'">Кредиты</span>-->
-<!--                <div th:case="*">-->
-
-<!--                </div>-->
-<!--            </td>-->
-<!--            </h1>-->
-        </div>
+        <div class="row flex-nowrap justify-content-between align-items-center">  <h1 class="display-3">
+        Ваши счета</h1></div>
     </header>
-
 
     <div class="p-5 text-center bg-light">
         <div class="nav-scroller py-1 mb-2">
@@ -37,9 +25,7 @@
                 <tr>
                     <th scope="col">Сумма</th>
                     <th scope="col">Название счета</th>
-<!--                    <th th:if="${typeAccount} == 'SAVING'" scope="col">Накопленая сумма</th>-->
                     <th scope="col">Дата открытия</th>
-
                     <th scope="col">История</th>
                 </tr>
                 </thead>
@@ -50,11 +36,7 @@
 
                     <td th:text="${account.amount}"></td>
                     <td th:text="${account.accountNumber}"></td>
-
-
-<!--                    <td th:if="${typeAccount} == 'SAVING'" th:text="${account.savingAmount}"></td>-->
                     <td th:text="${#temporals.format(account.dateOpened, 'dd-MMM-yyyy')}"></td>
-
                     <td><a th:href="@{/transaction/history/{id}(id=${account.id})}">Посмотреть транзакции</a></td>
                     <td><a th:href="@{/checking/close/{id}(id=${account.id})}">Закрыть</a></td>
                 </tr>
@@ -64,12 +46,11 @@
             <div th:if="${#lists.isEmpty(accounts)}">
                 <h2>У Вас еще не открыто счетов</h2>
             </div>
+            <br>
             <a class="btn btn-info" href="/client" role="button">В личный кабинет</a>
         </div>
     </div>
 </div>
-
-
 
 
 </body>

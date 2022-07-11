@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Открытие депозитного счета</title>
+    <title>Закрытие вклада</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -14,7 +14,7 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <h1 class="display-3">
-
+            Закрытие вклада
             </h1>
         </div>
     </header>
@@ -32,10 +32,8 @@
                     <p class="text-center">Сумма накоплений по вкладу: <span th:text="${closeAccount.savingAmount}"></span> </p>
                     <br>
                     <p class="text-center">Все средства будут перечислены на счет по умолчанию. </p>
-
                 </div>
-
-
+                <br>
                 <button type="submit" class="btn btn-primary">Подтвердить</button>
 
             </form>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Открытие депозитного счета</title>
+    <title>Открытие вклада</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -49,7 +49,8 @@
 
 
                         </div>
-                        <small th:if="${#fields.hasErrors('accountPlanDTO')}" th:errors="*{accountPlanDTO}" id="accountPlanDTOHelp"
+                        <small th:if="${#fields.hasErrors('accountPlanDTO')}" th:errors="*{accountPlanDTO}"
+                               id="accountPlanDTOHelp"
                                class="form-text text-danger"></small>
 
 
@@ -73,7 +74,8 @@
 
                 <div class="form-group">
                     <label for="checkingAccount">Выберите счет для привязки карты</label>
-                    <select th:field="*{checkingAccountDTO}" class="form-control" id="checkingAccount" name="checkingAccount">
+                    <select th:field="*{checkingAccountDTO}" class="form-control" id="checkingAccount"
+                            name="checkingAccount">
                         <option th:each="a : ${checkingAccounts}" th:value="${a.id}"
                                 th:text="'Баланс: ' + ${a.amount} + ' Cчет:' + ${a.accountNumber} ">
                         </option>

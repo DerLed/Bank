@@ -7,11 +7,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738
-@thymesVar id="post" type="your.package.Post"
-@thymesVar id="title" type="String"
-@thymesVar id="content" type="String"
-*/
+
 <h1>Регистрация</h1>
 
 <form action="#" th:action="@{/signup}" th:object="${client}" th:method="POST">
@@ -41,23 +37,6 @@
 
 </form>
 
-<!--<form action="#" th:action="@{/signup}" th:object="${client}" method="post">-->
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <td>Name:</td>-->
-<!--            <td><input type="text" th:field="*{name}" /></td>-->
-<!--            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>Age:</td>-->
-<!--            <td><input type="text" th:field="*{age}" /></td>-->
-<!--            <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td><button type="submit">Submit</button></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</form>-->
 
 </body>
 </html>
