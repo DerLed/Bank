@@ -83,8 +83,7 @@ http://localhost:8080/swagger-ui.html
 Можно первести деньги по номеру другому клиенту
 ![](src/main/resources/readme/img_9.png)
 
-![](src/main/resources/readme/img_10.png)
-Страница со списком выпущеных карт
+Страница со списком выпущенных карт
 ![](src/main/resources/readme/img_11.png)
 Есть небольшая панель администратора, через которую можно добавить банковские предложения
 ![](src/main/resources/readme/img.png)
