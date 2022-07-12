@@ -33,14 +33,9 @@ public class SavingAccountMvcController {
     private final SavingAccountCreateDTOValidator accountCreateValidator;
 
 
-    @InitBinder
+    @InitBinder("accountCreate")
     public void initBinder(WebDataBinder binder) {
-
-        if (binder.getTarget() == null) return;
-        if (accountCreateValidator.supports(binder.getTarget().getClass())) {
             binder.addValidators(accountCreateValidator);
-        }
-
     }
 
     @GetMapping
