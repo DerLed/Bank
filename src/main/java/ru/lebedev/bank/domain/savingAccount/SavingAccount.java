@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.account.saving;
+package ru.lebedev.bank.domain.savingAccount;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

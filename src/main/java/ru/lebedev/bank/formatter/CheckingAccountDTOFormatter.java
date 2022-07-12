@@ -3,8 +3,8 @@ package ru.lebedev.bank.formatter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
-import ru.lebedev.bank.domain.account.checking.CheckingAccountService;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.checkingAccount.CheckingAccountService;
+import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
 
 import java.text.ParseException;
 import java.util.Locale;

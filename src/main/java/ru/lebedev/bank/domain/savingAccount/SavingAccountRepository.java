@@ -1,8 +1,9 @@
-package ru.lebedev.bank.domain.account.saving;
+package ru.lebedev.bank.domain.savingAccount;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import ru.lebedev.bank.domain.savingAccount.SavingAccount;
 
 import java.util.List;
 import java.util.Optional;

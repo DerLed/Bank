@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.account.controller;
+package ru.lebedev.bank.domain.savingAccount;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,11 +8,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ru.lebedev.bank.domain.account.checking.CheckingAccountService;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
-import ru.lebedev.bank.domain.account.dto.SavingAccountCreateDTO;
-import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
-import ru.lebedev.bank.domain.account.saving.SavingAccountService;
+import ru.lebedev.bank.domain.checkingAccount.CheckingAccountService;
+import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountCreateDTO;
+import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountDTO;
+import ru.lebedev.bank.domain.savingAccount.SavingAccountService;
 import ru.lebedev.bank.domain.accountPlan.AccountPlanService;
 import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;

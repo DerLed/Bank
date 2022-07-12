@@ -1,9 +1,9 @@
-package ru.lebedev.bank.domain.account.mapper;
+package ru.lebedev.bank.domain.savingAccount.mapper;
 
 import org.mapstruct.*;
 import ru.lebedev.bank.domain.helper.EntityMapper;
-import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
-import ru.lebedev.bank.domain.account.saving.SavingAccount;
+import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountDTO;
+import ru.lebedev.bank.domain.savingAccount.SavingAccount;
 import ru.lebedev.bank.utills.DepositCalc;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))

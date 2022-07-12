@@ -1,9 +1,9 @@
-package ru.lebedev.bank.domain.account.mapper;
+package ru.lebedev.bank.domain.checkingAccount.mapper;
 
 import org.mapstruct.*;
 import ru.lebedev.bank.domain.helper.EntityMapper;
-import ru.lebedev.bank.domain.account.checking.CheckingAccount;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.checkingAccount.CheckingAccount;
+import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface CheckingAccountMapper extends EntityMapper<CheckingAccountDTO, CheckingAccount> {

@@ -1,8 +1,8 @@
-package ru.lebedev.bank.domain.account.saving;
+package ru.lebedev.bank.domain.savingAccount;
 
 import ru.lebedev.bank.domain.helper.BaseService;
-import ru.lebedev.bank.domain.account.dto.SavingAccountCreateDTO;
-import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
+import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountCreateDTO;
+import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountDTO;
 
 import java.util.List;
 

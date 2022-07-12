@@ -1,11 +1,11 @@
-package ru.lebedev.bank.domain.account.checking;
+package ru.lebedev.bank.domain.checkingAccount;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.transaction.TransactionStatus;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
-import ru.lebedev.bank.domain.account.mapper.CheckingAccountMapper;
+import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.checkingAccount.mapper.CheckingAccountMapper;
 import ru.lebedev.bank.domain.transaction.Transaction;
 import ru.lebedev.bank.domain.transaction.TransactionRepository;
 import ru.lebedev.bank.exception.AccountTransferException;

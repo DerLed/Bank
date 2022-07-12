@@ -1,9 +1,10 @@
-package ru.lebedev.bank.domain.account.dto;
+package ru.lebedev.bank.domain.savingAccount.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
 import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 

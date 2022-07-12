@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.account.controller;
+package ru.lebedev.bank.domain.savingAccount;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -6,11 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.lebedev.bank.domain.account.dto.SavingAccountDTO;
-import ru.lebedev.bank.domain.account.saving.SavingAccountService;
+import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountDTO;
+import ru.lebedev.bank.domain.savingAccount.SavingAccountService;
 import ru.lebedev.bank.domain.helper.validGroup.Create;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
