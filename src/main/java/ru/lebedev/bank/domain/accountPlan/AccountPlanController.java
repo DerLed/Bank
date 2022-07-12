@@ -1,14 +1,13 @@
 package ru.lebedev.bank.domain.accountPlan;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
+import ru.lebedev.bank.exception.AccountPlanNotFoundException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/v1/account-plans")
@@ -17,29 +16,23 @@ public class AccountPlanController {
     private final AccountPlanService accountPlanService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<AccountPlanDTO> findById(@PathVariable Long id) {
-        Optional<AccountPlanDTO> accountPlan = accountPlanService.findById(id);
-        return accountPlan.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public AccountPlanDTO findById(@PathVariable Long id) {
+        return accountPlanService.findById(id).orElseThrow(() -> new AccountPlanNotFoundException(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<AccountPlanDTO>> findAll () {
-        List<AccountPlanDTO> accountPlans = accountPlanService.findAll();
-        return new ResponseEntity<>(accountPlans, HttpStatus.OK);
+    public List<AccountPlanDTO> findAll () {
+        return accountPlanService.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<AccountPlanDTO> save (@RequestBody @Valid AccountPlanDTO accountPlanDTO) {
-        AccountPlanDTO savedAccount = accountPlanService.save(accountPlanDTO);
-        return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
+    public AccountPlanDTO save (@RequestBody @Valid AccountPlanDTO accountPlanDTO) {
+        return accountPlanService.save(accountPlanDTO);
     }
 
     @DeleteMapping
-    public ResponseEntity<String> delete(@RequestBody @Valid AccountPlanDTO accountPlanDTO) {
+    public void delete(@RequestBody @Valid AccountPlanDTO accountPlanDTO) {
         accountPlanService.deleteById(accountPlanDTO.getId());
-        return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 }

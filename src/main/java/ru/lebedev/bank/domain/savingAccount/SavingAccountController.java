@@ -21,33 +21,28 @@ public class SavingAccountController {
     private final SavingAccountService savingAccountService;
 
     @GetMapping
-    public ResponseEntity<List<SavingAccountDTO>> findAll () {
-        List<SavingAccountDTO> accounts = savingAccountService.findAll();
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    public List<SavingAccountDTO> findAll () {
+        return savingAccountService.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<SavingAccountDTO> save (@RequestBody @Validated({Create.class}) SavingAccountDTO account) {
-        SavingAccountDTO savedAccount = savingAccountService.save(account);
-        return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
+    public SavingAccountDTO save (@RequestBody @Validated({Create.class}) SavingAccountDTO account) {
+        return savingAccountService.save(account);
     }
 
     @DeleteMapping("/close/{accountId}")
-    public ResponseEntity<Void> close (@PathVariable Long accountId) {
+    public void close (@PathVariable Long accountId) {
         savingAccountService.deleteById(accountId);
-        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/client/{clientId}")
-    public ResponseEntity<List<SavingAccountDTO>> findByClientId (@PathVariable Long clientId) {
-        List<SavingAccountDTO> accounts = savingAccountService.findByClientId(clientId);
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    public List<SavingAccountDTO> findByClientId (@PathVariable Long clientId) {
+        return savingAccountService.findByClientId(clientId);
     }
 
     @GetMapping("/phoneNumber/{phoneNumber}")
-    public ResponseEntity<List<SavingAccountDTO>> findByPhoneNumber (@PathVariable String phoneNumber) {
-        List<SavingAccountDTO> accounts = savingAccountService.findByPhoneNumber(phoneNumber);
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    public List<SavingAccountDTO> findByPhoneNumber (@PathVariable String phoneNumber) {
+        return savingAccountService.findByPhoneNumber(phoneNumber);
     }
 
 }

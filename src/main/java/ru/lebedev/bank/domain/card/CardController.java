@@ -1,10 +1,9 @@
 package ru.lebedev.bank.domain.card;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.card.dto.CardDTO;
+import ru.lebedev.bank.exception.CardNotFoundException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,27 +17,22 @@ public class CardController {
     private final CardService cardService;
 
     @PostMapping
-    public ResponseEntity<CardDTO> create(@RequestBody @Valid CardDTO card) {
-        CardDTO savedCard = cardService.save(card);
-        return new ResponseEntity<>(savedCard, HttpStatus.CREATED);
+    public CardDTO create(@RequestBody @Valid CardDTO card) {
+        return cardService.save(card);
     }
 
     @PutMapping
-    public ResponseEntity<CardDTO> update(@RequestBody @Valid CardDTO card) {
-        CardDTO savedCard = cardService.save(card);
-        return new ResponseEntity<>(savedCard, HttpStatus.OK);
+    public CardDTO update(@RequestBody @Valid CardDTO card) {
+        return cardService.save(card);
     }
 
     @GetMapping(value = "/user/{id}")
-    public ResponseEntity<List<CardDTO>> getAllByUserId(@PathVariable Long id) {
-        List<CardDTO> cards = cardService.findByClientId(id);
-        return new ResponseEntity<>(cards, HttpStatus.OK);
+    public List<CardDTO> getAllByUserId(@PathVariable Long id) {
+        return cardService.findByClientId(id);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CardDTO> getById(@PathVariable Long id) {
-        Optional<CardDTO> cardDTO = cardService.findById(id);
-        return cardDTO.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public CardDTO getById(@PathVariable Long id) {
+        return cardService.findById(id).orElseThrow(() -> new CardNotFoundException(id));
     }
 }

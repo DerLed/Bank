@@ -1,14 +1,13 @@
 package ru.lebedev.bank.domain.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.user.dto.UserDTO;
+import ru.lebedev.bank.exception.UserNotFoundException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -17,33 +16,27 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> findAll() {
-        List<UserDTO> usersDTO = userService.findAll();
-        return new ResponseEntity<>(usersDTO, HttpStatus.OK);
+    public List<UserDTO> findAll() {
+        return userService.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-        Optional<UserDTO> userDTO = userService.findById(id);
-        return userDTO.map(u -> new ResponseEntity<>(u, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public UserDTO findById(@PathVariable Long id) {
+        return userService.findById(id).orElseThrow(()-> new UserNotFoundException(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> create(@RequestBody @Valid UserDTO user) {
-        UserDTO savedUser = userService.save(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    public UserDTO create(@RequestBody @Valid UserDTO user) {
+        return userService.save(user);
     }
 
     @PutMapping
-    public ResponseEntity<UserDTO> update(@RequestBody @Valid UserDTO user) {
-        UserDTO savedUser = userService.save(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.OK);
+    public UserDTO update(@RequestBody @Valid UserDTO user) {
+        return userService.save(user);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) {
         userService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,14 +1,12 @@
 package ru.lebedev.bank.domain.client;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
+import ru.lebedev.bank.exception.ClientNotFoundException;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/clients")
@@ -17,33 +15,27 @@ public class ClientController {
     private final ClientService clientService;
 
     @GetMapping
-    public ResponseEntity<List<ClientDTO>> findAll() {
-        List<ClientDTO> clientDTO = clientService.findAll();
-        return new ResponseEntity<>(clientDTO, HttpStatus.OK);
+    public List<ClientDTO> findAll() {
+        return clientService.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> findById(@PathVariable Long id) {
-        Optional<ClientDTO> clientDTO = clientService.findById(id);
-        return clientDTO.map(u -> new ResponseEntity<>(u, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ClientDTO findById(@PathVariable Long id) {
+        return clientService.findById(id).orElseThrow(()-> new ClientNotFoundException(id));
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> create(@RequestBody @Valid ClientDTO client) {
-        ClientDTO savedClient = clientService.save(client);
-        return new ResponseEntity<>(savedClient, HttpStatus.CREATED);
+    public ClientDTO create(@RequestBody @Valid ClientDTO client) {
+        return clientService.save(client);
     }
 
     @PutMapping
-    public ResponseEntity<ClientDTO> update(@RequestBody @Valid ClientDTO client) {
-        ClientDTO savedClient = clientService.save(client);
-        return new ResponseEntity<>(savedClient, HttpStatus.OK);
+    public ClientDTO update(@RequestBody @Valid ClientDTO client) {
+        return clientService.save(client);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) {
         clientService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
