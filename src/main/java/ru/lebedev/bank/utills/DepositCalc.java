@@ -1,7 +1,7 @@
 package ru.lebedev.bank.utills;
 
 
-import ru.lebedev.bank.domain.account.saving.SavingAccount;
+import ru.lebedev.bank.domain.savingAccount.SavingAccount;
 
 
 import java.math.BigDecimal;

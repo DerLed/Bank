@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.account.controller;
+package ru.lebedev.bank.domain.checkingAccount;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -9,13 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.account.AccountService;
-import ru.lebedev.bank.domain.account.checking.CheckingAccountService;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.checkingAccount.CheckingAccountService;
+import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
 import ru.lebedev.bank.domain.helper.validGroup.Create;
-import ru.lebedev.bank.domain.helper.validGroup.Update;
 
 
-import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 

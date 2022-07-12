@@ -3,9 +3,9 @@ package ru.lebedev.bank.scheduler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import ru.lebedev.bank.domain.account.saving.SavingAccount;
-import ru.lebedev.bank.domain.account.saving.SavingAccountRepository;
-import ru.lebedev.bank.domain.account.saving.SavingAccountService;
+import ru.lebedev.bank.domain.savingAccount.SavingAccount;
+import ru.lebedev.bank.domain.savingAccount.SavingAccountRepository;
+import ru.lebedev.bank.domain.savingAccount.SavingAccountService;
 
 import java.time.LocalDateTime;
 import java.util.List;

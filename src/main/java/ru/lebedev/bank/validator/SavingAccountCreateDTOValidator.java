@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import ru.lebedev.bank.domain.account.dto.SavingAccountCreateDTO;
+import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountCreateDTO;
 
 
 import java.math.BigDecimal;

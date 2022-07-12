@@ -1,10 +1,6 @@
-package ru.lebedev.bank.domain.account.dto;
+package ru.lebedev.bank.domain.checkingAccount.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import ru.lebedev.bank.domain.accountPlan.dto.AccountPlanDTO;
+import lombok.*;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.domain.helper.validGroup.Create;
 import ru.lebedev.bank.domain.helper.validGroup.Update;
@@ -20,23 +16,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SavingAccountDTO {
+public class CheckingAccountDTO {
     @Null(groups = {Create.class, Update.class})
     private Long id;
 
-
-    @NotNull(message = "Поле не может быть пустым", groups = {Update.class, Create.class})
+    @Null(groups = Create.class)
+    @NotNull(message = "Поле не может быть пустым", groups = Update.class)
     @PositiveOrZero(message = "Сумма должна быть не меньше 0", groups = Update.class)
     private BigDecimal amount;
 
     @Null(groups = Create.class)
     private LocalDateTime dateOpened;
-
-    @NotNull(message = "Поле период не может быть пустым", groups = {Update.class, Create.class})
-    private Long period;
-
-    @NotNull(message = "Не выбран аккаунт", groups = {Update.class, Create.class})
-    private AccountPlanDTO accountPlanDTO;
 
     @Null(groups = Create.class)
     @NotNull(message = "Поле не может быть пустым", groups = Update.class)
@@ -46,14 +36,11 @@ public class SavingAccountDTO {
     @NotBlank(message = "Номер счета не может быть пустым", groups = Update.class)
     private String accountNumber;
 
-    @NotNull(message = "Не выбран клиент", groups = {Update.class, Create.class})
+
+    @NotNull(message = "Поле не может быть пустым", groups = {Update.class, Create.class})
     private ClientDTO clientDTO;
 
     @Null(groups = Create.class)
     @NotNull(message = "Поле не может быть пустым", groups = Update.class)
     private Boolean isDefault;
-
-    @Null(groups = {Update.class, Create.class})
-    private BigDecimal savingAmount;
-
 }

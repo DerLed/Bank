@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.account.checking;
+package ru.lebedev.bank.domain.checkingAccount;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

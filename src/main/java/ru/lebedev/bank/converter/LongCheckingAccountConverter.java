@@ -3,8 +3,8 @@ package ru.lebedev.bank.converter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import ru.lebedev.bank.domain.account.checking.CheckingAccountService;
-import ru.lebedev.bank.domain.account.dto.CheckingAccountDTO;
+import ru.lebedev.bank.domain.checkingAccount.CheckingAccountService;
+import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
 
 @Component
 @RequiredArgsConstructor
