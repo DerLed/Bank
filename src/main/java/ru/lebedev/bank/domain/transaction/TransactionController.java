@@ -21,7 +21,7 @@ public class TransactionController {
 
     @DeleteMapping
     public void delete(@RequestBody @Valid TransactionDTO transactionDTO){
-        transactionService.delete(transactionDTO);
+        transactionService.deleteById(transactionDTO.getId());
     }
 
 }

@@ -1,9 +1,9 @@
 package ru.lebedev.bank.domain.account;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.lebedev.bank.aop.SendMessageTransaction;
 import ru.lebedev.bank.domain.transaction.TransactionStatus;
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
 import ru.lebedev.bank.domain.account.mapper.AccountMapper;
@@ -60,9 +60,35 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDTO save(AccountDTO accountDTO) {
+    @Transactional
+    public AccountDTO save( AccountDTO accountDTO) {
         Account savedAccount = accountRepository.saveAndFlush(accountMapper.toEntity(accountDTO));
         return accountMapper.toDTO(savedAccount);
+    }
+
+    @Override
+    @Transactional
+    public AccountDTO updateById(Long id, AccountDTO dto) {
+        return accountRepository.findById(id)
+                .map(account -> {
+                    BeanUtils.copyProperties(accountMapper.toEntity(dto), account, "id");
+                    return accountMapper.toDTO(accountRepository.save(account));
+                })
+                .orElseGet(() -> {
+                    dto.setId(id);
+                    return accountMapper.toDTO(accountRepository.save(accountMapper.toEntity(dto)));
+                });
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Long id) {
+        accountRepository.deleteById(id);
+    }
+
+    @Override
+    public List<AccountDTO> findAll() {
+        return accountRepository.findAll().stream().map(accountMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override

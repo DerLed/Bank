@@ -2,14 +2,13 @@ package ru.lebedev.bank.domain.card;
 
 import ru.lebedev.bank.domain.card.dto.CardCreateDTO;
 import ru.lebedev.bank.domain.card.dto.CardDTO;
+import ru.lebedev.bank.domain.helper.BaseService;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-public interface CardService {
-
-    CardDTO save(CardDTO cardRequestDTO);
+public interface CardService extends BaseService<CardDTO, Long> {
 
     CardDTO create(CardCreateDTO cardCreateDTO);
 
@@ -22,8 +21,6 @@ public interface CardService {
     List<CardDTO> findByClientId(Long userId);
 
     List<CardDTO> findByClientLogin(String login);
-
-    Optional<CardDTO> findById(Long id);
 
     Optional<CardDTO> findByCardNumber(String cardNumber);
 }

@@ -11,6 +11,4 @@ public interface TransactionService extends BaseService<TransactionDTO, Long> {
 
     List<TransactionDTO> findAllBySourceAccountId(Long id);
 
-    void delete(TransactionDTO transactionDTO);
-
 }

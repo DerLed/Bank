@@ -1,8 +1,10 @@
 package ru.lebedev.bank.domain.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.user.auth.Role;
 import ru.lebedev.bank.domain.user.auth.Status;
 import ru.lebedev.bank.domain.user.dto.UserDTO;
@@ -33,6 +35,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public UserDTO save(UserDTO userDTO) {
         User user = userMapper.toEntity(userDTO);
         String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -44,6 +47,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
+    public UserDTO updateById(Long id,UserDTO dto) {
+        return userRepository.findById(id)
+                .map(account -> {
+                    BeanUtils.copyProperties(userMapper.toEntity(dto), account, "id");
+                    return userMapper.toDTO(userRepository.save(account));
+                })
+                .orElseGet(() -> {
+                    dto.setId(id);
+                    return userMapper.toDTO(userRepository.save(userMapper.toEntity(dto)));
+                });
+    }
+
+    @Override
+    @Transactional
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }

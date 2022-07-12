@@ -1,6 +1,7 @@
 package ru.lebedev.bank.domain.checkingAccount;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.transaction.TransactionStatus;
@@ -57,7 +58,15 @@ public class CheckingAccountServiceImpl implements CheckingAccountService {
 
     @Override
     public CheckingAccountDTO updateById(Long id, CheckingAccountDTO dto) {
-        return null;
+        return checkingAccountRepository.findById(id)
+                .map(account -> {
+                    BeanUtils.copyProperties(checkingAccountMapper.toEntity(dto), account, "id");
+                    return checkingAccountMapper.toDTO(checkingAccountRepository.save(account));
+                })
+                .orElseGet(() -> {
+                    dto.setId(id);
+                    return checkingAccountMapper.toDTO(checkingAccountRepository.save(checkingAccountMapper.toEntity(dto)));
+                });
     }
 
     @Override

@@ -2,16 +2,13 @@ package ru.lebedev.bank.domain.account;
 
 
 import ru.lebedev.bank.domain.account.dto.AccountDTO;
+import ru.lebedev.bank.domain.helper.BaseService;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-public interface AccountService {
-
-    Optional<AccountDTO> findById(Long id);
-
-    AccountDTO save(AccountDTO accountDTO);
+public interface AccountService extends BaseService<AccountDTO, Long> {
 
     List<AccountDTO> findAllByClientLogin(String login);
 

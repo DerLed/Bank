@@ -1,6 +1,7 @@
 package ru.lebedev.bank.domain.savingAccount;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.transaction.TransactionStatus;
@@ -12,7 +13,6 @@ import ru.lebedev.bank.domain.savingAccount.dto.SavingAccountDTO;
 import ru.lebedev.bank.domain.savingAccount.mapper.SavingAccountMapper;
 import ru.lebedev.bank.domain.transaction.Transaction;
 import ru.lebedev.bank.domain.transaction.TransactionRepository;
-import ru.lebedev.bank.domain.transaction.TransactionService;
 import ru.lebedev.bank.exception.AccountTransferException;
 import ru.lebedev.bank.utills.DepositCalc;
 
@@ -30,7 +30,6 @@ public class SavingAccountServiceImpl implements SavingAccountService {
     private final SavingAccountRepository savingAccountRepository;
     private final SavingAccountMapper savingAccountMapper;
     private final CheckingAccountRepository checkingAccountRepository;
-    private final TransactionService transactionService;
     private final TransactionRepository transactionRepository;
     private final AccountService accountService;
 
@@ -102,6 +101,7 @@ public class SavingAccountServiceImpl implements SavingAccountService {
     }
 
     @Override
+    @Transactional
     public SavingAccountDTO save(SavingAccountDTO dto) {
         SavingAccount savingAccount = savingAccountMapper.toEntity(dto);
         SavingAccount sSavingAccount = savingAccountRepository.saveAndFlush(savingAccount);
@@ -109,8 +109,17 @@ public class SavingAccountServiceImpl implements SavingAccountService {
     }
 
     @Override
+    @Transactional
     public SavingAccountDTO updateById(Long id, SavingAccountDTO dto) {
-        return null;
+        return savingAccountRepository.findById(id)
+                .map(account -> {
+                    BeanUtils.copyProperties(savingAccountMapper.toEntity(dto), account, "id");
+                    return savingAccountMapper.toDTO(savingAccountRepository.save(account));
+                })
+                .orElseGet(() -> {
+                    dto.setId(id);
+                    return savingAccountMapper.toDTO(savingAccountRepository.save(savingAccountMapper.toEntity(dto)));
+                });
     }
 
     @Override

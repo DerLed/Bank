@@ -2,6 +2,7 @@ package ru.lebedev.bank.domain.card;
 
 import lombok.RequiredArgsConstructor;
 import net.andreinc.mockneat.MockNeat;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.lebedev.bank.domain.account.AccountService;
@@ -10,7 +11,6 @@ import ru.lebedev.bank.domain.card.dto.CardCreateDTO;
 import ru.lebedev.bank.domain.card.dto.CardDTO;
 import ru.lebedev.bank.domain.card.mapper.CardMapper;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,13 +26,31 @@ public class CardServiceImpl implements CardService{
     private final CardMapper cardMapper;
 
     @Override
-    public CardDTO save(@Valid CardDTO cardRequestDTO) {
+    public CardDTO save(CardDTO cardRequestDTO) {
         Card entity = cardMapper.toEntity(cardRequestDTO);
         if (entity.getCardNumber() == null) {
             entity.setCardNumber(getNewCardNumber());
         }
         cardRepository.saveAndFlush(entity);
         return cardMapper.toDTO(entity);
+    }
+
+    @Override
+    public CardDTO updateById(Long id, CardDTO dto) {
+        return cardRepository.findById(id)
+                .map(account -> {
+                    BeanUtils.copyProperties(cardMapper.toEntity(dto), account, "id");
+                    return cardMapper.toDTO(cardRepository.save(account));
+                })
+                .orElseGet(() -> {
+                    dto.setId(id);
+                    return cardMapper.toDTO(cardRepository.save(cardMapper.toEntity(dto)));
+                });
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        cardRepository.deleteById(id);
     }
 
     @Override
@@ -85,6 +103,11 @@ public class CardServiceImpl implements CardService{
         return cardRepository.findByClientUserLoginAndIsClosedFalse(login).stream()
                 .map(cardMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CardDTO> findAll() {
+        return cardRepository.findAll().stream().map(cardMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
