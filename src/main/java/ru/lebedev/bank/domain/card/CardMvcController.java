@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.account.AccountService;
 import ru.lebedev.bank.domain.card.dto.CardCreateDTO;
 import ru.lebedev.bank.domain.card.dto.CardDTO;
@@ -52,21 +49,10 @@ public class CardMvcController {
     @PostMapping("/new")
     public String newCardCreate(@ModelAttribute("newCard") @Valid CardCreateDTO cardDTO,
                                 BindingResult bindingResult, Principal principal, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            List<AccountDTO> accounts = accountService.findByClientLoginAndType(principal.getName(), TypeAccount.CHECKING);
-//            List<CardPlanDTO> cardPlans = cardPlanService.findAll();
-//            model.addAttribute("accounts", accounts);
-//            model.addAttribute("cardPlans", cardPlans);
-//            return "card/card-new";
-//        }
         ClientDTO clientDTO = clientService.findByUserLogin(principal.getName()).orElseThrow();
-//        CardDTO savedCard = CardDTO.builder()
-//                .clientDTO(clientDTO)
-//                .cardPlanDTO(cardDTO.getCardPlanDTO())
-//                .accountDTO(cardDTO.getAccountDTO())
-//                .build();
         cardDTO.setClientDTO(clientDTO);
         cardService.create(cardDTO);
+
         return "redirect:/client";
     }
 
