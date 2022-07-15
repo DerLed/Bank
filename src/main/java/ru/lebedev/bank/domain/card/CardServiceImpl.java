@@ -122,6 +122,11 @@ public class CardServiceImpl implements CardService{
         return card.map(cardMapper::toDTO);
     }
 
+    @Override
+    public boolean existsByCardNumber(String cardNumber) {
+        return cardRepository.existsByCardNumber(cardNumber);
+    }
+
     private String getNewCardNumber() {
         String cardNumber;
         do {

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ru.lebedev.bank.domain.account.AccountService;
 import ru.lebedev.bank.domain.card.dto.CardCreateDTO;
@@ -12,6 +13,7 @@ import ru.lebedev.bank.domain.card.dto.TransactionCardFormDTO;
 import ru.lebedev.bank.domain.client.ClientService;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.exception.AccountTransferException;
+import ru.lebedev.bank.validator.TransactionCardFormDTOValidator;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -24,6 +26,12 @@ public class CardMvcController {
     private final CardService cardService;
     private final AccountService accountService;
     private final ClientService clientService;
+    private final TransactionCardFormDTOValidator transactionCardFormDTOValidator;
+
+    @InitBinder("form")
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(transactionCardFormDTOValidator);
+    }
 
     @GetMapping
     public String allCards(Model model, Principal principal) {
@@ -65,7 +73,7 @@ public class CardMvcController {
     }
 
     @PostMapping("/transfer")
-    public String accountsTransfer(@ModelAttribute("form") @Valid TransactionCardFormDTO transactionCardFormDTO,
+    public String cardTransfer(@ModelAttribute("form") @Valid TransactionCardFormDTO transactionCardFormDTO,
                                    BindingResult bindingResult,
                                    Principal principal, Model model) {
         if (bindingResult.hasErrors()) {
@@ -74,16 +82,8 @@ public class CardMvcController {
             return "card/card-transfer";
         }
 
-        try {
-            accountService.transferMoneyByCardNumber(transactionCardFormDTO.getCardDTO().getAccountDTO().getId(),
-                    transactionCardFormDTO.getCardNumber(), transactionCardFormDTO.getAmount());
-        } catch (AccountTransferException e) {
-            bindingResult.rejectValue("cardNumber", "cardNumber", "Данной карты нет в системе.");
-            model.addAttribute("form", transactionCardFormDTO);
-            List<CardDTO> cards = cardService.findByClientLogin(principal.getName());
-            model.addAttribute("cards", cards);
-            return "card/card-transfer";
-        }
+        accountService.transferMoneyByCardNumber(transactionCardFormDTO.getCardDTO().getAccountDTO().getId(),
+                transactionCardFormDTO.getCardNumber(), transactionCardFormDTO.getAmount());
 
         return "redirect:/client";
     }

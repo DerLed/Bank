@@ -23,4 +23,6 @@ public interface CardService extends BaseService<CardDTO, Long> {
     List<CardDTO> findByClientLogin(String login);
 
     Optional<CardDTO> findByCardNumber(String cardNumber);
+
+    boolean existsByCardNumber(String cardNumber);
 }

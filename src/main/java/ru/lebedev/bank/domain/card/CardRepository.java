@@ -34,4 +34,7 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     Optional<Card> findByIdAndIsClosedFalse(Long id);
 
     Optional<Card> findByCardNumber(String cardNumber);
+
+    boolean existsByCardNumber(String cardNumber);
+
 }
