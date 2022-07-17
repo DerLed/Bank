@@ -1,4 +1,4 @@
-package ru.lebedev.bank.domain.transaction.dto;
+package ru.lebedev.bank.domain.checkingAccount.dto;
 
 
 import lombok.Data;
@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 public class TransactionFormDTO {
-    @Min(value = 6, message = "Номер телефона не может быть пустым")
+
     private String phoneNumber;
-    @NotNull(message = "Номер телефона не может быть пустым")
+
     private BigDecimal amount;
-    @NotNull(message = "Счет списания не выбран")
+
     private AccountDTO account;
 
 }

@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
-    //
+
     private static final String ACCOUNT_BY_ID_NOT_FOUND_MESSAGE = "Account with id %s is not found";
     private static final String TRANSFER_AMOUNT_HIGHER_THEN_ACCOUNT_AMOUNT =
             "Transfer amount higher than source account amount";

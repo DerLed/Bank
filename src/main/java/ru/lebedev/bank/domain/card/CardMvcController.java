@@ -46,14 +46,6 @@ public class CardMvcController {
         return "card/card-new";
     }
 
-
-    /**
-     * @param cardDTO
-     * @param bindingResult
-     * @param principal
-     * @param model
-     * @return
-     */
     @PostMapping("/new")
     public String newCardCreate(@ModelAttribute("newCard") @Valid CardCreateDTO cardDTO,
                                 BindingResult bindingResult, Principal principal, Model model) {

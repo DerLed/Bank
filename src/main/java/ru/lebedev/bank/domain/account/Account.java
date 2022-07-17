@@ -29,7 +29,7 @@ public class Account {
     @Column(name = "date_opened")
     @CreatedDate
     private LocalDateTime dateOpened;
-    //
+
     @Column(name = "is_closed")
     private Boolean isClosed;
 

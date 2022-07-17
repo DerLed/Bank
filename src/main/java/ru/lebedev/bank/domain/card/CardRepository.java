@@ -1,18 +1,14 @@
 package ru.lebedev.bank.domain.card;
-//
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-//import org.springframework.data.jpa.repository.Modifying;
-//import org.springframework.data.jpa.repository.Query;
-//import ru.lebedev.bank.domain.card.Card;
-//
 import java.util.List;
-import java.util.Optional;
-//
+
+
 public interface CardRepository extends JpaRepository<Card, Long> {
 
     @Modifying(clearAutomatically = true)

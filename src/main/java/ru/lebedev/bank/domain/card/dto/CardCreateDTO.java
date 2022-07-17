@@ -14,14 +14,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class CardCreateDTO {
 
-//    @NotNull
-//    private AccountDTO accountDTO;
-//    @NotNull
-//    private CardPlanDTO cardPlanDTO;
-
-
-
-
     private ClientDTO clientDTO;
 
 }

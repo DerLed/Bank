@@ -11,12 +11,13 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
+//Валидация полей в кастомном валидаторе
 public class TransactionCardFormDTO {
-    @Min(value = 16, message = "Номер карты не может быть пустым")
+
     private String cardNumber;
-    @NotNull(message = "Сумма перевода не может быть пустой")
+
     private BigDecimal amount;
-    @NotNull(message = "Карта списания не выбрана")
+
     private CardDTO cardDTO;
 
 }

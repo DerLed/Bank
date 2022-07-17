@@ -22,7 +22,7 @@
             <div class="p-5 text-center bg-light">
 
                 <form th:if="${not #lists.isEmpty(accounts)}" action="#" th:action="@{/checking/transfer-phone}"
-                      th:object="${form}" th:method="POST">
+                      th:object="${phoneTransactionForm}" th:method="POST">
 
                     <div class="form-group">
                         <label for="amount">Сумма</label>

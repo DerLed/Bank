@@ -22,14 +22,14 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
 
 
-            <form action="#" th:action="@{/checking/close/{id} (id = ${closeAccount.id})} "
+            <form th:if="${closeAccount != null}" action="#" th:action="@{/checking/close/{id} (id = ${closeAccount.id})} "
                   th:method="POST">
 
                 <div class="border border-warning">
                     <h6 class="h6">Закрыть счет?</h6>
                     <p class="text-center">Счет номер: <span th:text="${closeAccount.accountNumber}"></span></p>
                     <br>
-                    <p class="text-center"><span th:text="${error}"></span></p>
+
                     <p class="text-center">Все средства будут перечислены на счет по умолчанию. </p>
 
                 </div>
@@ -38,6 +38,7 @@
                 <button type="submit" class="btn btn-primary">Подтвердить</button>
 
             </form>
+            <p class="text-center"><span th:text="${error}"></span></p>
 
             <br>
             <a class="btn btn-info" href="/client" role="button">В личный кабинет</a>

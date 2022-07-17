@@ -29,9 +29,23 @@ public class TransactionCardFormDTOValidator implements Validator {
         if (cardFormDTO.getCardNumber() == null || cardFormDTO.getCardNumber().isBlank()){
             errors.rejectValue("cardNumber", "cardNumber.error", "Номер карты не может быть пустым");
         }
-
-        if (!cardService.existsByCardNumber(cardFormDTO.getCardNumber())) {
+        else if (cardFormDTO.getCardNumber().length() < 16){
+            errors.rejectValue("cardNumber", "cardNumber.error", "Введен не корректный номер карты");
+        }
+        else if (!cardService.existsByCardNumber(cardFormDTO.getCardNumber())) {
             errors.rejectValue("cardNumber", "cardNumber.error", "Данной карты нет в системе");
+        }
+
+        if (cardFormDTO.getCardDTO() == null){
+            errors.rejectValue("cardDTO", "cardDTO.error", "Не выбрана карта списания");
+        }
+
+        if (cardFormDTO.getAmount() == null){
+            errors.rejectValue("amount", "amount.error", "Сумма перевода не введена");
+        }
+        else if (cardFormDTO.getCardDTO() == null &&
+                cardFormDTO.getAmount().compareTo(cardFormDTO.getCardDTO().getAccountDTO().getAmount()) > 0){
+            errors.rejectValue("amount", "amount.error", "На данной карте не достаточно средств");
         }
     }
 }

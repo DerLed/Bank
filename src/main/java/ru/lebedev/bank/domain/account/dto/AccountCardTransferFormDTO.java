@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 public class AccountCardTransferFormDTO {
-    @NotNull(message = "Карта зачисления не выбрана")
+
     private CardDTO cardDTO;
-    @NotNull(message = "Сумма не введена")
+
     private BigDecimal amount;
-    @NotNull(message = "Счет списания не выбран")
+
     private CheckingAccountDTO accountDTO;
 
 }
