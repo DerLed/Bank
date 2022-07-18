@@ -17,9 +17,9 @@ import java.util.List;
 public class AccountPlanController {
     private final AccountPlanService accountPlanService;
 
-    @GetMapping(value = "/{id}")
-    public AccountPlanDTO findById(@PathVariable Long id) {
-        return accountPlanService.findById(id).orElseThrow(() -> new AccountPlanNotFoundException(id));
+    @GetMapping("/{id}")
+    public AccountPlanDTO findById(@PathVariable("id") AccountPlanDTO accountPlanDTO) {
+        return accountPlanDTO;
     }
 
     @GetMapping

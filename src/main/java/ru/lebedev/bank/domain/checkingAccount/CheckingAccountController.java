@@ -29,6 +29,11 @@ public class CheckingAccountController {
         return checkingAccountService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public CheckingAccountDTO getById(@PathVariable("id") CheckingAccountDTO checkingAccountDTO){
+        return checkingAccountDTO;
+    }
+
     @PostMapping
     public CheckingAccountDTO save(@RequestBody @Validated(Create.class) CheckingAccountDTO account) {
         return checkingAccountService.save(account);

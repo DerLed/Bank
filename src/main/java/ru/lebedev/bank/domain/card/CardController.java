@@ -26,13 +26,13 @@ public class CardController {
         return cardService.save(card);
     }
 
-    @GetMapping(value = "/user/{id}")
+    @GetMapping("/user/{id}")
     public List<CardDTO> getAllByUserId(@PathVariable Long id) {
         return cardService.findByClientId(id);
     }
 
-    @GetMapping(value = "/{id}")
-    public CardDTO getById(@PathVariable Long id) {
-        return cardService.findById(id).orElseThrow(() -> new CardNotFoundException(id));
+    @GetMapping("/{id}")
+    public CardDTO getById(@PathVariable("id") CardDTO cardDTO) {
+        return cardDTO;
     }
 }
