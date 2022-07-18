@@ -24,7 +24,7 @@ public class ClientMvcController {
     private final ClientService clientService;
     private final ClientCreateReqValidator clientCreateReqValidator;
 
-    @InitBinder("client")
+    @InitBinder("clientCreate")
     private void initBinder(WebDataBinder binder) {
         binder.addValidators(clientCreateReqValidator);
     }
@@ -43,12 +43,12 @@ public class ClientMvcController {
 
     @GetMapping("/new")
     public String signup(Model model) {
-        model.addAttribute("client", new ClientCreateReq());
+        model.addAttribute("clientCreate", new ClientCreateReq());
         return "client/new";
     }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("client") @Valid ClientCreateReq clientCreate, BindingResult bindingResult) throws UserAlreadyExistException {
+    public String create(@ModelAttribute("clientCreate") @Valid ClientCreateReq clientCreate, BindingResult bindingResult) throws UserAlreadyExistException {
         if (bindingResult.hasErrors()) {
             return "client/new";
         }

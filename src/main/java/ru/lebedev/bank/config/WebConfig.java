@@ -6,10 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import ru.lebedev.bank.converter.LongAccountConverter;
-import ru.lebedev.bank.converter.LongAccountPlanConverter;
-import ru.lebedev.bank.converter.LongCardConverter;
-import ru.lebedev.bank.converter.LongCheckingAccountConverter;
+import ru.lebedev.bank.converter.*;
 import ru.lebedev.bank.formatter.CheckingAccountDTOFormatter;
 
 

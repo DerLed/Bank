@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,12 +24,10 @@ public class ClientCreateReq {
     @NotBlank(message = "Поле Email не может быть пустым")
     private String email;
 
-
-    @Min(value = 6, message = "Номер телефона не может быть пустым")
+    @Size(min = 6, message = "Номер телефона не может быть пустым")
     private String phoneNumber;
 
-    @Min(value = 8, message = "Минимум 8 символов")
+    @Size(min = 8, message = "Минимум 8 символов")
     private String password;
-
 
 }

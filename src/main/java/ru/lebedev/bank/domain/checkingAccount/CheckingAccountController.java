@@ -11,6 +11,7 @@ import ru.lebedev.bank.domain.checkingAccount.dto.CheckingAccountDTO;
 import ru.lebedev.bank.domain.helper.validGroup.Create;
 
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class CheckingAccountController {
     }
 
     @PostMapping
-    public CheckingAccountDTO save(@RequestBody @Validated({Create.class}) CheckingAccountDTO account) {
+    public CheckingAccountDTO save(@RequestBody @Validated(Create.class) CheckingAccountDTO account) {
         return checkingAccountService.save(account);
     }
 

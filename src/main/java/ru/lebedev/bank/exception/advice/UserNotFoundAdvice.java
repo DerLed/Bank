@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import ru.lebedev.bank.exception.UserAlreadyExistException;
 import ru.lebedev.bank.exception.UserNotFoundException;
 
 
@@ -15,6 +16,13 @@ public class UserNotFoundAdvice {
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     String accountNotFoundHandler(UserNotFoundException ex) {
+        return ex.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(UserAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String userAlreadyExistHandler(UserAlreadyExistException ex) {
         return ex.getMessage();
     }
 }

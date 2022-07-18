@@ -17,7 +17,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class CheckingAccountDTO {
-    @Null(groups = {Create.class, Update.class})
+    @Null(groups = Create.class)
+    @NotNull(groups = Update.class)
     private Long id;
 
     @Null(groups = Create.class)
@@ -35,7 +36,6 @@ public class CheckingAccountDTO {
     @Null(groups = Create.class)
     @NotBlank(message = "Номер счета не может быть пустым", groups = Update.class)
     private String accountNumber;
-
 
     @NotNull(message = "Поле не может быть пустым", groups = {Update.class, Create.class})
     private ClientDTO clientDTO;

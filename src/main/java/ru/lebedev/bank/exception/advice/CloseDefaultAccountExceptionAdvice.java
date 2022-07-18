@@ -10,7 +10,7 @@ import ru.lebedev.bank.exception.CloseDefaultAccountException;
 
 
 @ControllerAdvice
-public class CloseDefaultAccountExceptionAdvice extends ResponseEntityExceptionHandler {
+public class CloseDefaultAccountExceptionAdvice {
 
     @ResponseBody
     @ExceptionHandler(CloseDefaultAccountException.class)

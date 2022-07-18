@@ -1,9 +1,12 @@
 package ru.lebedev.bank.domain.client;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.lebedev.bank.domain.client.dto.ClientCreateReq;
 import ru.lebedev.bank.domain.client.dto.ClientDTO;
 import ru.lebedev.bank.exception.ClientNotFoundException;
+import ru.lebedev.bank.exception.UserAlreadyExistException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/clients")
 @RequiredArgsConstructor
+@Validated
 public class ClientController {
     private final ClientService clientService;
 
@@ -25,8 +29,8 @@ public class ClientController {
     }
 
     @PostMapping
-    public ClientDTO create(@RequestBody @Valid ClientDTO client) {
-        return clientService.save(client);
+    public ClientDTO create(@RequestBody @Valid ClientCreateReq client) throws UserAlreadyExistException {
+        return clientService.newClient(client);
     }
 
     @PutMapping

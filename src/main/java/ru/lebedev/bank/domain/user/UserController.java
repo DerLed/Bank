@@ -1,7 +1,9 @@
 package ru.lebedev.bank.domain.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.lebedev.bank.domain.helper.validGroup.Create;
 import ru.lebedev.bank.domain.user.dto.UserDTO;
 import ru.lebedev.bank.exception.UserNotFoundException;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@Validated
 public class UserController {
     private final UserService userService;
 
@@ -26,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDTO create(@RequestBody @Valid UserDTO user) {
+    public UserDTO create(@RequestBody @Validated(Create.class) UserDTO user) {
         return userService.save(user);
     }
 

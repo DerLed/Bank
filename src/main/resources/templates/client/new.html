@@ -19,7 +19,7 @@
 
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-            <form action="#" th:action="@{/client/new}" th:object="${client}" th:method="POST">
+            <form action="#" th:action="@{/client/new}" th:object="${clientCreate}" th:method="POST">
                 <div class="form-group">
                     <label for="name">Имя</label>
                     <input type="text" th:field="*{name}" class="form-control" id="name" aria-describedby="nameHelp"
